@@ -1,5 +1,6 @@
 package test.problems
 
+import problems.WorkingWithLists
 import problems.WorkingWithLists._
 import org.specs2.mutable._
 import java.util.NoSuchElementException
@@ -48,6 +49,16 @@ class WorkingWithListsSpec extends Specification {
 
     "throws IndexOutOfBoundsException if (n, list) = (6, [1, 1, 2, 3, 5, 8])" in {
       nth(6, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
+    }
+  }
+
+  "length(List[A])" should {
+    "returns 0 if list = []" in {
+      WorkingWithLists.length(Nil) must beEqualTo(0)
+    }
+
+    "returns 6 if list = [1, 1, 2, 3, 5, 8]" in {
+      WorkingWithLists.length(List(1, 1, 2, 3, 5, 8)) must beEqualTo(6)
     }
   }
 }
