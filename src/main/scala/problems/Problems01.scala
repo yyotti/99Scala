@@ -51,5 +51,11 @@ object WorkingWithLists {
    *   scala> nth(2, List(1, 1, 2, 3, 5, 8))
    *   res0: Int = 2
    */
-  def nth[A](n: Int, list: List[A]): A = ???
+  def nth[A](n: Int, list: List[A]): A =
+    if (n < 0) throw new IndexOutOfBoundsException
+    else (n, list) match {
+      case (_, Nil) => throw new IndexOutOfBoundsException
+      case (0, x :: _) => x
+      case (n, _ :: xs) => nth(n - 1, xs)
+    }
 }
