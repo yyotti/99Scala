@@ -98,4 +98,13 @@ object WorkingWithLists {
    *   res0: Boolean = true
    */
   def isPalindrome[A](list: List[A]): Boolean = reverse(list) == list
+
+  /**
+   * P07 (**) Flatten a nested list structure.
+   *
+   * Example:
+   *   scala> flatten(List(List(1, 1), 2, List(3, List(5, 8))))
+   *   res0: List[Any] = List(1, 1, 2, 3, 5, 8)
+   */
+  def flatten(list: List[_]): List[Any] = ???
 }

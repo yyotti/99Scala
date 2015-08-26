@@ -85,5 +85,31 @@ class WorkingWithListsSpec extends Specification {
       isPalindrome(List(1, 2, 3, 2, 1)) must beTrue
     }
   }
+
+  "flatten(List[A])" should {
+    "returns [] if list = []" in {
+      flatten(Nil) must beEmpty
+    }
+
+    "returns [] if list = [[]]" in {
+      flatten(List(List())) must beEmpty
+    }
+
+    "returns [] if list = [[], []]" in {
+      flatten(List(List(), List())) must beEmpty
+    }
+
+    "returns [1, 2, 3] if list = [1, 2, 3]" in {
+      flatten(List(1, 2, 3)) must beEqualTo(List(1, 2, 3))
+    }
+
+    "returns [1, 2, 3] if list = [1, [2, [3]]]" in {
+      flatten(List(1, List(2, List(3)))) must beEqualTo(List(1, 2, 3))
+    }
+
+    "returns [1, 1, 2, 3, 5, 8] if list = [[1, 1], 2, [3, [5, 8]]" in {
+      flatten(List(List(1, 1), 2, List(3, List(5, 8)))) must beEqualTo(List(1, 1, 2, 3, 5, 8))
+    }
+  }
 }
 
