@@ -133,5 +133,9 @@ object WorkingWithLists {
    *   scala> compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
    *   res0: List[Symbol] = List('a, 'b, 'c, 'a, 'd, 'e)
    */
-  def compress[A](list: List[A]): List[A] = ???
+  def compress[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case x1 :: x2 :: xs if (x1 == x2) => compress(x2 :: xs)
+    case x :: xs => x :: compress(xs)
+  }
 }
