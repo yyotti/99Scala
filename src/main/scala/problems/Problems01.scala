@@ -147,5 +147,18 @@ object WorkingWithLists {
    *   scala> pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
    *   res0: List[List[Symbol]] = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
    */
-  def pack[A](list: List[A]): List[List[A]] = ???
+  def pack[A](list: List[A]): List[List[A]] = {
+    @tailrec
+    def takeSame(list: List[A], sublist: List[A]): (List[A], List[A]) = (list, sublist) match {
+      case (Nil, _) => (Nil , sublist)
+      case (x :: xs, Nil) => takeSame(xs, x :: Nil)
+      case (x :: xs, y :: ys) if (x == y) => takeSame(xs, x :: sublist)
+      case _ => (list, sublist)
+    }
+
+    takeSame(list, Nil) match {
+      case (_, Nil) => Nil
+      case (list, sublist) => sublist :: pack(list)
+    }
+  }
 }
