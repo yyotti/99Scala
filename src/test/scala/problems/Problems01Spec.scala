@@ -34,11 +34,11 @@ class WorkingWithListsSpec extends Specification {
       nth(-1, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
     }
 
-    "throws 1 if (n, list) = (0, [1, 1, 2, 3, 5, 8])" in {
+    "returns 1 if (n, list) = (0, [1, 1, 2, 3, 5, 8])" in {
       nth(0, List(1, 1, 2, 3, 5, 8)) must beEqualTo(1)
     }
 
-    "throws 2 if (n, list) = (2, [1, 1, 2, 3, 5, 8])" in {
+    "returns 2 if (n, list) = (2, [1, 1, 2, 3, 5, 8])" in {
       nth(2, List(1, 1, 2, 3, 5, 8)) must beEqualTo(2)
     }
 
