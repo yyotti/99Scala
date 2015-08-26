@@ -97,5 +97,5 @@ object WorkingWithLists {
    *   scala> isPalindrome(List(1, 2, 3, 2, 1))
    *   res0: Boolean = true
    */
-  def isPalindrome[A](list: List[A]): Boolean = ???
+  def isPalindrome[A](list: List[A]): Boolean = reverse(list) == list
 }
