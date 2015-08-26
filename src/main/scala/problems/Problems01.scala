@@ -26,7 +26,7 @@ object WorkingWithLists {
   def last[A](list: List[A]): A = list match {
     case Nil => throw new NoSuchElementException
     case x :: Nil => x
-    case x :: xs => last(xs)
+    case _ :: xs => last(xs)
   }
 
   /**
@@ -41,7 +41,7 @@ object WorkingWithLists {
     case Nil => throw new NoSuchElementException
     case x :: Nil => throw new NoSuchElementException
     case x :: _ :: Nil => x
-    case x :: xs => penultimate(xs)
+    case _ :: xs => penultimate(xs)
   }
 
   /**
