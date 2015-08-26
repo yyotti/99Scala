@@ -80,5 +80,13 @@ object WorkingWithLists {
    *   scala> reverse(List(1, 1, 2, 3, 5, 8))
    *   res0: List[Int] = List(8, 5, 3, 2, 1, 1)
    */
-  def reverse[A](list: List[A]): List[A] = ???
+  def reverse[A](list: List[A]): List[A] = {
+    @tailrec
+    def reverseR(list: List[A], rev: List[A]): List[A] = list match {
+      case Nil => rev
+      case x :: xs => reverseR(xs, x :: rev)
+    }
+
+    reverseR(list, Nil)
+  }
 }
