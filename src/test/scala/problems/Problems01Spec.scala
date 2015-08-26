@@ -61,5 +61,15 @@ class WorkingWithListsSpec extends Specification {
       WorkingWithLists.length(List(1, 1, 2, 3, 5, 8)) must beEqualTo(6)
     }
   }
+
+  "reverse(List[A])" should {
+    "returns [] if list = []" in {
+      reverse(Nil) must beEmpty
+    }
+
+    "returns [8, 5, 3, 2, 1, 1] if list = [1, 1, 2, 3, 5, 8]" in {
+      reverse(List(1, 1, 2, 3, 5, 8)) must beEqualTo(List(8, 5, 3, 2, 1, 1))
+    }
+  }
 }
 
