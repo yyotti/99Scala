@@ -106,5 +106,22 @@ object WorkingWithLists {
    *   scala> flatten(List(List(1, 1), 2, List(3, List(5, 8))))
    *   res0: List[Any] = List(1, 1, 2, 3, 5, 8)
    */
-  def flatten(list: List[_]): List[Any] = ???
+  def flatten(list: List[_]): List[Any] = {
+    def append(list1: List[_], list2: List[_]): List[Any] = {
+      @tailrec
+      def appendR(list1: List[_], list2: List[_], list: List[_]): List[Any] = (list1, list2) match {
+        case (Nil, Nil) => reverse(list)
+        case (Nil, _) => appendR(list2, Nil, list)
+        case (x :: xs, _) => appendR(xs, list2, x :: list)
+      }
+
+      appendR(list1, list2, Nil)
+    }
+
+    list match {
+      case Nil => Nil
+      case (x: List[_]) :: xs => append(flatten(x), flatten(xs))
+      case x :: xs => x :: flatten(xs)
+    }
+  }
 }
