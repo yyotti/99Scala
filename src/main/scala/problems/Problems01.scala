@@ -36,6 +36,7 @@ object WorkingWithLists {
    *   scala> penultimate(List(1, 1, 2, 3, 5, 8))
    *   res0: Int = 5
    */
+  @tailrec
   def penultimate[A](list: List[A]): A = list match {
     case Nil => throw new NoSuchElementException
     case x :: Nil => throw new NoSuchElementException
@@ -51,6 +52,7 @@ object WorkingWithLists {
    *   scala> nth(2, List(1, 1, 2, 3, 5, 8))
    *   res0: Int = 2
    */
+  @tailrec
   def nth[A](n: Int, list: List[A]): A =
     if (n < 0) throw new IndexOutOfBoundsException
     else (n, list) match {
