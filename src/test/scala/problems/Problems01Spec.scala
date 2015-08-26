@@ -71,5 +71,19 @@ class WorkingWithListsSpec extends Specification {
       reverse(List(1, 1, 2, 3, 5, 8)) must beEqualTo(List(8, 5, 3, 2, 1, 1))
     }
   }
+
+  "isPalindrome(List[A])" should {
+    "returns true if list = []" in {
+      isPalindrome(Nil) must beTrue
+    }
+
+    "returns false if list = [1, 1, 2, 3, 5, 8]" in {
+      isPalindrome(List(1, 1, 2, 3, 5, 8)) must beFalse
+    }
+
+    "returns true if list = [1, 2, 3, 2, 1]" in {
+      isPalindrome(List(1, 2, 3, 2, 1)) must beTrue
+    }
+  }
 }
 
