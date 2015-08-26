@@ -163,4 +163,30 @@ class WorkingWithListsSpec extends Specification {
       pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
     }
   }
+
+  "encode(List[A])" should {
+    "returns [] if list = []" in {
+      encode(Nil) must beEmpty
+    }
+
+    "returns [[1, 1]] if list = [1]" in {
+      encode(List(1)) must beEqualTo(List((1, 1)))
+    }
+
+    "returns [[2, 2]] if list = [2, 2]" in {
+      encode(List(2, 2)) must beEqualTo(List((2, 2)))
+    }
+
+    "returns [[1, 1], [1, 2]] if list = [1, 2]" in {
+      encode(List(1, 2)) must beEqualTo(List((1, 1), (1, 2)))
+    }
+
+    "returns [[2, 1], [1, 2], [2, 3]] if list = [1, 1, 2, 3, 3]" in {
+      encode(List(1, 1, 2, 3, 3)) must beEqualTo(List((2, 1), (1, 2), (2, 3)))
+    }
+
+    "returns [(4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)] if list = ['a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e]" in {
+      encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+    }
+  }
 }
