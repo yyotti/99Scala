@@ -1,5 +1,8 @@
 package problems
 
+import java.util.NoSuchElementException
+import scala.annotation.tailrec
+
 object WorkingWithLists {
   // [テンプレート]
   //
@@ -19,5 +22,10 @@ object WorkingWithLists {
    *   scala> last(List(1, 1, 2, 3, 5, 8))
    *   res0: Int = 8
    */
-  def last[A](list: List[A]): A = ???
+  @tailrec
+  def last[A](list: List[A]): A = list match {
+    case Nil => throw new NoSuchElementException
+    case x :: Nil => x
+    case x :: xs => last(xs)
+  }
 }
