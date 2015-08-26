@@ -137,4 +137,30 @@ class WorkingWithListsSpec extends Specification {
       compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List('a, 'b, 'c, 'a, 'd, 'e))
     }
   }
+
+  "pack(List[A])" should {
+    "returns [] if list = []" in {
+      pack(Nil) must beEmpty
+    }
+
+    "returns [[1]] if list = [1]" in {
+      pack(List(1)) must beEqualTo(List(List(1)))
+    }
+
+    "returns [[2, 2]] if list = [2, 2]" in {
+      pack(List(2, 2)) must beEqualTo(List(List(2, 2)))
+    }
+
+    "returns [[1], [2]] if list = [1, 2]" in {
+      pack(List(1, 2)) must beEqualTo(List(List(1), List(2)))
+    }
+
+    "returns [[1, 1], [2], [3, 3]] if list = [1, 1, 2, 3, 3]" in {
+      pack(List(1, 1, 2, 3, 3)) must beEqualTo(List(List(1, 1), List(2), List(3, 3)))
+    }
+
+    "returns [['a, 'a, 'a, 'a], ['b], ['c, 'c], ['a, 'a], ['d], ['e, 'e, 'e, 'e]] if list = ['a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e]" in {
+      pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
+    }
+  }
 }
