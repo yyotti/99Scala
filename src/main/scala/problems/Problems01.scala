@@ -68,5 +68,8 @@ object WorkingWithLists {
    *   scala> length(List(1, 1, 2, 3, 5, 8))
    *   res0: Int = 6
    */
-  def length[A](list: List[A]): Int = ???
+  def length[A](list: List[A]): Int = list match {
+    case Nil => 0
+    case _ :: xs => 1 + length(xs)
+  }
 }
