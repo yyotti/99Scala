@@ -656,4 +656,16 @@ class WorkingWithListsSpec extends Specification {
       combinations(3, List('a, 'b, 'c, 'd, 'e, 'f)) must beEqualTo(expected)
     }
   }
+
+  "group3(List[A])" should {
+    """returns [[["Aldo", "Beat"], ["Carla", "David", "Evi"], ["Flip", "Gary", "Hugo", "Ida"]], ...] if list = ["Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"]""" in {
+      val groups = group3(List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))
+      groups.size must beEqualTo(1260)
+      groups.head must beEqualTo(List(List("Aldo", "Beat"), List("Carla", "David", "Evi"), List("Flip", "Gary", "Hugo", "Ida")))
+      groups must forall { group: List[List[_]] =>
+        group.size must beEqualTo(3)
+        group.map { _.size } must beEqualTo(List(2, 3, 4))
+      }
+    }
+  }
 }

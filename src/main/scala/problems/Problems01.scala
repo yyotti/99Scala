@@ -337,4 +337,14 @@ object WorkingWithLists {
       case (0, _) => List(Nil)
       case (_, x :: xs) => combinations(n - 1, xs).map { ls => x :: ls } ::: combinations(n, xs)
     }
+
+  /**
+   * P27 (**) Group the elements of a set into disjoint subsets.
+   * a) In how many ways can a group of 9 people work in 3 disjoint subgroups of 2, 3 and 4 persons? Write a function that generates all the possibilities.
+   *
+   * Example:
+   *   scala> group3(List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))
+   *   res0: List[List[List[String]]] = List(List(List(Aldo, Beat), List(Carla, David, Evi), List(Flip, Gary, Hugo, Ida)), ...
+   */
+  def group3[A](list: List[A]): List[List[List[A]]] = ???
 }
