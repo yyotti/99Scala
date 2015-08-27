@@ -139,4 +139,42 @@ class ArithmeticSpec extends Specification {
       new S99Int(35).isCoprimeTo(64) must beTrue
     }
   }
+
+  "S99Int#totient" should {
+    "returns 0 if this = -1" in {
+      new S99Int(-1).totient must beEqualTo(0)
+    }
+
+    "returns 0 if this = 0" in {
+      new S99Int(0).totient must beEqualTo(0)
+    }
+
+    "returns 1 if this = 1" in {
+      new S99Int(1).totient must beEqualTo(0)
+    }
+
+    "returns 1 if this = 2" in {
+      new S99Int(2).totient must beEqualTo(1)
+    }
+
+    "returns 2 if this = 3" in {
+      new S99Int(3).totient must beEqualTo(2)
+    }
+
+    "returns 2 if this = 4" in {
+      new S99Int(4).totient must beEqualTo(2)
+    }
+
+    "returns 4 if this = 5" in {
+      new S99Int(5).totient must beEqualTo(4)
+    }
+
+    "returns 2 if this = 6" in {
+      new S99Int(6).totient must beEqualTo(2)
+    }
+
+    "returns 6 if this = 7" in {
+      new S99Int(7).totient must beEqualTo(6)
+    }
+  }
 }
