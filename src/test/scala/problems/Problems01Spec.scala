@@ -453,6 +453,10 @@ class WorkingWithListsSpec extends Specification {
       removeAt(-1, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
     }
 
+    "returns [[], 1] if (n, list) = (0, [1])" in {
+      removeAt(0, List(1)) must beEqualTo((Nil, 1))
+    }
+
     "returns [[1, 2, 3, 5, 8], 1] if (n, list) = (0, [1, 1, 2, 3, 5, 8])" in {
       removeAt(0, List(1, 1, 2, 3, 5, 8)) must beEqualTo((List(1, 2, 3, 5, 8), 1))
     }

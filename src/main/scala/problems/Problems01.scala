@@ -251,5 +251,11 @@ object WorkingWithLists {
    *   scala> removeAt(1, List('a, 'b, 'c, 'd))
    *   res0: (List[Symbol], Symbol) = (List('a, 'c, 'd),'b)
    */
-  def removeAt[A](n: Int, list: List[A]): (List[A], A) = ???
+  def removeAt[A](n: Int, list: List[A]): (List[A], A) =
+    if (n < 0) throw new IndexOutOfBoundsException
+    else if (n >= list.size) throw new IndexOutOfBoundsException
+    else {
+      val (hs, ts) = list.splitAt(n)
+      (hs ::: ts.tail, ts.head)
+    }
 }
