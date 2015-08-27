@@ -144,5 +144,5 @@ object WorkingWithLists {
    *   scala> decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e)))
    *   res0: List[Symbol] = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
    */
-  def decode[A](list: List[(Int, A)]): List[A] = ???
+  def decode[A](list: List[(Int, A)]): List[A] = list.flatMap { case (c, x) => List.fill(c)(x) }
 }
