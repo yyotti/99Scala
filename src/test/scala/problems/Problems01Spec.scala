@@ -215,4 +215,30 @@ class WorkingWithListsSpec extends Specification {
       encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)))
     }
   }
+
+  "decode(List[(Int, A)])" should {
+    "returns [] if list = []" in {
+      decode(Nil) must beEmpty
+    }
+
+    "returns [1] if list = [[1, 1]]" in {
+      decode(List((1, 1))) must beEqualTo(List(1))
+    }
+
+    "returns [2, 2] if list = [[2, 2]]" in {
+      decode(List((2, 2))) must beEqualTo(List(2, 2))
+    }
+
+    "returns [1, 2] if list = [[1, 1], [1, 2]]" in {
+      decode(List((1, 1), (1, 2))) must beEqualTo(List(1, 2))
+    }
+
+    "returns [1, 1, 2, 3, 3] if list = [[2, 1], [1, 2], [2, 3]]" in {
+      decode(List((2, 1), (1, 2), (2, 3))) must beEqualTo(List(1, 1, 2, 3, 3))
+    }
+
+    "returns ['a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e] if list = [(4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)]" in {
+      decode(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))) must beEqualTo(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+    }
+  }
 }
