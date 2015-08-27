@@ -329,5 +329,12 @@ object WorkingWithLists {
    *   scala> combinations(3, List('a, 'b, 'c, 'd, 'e, 'f))
    *   res0: List[List[Symbol]] = List(List('a, 'b, 'c), List('a, 'b, 'd), List('a, 'b, 'e), ...
    */
-  def combinations[A](n: Int, list: List[A]): List[List[A]] = ???
+  def combinations[A](n: Int, list: List[A]): List[List[A]] =
+    // ScalaのCollectionにはcombinationsが実装されているが、あえて再発明
+    (n, list) match {
+      case (n, _) if n < 0 => throw new IllegalArgumentException
+      case (_, xs) if n > xs.size => Nil
+      case (0, _) => List(Nil)
+      case (_, x :: xs) => combinations(n - 1, xs).map { ls => x :: ls } ::: combinations(n, xs)
+    }
 }
