@@ -314,4 +314,14 @@ object WorkingWithLists {
    *   res0: List[Int] = List(23, 1, 17, 33, 21, 37)
    */
   def lotto(n: Int, max: Int): List[Int] = randomSelect(n, range(1, max))
+
+  /**
+   * P25 (*) Generate a random permutation of the elements of a list.
+   * Hint: Use the solution of problem P23.
+   *
+   * Example:
+   *   scala> randomPermute(List('a, 'b, 'c, 'd, 'e, 'f))
+   *   res0: List[Symbol] = List('b, 'a, 'd, 'c, 'e, 'f)
+   */
+  def randomPermute[A](list: List[A]): List[A] = ???
 }
