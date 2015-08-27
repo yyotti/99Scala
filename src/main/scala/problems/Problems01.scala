@@ -177,5 +177,7 @@ object WorkingWithLists {
    *   scala> duplicateN(3, List('a, 'b, 'c, 'c, 'd))
    *   res0: List[Symbol] = List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd)
    */
-  def duplicateN[A](n: Int, list: List[A]): List[A] = ???
+  def duplicateN[A](n: Int, list: List[A]): List[A] =
+    if (n < 0) throw new IllegalArgumentException
+    else list.flatMap { x => List.fill(n)(x) }
 }
