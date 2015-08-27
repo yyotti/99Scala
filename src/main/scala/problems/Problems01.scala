@@ -313,5 +313,5 @@ object WorkingWithLists {
    *   scala> lotto(6, 49)
    *   res0: List[Int] = List(23, 1, 17, 33, 21, 37)
    */
-  def lotto(n: Int, max: Int): List[Int] = ???
+  def lotto(n: Int, max: Int): List[Int] = randomSelect(n, range(1, max))
 }
