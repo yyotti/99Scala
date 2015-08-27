@@ -366,5 +366,14 @@ object WorkingWithLists {
    *
    * You may find more about this combinatorial problem in a good book on discrete mathematics under the term "multinomial coefficients".
    */
-  def group[A](ns: List[Int], list: List[A]): List[List[List[A]]] = ???
+  def group[A](ns: List[Int], list: List[A]): List[List[List[A]]] = (ns, list) match {
+    case (Nil, _) => List(Nil)
+    case (ns, _) if ns.exists { _ < 0 } => throw new IllegalArgumentException
+    case (ns, list) if ns.sum != list.size => throw new IllegalArgumentException
+    case (n :: ns, _) =>
+      combinations(n, list).flatMap { g =>
+        val xs = list.diff(g)
+        group(ns, xs).map { g :: _ }
+      }
+  }
 }
