@@ -154,5 +154,10 @@ object WorkingWithLists {
    *   scala> encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
    *   res0: List[(Int, Symbol)] = List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
    */
-  def encodeDirect[A](list: List[A]): List[(Int, A)] = ???
+  def encodeDirect[A](list: List[A]): List[(Int, A)] = list match {
+    case Nil => Nil
+    case x :: _ =>
+      val (packed, xs) = list.span { _ == x }
+      (packed.size, x) :: encodeDirect(xs)
+  }
 }
