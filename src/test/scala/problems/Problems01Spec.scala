@@ -189,4 +189,30 @@ class WorkingWithListsSpec extends Specification {
       encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
     }
   }
+
+  "encodeModified(List[A])" should {
+    "returns [] if list = []" in {
+      encodeModified(Nil) must beEmpty
+    }
+
+    "returns [1] if list = [1]" in {
+      encodeModified(List(1)) must beEqualTo(List(1))
+    }
+
+    "returns [[2, 2]] if list = [2, 2]" in {
+      encodeModified(List(2, 2)) must beEqualTo(List((2, 2)))
+    }
+
+    "returns [1, 2] if list = [1, 2]" in {
+      encodeModified(List(1, 2)) must beEqualTo(List(1, 2))
+    }
+
+    "returns [[2, 1], 2, [2, 3]] if list = [1, 1, 2, 3, 3]" in {
+      encodeModified(List(1, 1, 2, 3, 3)) must beEqualTo(List((2, 1), 2, (2, 3)))
+    }
+
+    "returns [(4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)] if list = ['a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e]" in {
+      encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)))
+    }
+  }
 }
