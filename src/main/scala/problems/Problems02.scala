@@ -37,7 +37,7 @@ class S99Int(val start: Int) {
    * scala> 10.totient
    * res0: Int = 4
    */
-  def totient: Int = ???
+  def totient: Int = if (start < 1) 0 else (1 until start).count { _.isCoprimeTo(start) }
 }
 
 object S99Int {
