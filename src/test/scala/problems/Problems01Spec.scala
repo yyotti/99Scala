@@ -550,7 +550,7 @@ class WorkingWithListsSpec extends Specification {
 
       list1.size must beEqualTo(3)
       list2.size must beEqualTo(3)
-      list1.size must not(beEqualTo(list2))
+      list1 must not(beEqualTo(list2))
     }
 
   }
