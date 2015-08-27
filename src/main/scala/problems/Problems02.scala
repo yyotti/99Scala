@@ -50,5 +50,9 @@ object Arithmetic {
    * scala> gcd(36, 63)
    * res0: Int = 9
    */
-  def gcd(m: Int, n: Int): Int = ???
+  def gcd(m: Int, n: Int): Int =
+    if (m < 0 || n < 0) throw new IllegalArgumentException
+    else if (m < n) gcd(n, m)
+    else if (n == 0) m
+    else gcd(n, m % n)
 }
