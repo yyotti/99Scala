@@ -409,4 +409,42 @@ class WorkingWithListsSpec extends Specification {
       slice(2, -1, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
     }
   }
+
+  "rotate(Int, List[A])" should {
+    "returns [] if (n, list) = (2, [])" in {
+      rotate(2, Nil) must beEmpty
+    }
+
+    "returns [] if (n, list) = (-2, [])" in {
+      rotate(-2, Nil) must beEmpty
+    }
+
+    "returns [1, 2, 3] if (n, list) = (0, [1, 2, 3])" in {
+      rotate(0, List(1, 2, 3)) must beEqualTo(List(1, 2, 3))
+    }
+
+    "returns [1] if (n, list) = (3, [1])" in {
+      rotate(3, List(1)) must beEqualTo(List(1))
+    }
+
+    "returns [1] if (n, list) = (-3, [1])" in {
+      rotate(-3, List(1)) must beEqualTo(List(1))
+    }
+
+    "returns ['d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c] if (n, list) = (3, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must beEqualTo(List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c))
+    }
+
+    "returns ['j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i] if (n, list) = (-2, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must beEqualTo(List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i))
+    }
+
+    "returns [3, 1, 2] if (n, list) = (5, [1, 2, 3])" in {
+      rotate(5, List(1, 2, 3)) must beEqualTo(List(3, 1, 2))
+    }
+
+    "returns [3, 1, 2] if (n, list) = (-4, [1, 2, 3])" in {
+      rotate(-4, List(1, 2, 3)) must beEqualTo(List(3, 1, 2))
+    }
+  }
 }
