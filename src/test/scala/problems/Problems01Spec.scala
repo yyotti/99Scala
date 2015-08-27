@@ -499,4 +499,35 @@ class WorkingWithListsSpec extends Specification {
       insertAt(4, 10, List(1, 2, 3)) must beEqualTo(List(1, 2, 3, 4))
     }
   }
+
+  "range(Int, Int)" should {
+    "returns [] if (s, e) = (2, 1)" in {
+      range(2, 1) must beEqualTo(Nil)
+    }
+
+    "returns [] if (s, e) = (-1, -2)" in {
+      range(-1, -2) must beEqualTo(Nil)
+    }
+
+    "returns [3] if (s, e) = (3, 3)" in {
+      range(3, 3) must beEqualTo(List(3))
+    }
+
+    "returns [-4] if (s, e) = (-4, -4)" in {
+      range(-4, -4) must beEqualTo(List(-4))
+    }
+
+    "returns [4, 5, 6, 7, 8, 9] if (s, e) = (4, 9)" in {
+      range(4, 9) must beEqualTo(List(4, 5, 6, 7, 8, 9))
+    }
+
+    "returns [-4, -3, -2] if (s, e) = (-4, -2)" in {
+      range(-4, -2) must beEqualTo(List(-4, -3, -2))
+    }
+
+    "returns [-4, -3, -2, -1, 0, 1, 2, 3] if (s, e) = (-4, 3)" in {
+      range(-4, 3) must beEqualTo(List(-4, -3, -2, -1, 0, 1, 2, 3))
+    }
+
+  }
 }
