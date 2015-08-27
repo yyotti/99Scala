@@ -285,4 +285,38 @@ class WorkingWithListsSpec extends Specification {
       duplicate(List('a, 'b, 'c, 'c, 'd)) must beEqualTo(List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
     }
   }
+
+  "duplicateN(Int, List[A])" should {
+    "returns [] if (n, list) = (2, [])" in {
+      duplicateN(2, Nil) must beEmpty
+    }
+
+    "returns [] if (n, list) = (0, [2])" in {
+      duplicateN(0, List(2)) must beEmpty
+    }
+
+    "returns [1] if (n, list) = (1, [1])" in {
+      duplicateN(1, List(1)) must beEqualTo(List(1))
+    }
+
+    "returns [1, 2] if (n, list) = (1, [1, 2])" in {
+      duplicateN(1, List(1, 2)) must beEqualTo(List(1, 2))
+    }
+
+    "returns [1, 1] if (n, list) = (2, [1])" in {
+      duplicateN(2, List(1)) must beEqualTo(List(1, 1))
+    }
+
+    "returns [1, 1, 2, 2] if (n, list) = (2, [1, 2])" in {
+      duplicateN(2, List(1, 2)) must beEqualTo(List(1, 1, 2, 2))
+    }
+
+    "returns ['a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd] if (n, list) = (3, ['a, 'b, 'c, 'c, 'd])" in {
+      duplicateN(3, List('a, 'b, 'c, 'c, 'd)) must beEqualTo(List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+    }
+
+    "throws IllegalArgumentException if (n, list) = (-1, ['a, 'b, 'c, 'c, 'd])" in {
+      duplicateN(-1, List('a, 'b, 'c, 'c, 'd)) must throwA[IllegalArgumentException]
+    }
+  }
 }
