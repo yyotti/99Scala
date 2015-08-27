@@ -592,14 +592,16 @@ class WorkingWithListsSpec extends Specification {
     }
 
     "returns [?, ?, ?, ?, ?, ?] if list = ['a, 'b, 'c, 'd, 'e, 'f]" in {
-      val list1 = randomPermute(List('a, 'b, 'c, 'd, 'e, 'f))
-      val list2 = randomPermute(List('a, 'b, 'c, 'd, 'e, 'f))
+      val list = List('a, 'b, 'c, 'd, 'e, 'f)
+
+      val list1 = randomPermute(list)
+      val list2 = randomPermute(list)
 
       list1.size must beEqualTo(6)
       list2.size must beEqualTo(6)
+      list1.sortBy { _.toString } must beEqualTo(list)
+      list2.sortBy { _.toString } must beEqualTo(list)
       list1 must not(beEqualTo(list2))
-      list1.sortBy { _.toString } must beEqualTo(List('a, 'b, 'c, 'd, 'e, 'f))
-      list1.sortBy { _.toString } must beEqualTo(list2)
     }
   }
 }

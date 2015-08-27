@@ -323,5 +323,5 @@ object WorkingWithLists {
    *   scala> randomPermute(List('a, 'b, 'c, 'd, 'e, 'f))
    *   res0: List[Symbol] = List('b, 'a, 'd, 'c, 'e, 'f)
    */
-  def randomPermute[A](list: List[A]): List[A] = ???
+  def randomPermute[A](list: List[A]): List[A] = randomSelect(list.size, list)
 }
