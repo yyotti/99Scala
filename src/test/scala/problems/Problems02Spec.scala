@@ -1,7 +1,5 @@
 package test.problems
 
-import problems.Arithmetic
-import problems.Arithmetic._
 import problems.arithmetic._
 import org.specs2.mutable._
 
@@ -50,49 +48,49 @@ class ArithmeticSpec extends Specification {
     }
   }
 
-  "gcd(Int, Int)" should {
+  "S99Int->gcd(Int, Int)" should {
     "throws IllegalArgumentException if (m, n) = (-1, 2)" in {
-      gcd(-1, 2) must throwA[IllegalArgumentException]
+      S99Int.gcd(-1, 2) must throwA[IllegalArgumentException]
     }
 
     "returns 2 if (m, n) = (0, 2)" in {
-      gcd(0, 2) must beEqualTo(2)
+      S99Int.gcd(0, 2) must beEqualTo(2)
     }
 
     "throws IllegalArgumentException if (m, n) = (1, -2)" in {
-      gcd(1, -2) must throwA[IllegalArgumentException]
+      S99Int.gcd(1, -2) must throwA[IllegalArgumentException]
     }
 
     "returns 1 if (m, n) = (1, 0)" in {
-      gcd(1, 0) must beEqualTo(1)
+      S99Int.gcd(1, 0) must beEqualTo(1)
     }
 
     "returns 1 if (m, n) = (1, 1)" in {
-      gcd(1, 1) must beEqualTo(1)
+      S99Int.gcd(1, 1) must beEqualTo(1)
     }
 
     "returns 2 if (m, n) = (2, 2)" in {
-      gcd(2, 2) must beEqualTo(2)
+      S99Int.gcd(2, 2) must beEqualTo(2)
     }
 
     "returns 1 if (m, n) = (2, 1)" in {
-      gcd(2, 1) must beEqualTo(1)
+      S99Int.gcd(2, 1) must beEqualTo(1)
     }
 
     "returns 1 if (m, n) = (1, 2)" in {
-      gcd(1, 2) must beEqualTo(1)
+      S99Int.gcd(1, 2) must beEqualTo(1)
     }
 
     "returns 1 if (m, n) = (3, 2)" in {
-      gcd(3, 2) must beEqualTo(1)
+      S99Int.gcd(3, 2) must beEqualTo(1)
     }
 
     "returns 2 if (m, n) = (6, 4)" in {
-      gcd(6, 2) must beEqualTo(2)
+      S99Int.gcd(6, 2) must beEqualTo(2)
     }
 
     "returns 9 if (m, n) = (36, 63)" in {
-      gcd(36, 63) must beEqualTo(9)
+      S99Int.gcd(36, 63) must beEqualTo(9)
     }
   }
 
