@@ -462,7 +462,7 @@ class WorkingWithListsSpec extends Specification {
     }
 
     "returns [['a, 'c, 'd], 'b] if (n, list) = (1, ['a, 'b, 'c, 'd])" in {
-      removeAt(1, List('a, 'b, 'c, 'd)) must beEqualTo(List('a, 'c, 'd),'b)
+      removeAt(1, List('a, 'b, 'c, 'd)) must beEqualTo((List('a, 'c, 'd), 'b))
     }
 
     "throws IndexOutOfBoundsException if (n, list) = (0, [])" in {
