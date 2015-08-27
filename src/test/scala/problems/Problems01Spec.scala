@@ -351,19 +351,19 @@ class WorkingWithListsSpec extends Specification {
       split(2, Nil) must beEqualTo((Nil, Nil))
     }
 
-    "returns [[1, 2, 3], []] if (n, list) = (0, [1, 2, 3])" in {
+    "returns ([1, 2, 3], []) if (n, list) = (0, [1, 2, 3])" in {
       split(0, List(1, 2, 3)) must beEqualTo((Nil, List(1, 2, 3)))
     }
 
-    "returns [[1], []] if (n, list) = (1, [1])" in {
+    "returns ([1], []) if (n, list) = (1, [1])" in {
       split(1, List(1)) must beEqualTo((List(1), Nil))
     }
 
-    "returns [[1, 2], [3, 4, 5]] if (n, list) = (2, [1, 2, 3, 4, 5])" in {
+    "returns ([1, 2], [3, 4, 5]) if (n, list) = (2, [1, 2, 3, 4, 5])" in {
       split(2, List(1, 2, 3, 4, 5)) must beEqualTo((List(1, 2), List(3, 4, 5)))
     }
 
-    "returns [['a, 'b, 'c], ['d, 'e, 'f, 'g, 'h, 'i, 'j, 'k]] if (n, list) = (3, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+    "returns (['a, 'b, 'c], ['d, 'e, 'f, 'g, 'h, 'i, 'j, 'k]) if (n, list) = (3, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
       split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must beEqualTo((List('a, 'b, 'c), List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
     }
 
