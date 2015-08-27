@@ -188,5 +188,11 @@ object WorkingWithLists {
    *   scala> drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res0: List[Symbol] = List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
    */
-  def drop[A](n: Int, list: List[A]): List[A] = ???
+  def drop[A](n: Int, list: List[A]): List[A] =
+    if (n < 0) throw new IllegalArgumentException
+    else if (n == 0) list
+    else list.grouped(n).flatMap {
+      case x if (x.size == n) => x.init
+      case x => x
+    }.toList
 }
