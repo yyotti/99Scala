@@ -597,8 +597,8 @@ class WorkingWithListsSpec extends Specification {
       val list1 = randomPermute(list)
       val list2 = randomPermute(list)
 
-      list1.size must beEqualTo(6)
-      list2.size must beEqualTo(6)
+      list1.size must beEqualTo(list.size)
+      list2.size must beEqualTo(list.size)
       list1.sortBy { _.toString } must beEqualTo(list)
       list2.sortBy { _.toString } must beEqualTo(list)
       list1 must not(beEqualTo(list2))
