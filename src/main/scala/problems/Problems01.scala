@@ -387,5 +387,5 @@ object WorkingWithLists {
    *   scala> lsort(List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o)))
    *   res0: List[List[Symbol]] = List(List('o), List('d, 'e), List('d, 'e), List('m, 'n), List('a, 'b, 'c), List('f, 'g, 'h), List('i, 'j, 'k, 'l))
    */
-  def lsort[A](list: List[List[A]]): List[List[A]] = ???
+  def lsort[A](list: List[List[A]]): List[List[A]] = list.sortBy { _.size }
 }
