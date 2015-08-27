@@ -204,5 +204,7 @@ object WorkingWithLists {
    *   scala> split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res0: (List[Symbol], List[Symbol]) = (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    */
-  def split[A](n: Int, list: List[A]): (List[A], List[A]) = ???
+  def split[A](n: Int, list: List[A]): (List[A], List[A]) =
+    if (n < 0) throw new IndexOutOfBoundsException
+    else list.splitAt(n)
 }
