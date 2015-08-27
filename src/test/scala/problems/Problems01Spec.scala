@@ -267,4 +267,22 @@ class WorkingWithListsSpec extends Specification {
       encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
     }
   }
+
+  "duplicate(List[A])" should {
+    "returns [] if list = []" in {
+      duplicate(Nil) must beEmpty
+    }
+
+    "returns [1, 1] if list = [1]" in {
+      duplicate(List(1)) must beEqualTo(List(1, 1))
+    }
+
+    "returns [1, 1, 2, 2] if list = [1, 2]" in {
+      duplicate(List(1, 2)) must beEqualTo(List(1, 1, 2, 2))
+    }
+
+    "returns ['a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd] if list = ['a, 'b, 'c, 'c, 'd]" in {
+      duplicate(List('a, 'b, 'c, 'c, 'd)) must beEqualTo(List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
+    }
+  }
 }
