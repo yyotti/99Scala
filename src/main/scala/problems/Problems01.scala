@@ -401,5 +401,6 @@ object WorkingWithLists {
    *
    * Note that in the above example, the first two lists in the result have length 4 and 1 and both lengths appear just once. The third and fourth lists have length 3 and there are two list of this length. Finally, the last three lists have length 2. This is the most frequent length.
    */
-  def lsortFreq[A](list: List[List[A]]): List[List[A]] = ???
+  def lsortFreq[A](list: List[List[A]]): List[List[A]] =
+    list.groupBy { _.size }.mapValues { x => (x, x.size) }.toList.sortBy { case (_, (_, size)) => size }.flatMap { case (_, (x, _)) => x }
 }
