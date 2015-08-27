@@ -21,12 +21,14 @@ package arithmetic {
      * scala> 7.isPrime
      * res0: Boolean = true
      */
-    def isPrime: Boolean = ???
+    def isPrime: Boolean = primes.takeWhile { _ <= math.sqrt(start) }.forall { start % _ != 0 }
   }
 
   object S99Int {
     import scala.language.implicitConversions
     implicit def int2S99Int(i: Int): S99Int = new S99Int(i)
+
+    val primes: Stream[Int] = 2 #:: Stream.from(3, 2).filter { _.isPrime }
   }
 }
 

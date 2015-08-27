@@ -31,4 +31,10 @@ class ArithmeticSpec extends Specification {
       new S99Int(7).isPrime must beTrue
     }
   }
+
+  "S99Int->primes" should {
+    "first 10 terms are [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]" in {
+      S99Int.primes.take(10).toList must beEqualTo(List(2, 3, 5, 7, 11, 13, 17, 19, 23, 29))
+    }
+  }
 }
