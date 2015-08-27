@@ -7,13 +7,12 @@ package arithmetic {
     // [テンプレート]
     //
     // /**
-    //  * P01 (*) Find the last element of a list.
+    //  * P31 (**) Determine whether a given integer number is prime.
     //  *
-    //  * Example:
-    //  *   scala> last(List(1, 1, 2, 3, 5, 8))
-    //  *   res0: Int = 8
+    //  * scala> 7.isPrime
+    //  * res0: Boolean = true
     //  */
-    // def last[A](list: List[A]): A = ???
+    // def isPrime: Boolean = ???
 
     /**
      * P31 (**) Determine whether a given integer number is prime.
@@ -36,11 +35,11 @@ object Arithmetic {
   // [テンプレート]
   //
   // /**
-  //  * P01 (*) Find the last element of a list.
+  //  * P32 (**) Determine the greatest common divisor of two positive integer numbers.
+  //  * Use Euclid's algorithm.
   //  *
-  //  * Example:
-  //  *   scala> last(List(1, 1, 2, 3, 5, 8))
-  //  *   res0: Int = 8
+  //  * scala> gcd(36, 63)
+  //  * res0: Int = 9
   //  */
-  // def last[A](list: List[A]): A = ???
+  // def gcd(m: Int, n: Int): Int = ???
 }
