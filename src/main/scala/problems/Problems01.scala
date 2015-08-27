@@ -232,5 +232,14 @@ object WorkingWithLists {
    *   scala> rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res1: List[Symbol] = List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
    */
-  def rotate[A](n: Int, list: List[A]): List[A] = ???
+  def rotate[A](n: Int, list: List[A]): List[A] = {
+    if (n < 0) rotate(-n, list.reverse).reverse
+    else if (n == 0) list
+    else if (list.isEmpty) list
+    else if (n >= list.size) rotate(n % list.size, list)
+    else {
+      val (hs, ts) = list.splitAt(n)
+      ts ::: hs
+    }
+  }
 }
