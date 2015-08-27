@@ -530,4 +530,28 @@ class WorkingWithListsSpec extends Specification {
     }
 
   }
+
+  "randomSelect(Int, List[A])" should {
+    "throws IllegalArgumentException if (n, list) = (-1, [1, 2, 3])" in {
+      randomSelect(-1, List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (n, list) = (2, [1])" in {
+      randomSelect(2, List(1)) must throwA[IllegalArgumentException]
+    }
+
+    "returns [] if (n, list) = (0, [1, 2, 3])" in {
+      randomSelect(0, List(1, 2, 3)) must beEqualTo(Nil)
+    }
+
+    "returns [?, ?, ?] if (n, list) = (3, ['a, 'b, 'c, 'd, 'f, 'g, 'h])" in {
+      val list1 = randomSelect(3, List('a, 'b, 'c, 'd, 'f, 'g, 'h))
+      val list2 = randomSelect(3, List('a, 'b, 'c, 'd, 'f, 'g, 'h))
+
+      list1.size must beEqualTo(3)
+      list2.size must beEqualTo(3)
+      list1.size must not(beEqualTo(list2))
+    }
+
+  }
 }

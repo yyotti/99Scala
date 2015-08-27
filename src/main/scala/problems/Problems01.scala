@@ -281,4 +281,15 @@ object WorkingWithLists {
    *   res0: List[Int] = List(4, 5, 6, 7, 8, 9)
    */
   def range(s: Int, e: Int): List[Int] = List.range(s, e + 1)
+
+  /**
+   * P23 (**) Extract a given number of randomly selected elements from a list.
+   *
+   * Example:
+   *   scala> randomSelect(3, List('a, 'b, 'c, 'd, 'f, 'g, 'h))
+   *   res0: List[Symbol] = List('e, 'd, 'a)
+   *
+   * Hint: Use the solution to problem P20
+   */
+  def randomSelect[A](n: Int, list: List[A]): List[A] = ???
 }
