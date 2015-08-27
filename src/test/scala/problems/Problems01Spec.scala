@@ -668,4 +668,36 @@ class WorkingWithListsSpec extends Specification {
       }
     }
   }
+
+  "group(List[Int], List[A])" should {
+    "returns [[]] if (ns, list) = ([], [1, 2, 3])" in {
+      group(Nil, List(1, 2, 3)) must beEqualTo(List(Nil))
+    }
+
+    "throws IllegalArgumentException if (ns, list) = ([4], [1, 2, 3])" in {
+      group(List(4), List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (ns, list) = ([2, 2], [1, 2, 3])" in {
+      group(List(2, 2), List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (ns, list) = ([1, 1], [1, 2, 3])" in {
+      group(List(1, 1), List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (ns, list) = ([-1, 4], [1, 2, 3])" in {
+      group(List(-1, 4), List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    """returns [[[Aldo, Beat], [Carla, David], [Evi, Flip, Gary, Hugo, Ida]], ...] if (ns, list) = ([2, 2, 5], ["Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"])""" in {
+      val groups = group(List(2, 2, 5), List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))
+      groups.size must beEqualTo(756)
+      groups.head must beEqualTo(List(List("Aldo", "Beat"), List("Carla", "David"), List("Evi", "Flip", "Gary", "Hugo", "Ida")))
+      groups must forall { group: List[List[_]] =>
+        group.size must beEqualTo(3)
+        group.map { _.size } must beEqualTo(List(2, 2, 5))
+      }
+    }
+  }
 }
