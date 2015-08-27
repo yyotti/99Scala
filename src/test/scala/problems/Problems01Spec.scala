@@ -447,4 +447,26 @@ class WorkingWithListsSpec extends Specification {
       rotate(-4, List(1, 2, 3)) must beEqualTo(List(3, 1, 2))
     }
   }
+
+  "removeAt(Int, List[A])" should {
+    "throws IndexOutOfBoundsException if (n, list) = (-1, [1, 1, 2, 3, 5, 8])" in {
+      removeAt(-1, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
+    }
+
+    "returns [[1, 2, 3, 5, 8], 1] if (n, list) = (0, [1, 1, 2, 3, 5, 8])" in {
+      removeAt(0, List(1, 1, 2, 3, 5, 8)) must beEqualTo((List(1, 2, 3, 5, 8), 1))
+    }
+
+    "returns [['a, 'c, 'd], 'b] if (n, list) = (1, ['a, 'b, 'c, 'd])" in {
+      removeAt(1, List('a, 'b, 'c, 'd)) must beEqualTo(List('a, 'c, 'd),'b)
+    }
+
+    "throws IndexOutOfBoundsException if (n, list) = (0, [])" in {
+      removeAt(0, Nil) must throwA[IndexOutOfBoundsException]
+    }
+
+    "throws IndexOutOfBoundsException if (n, list) = (6, [1, 1, 2, 3, 5, 8])" in {
+      removeAt(6, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
+    }
+  }
 }
