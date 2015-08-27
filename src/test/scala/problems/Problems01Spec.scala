@@ -371,4 +371,42 @@ class WorkingWithListsSpec extends Specification {
       split(-1, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
     }
   }
+
+  "slice(Int, Int, List[A])" should {
+    "returns [] if (i, k, list) = (1, 2, [])" in {
+      slice(1, 2, Nil) must beEmpty
+    }
+
+    "returns [] if (i, k, list) = (2, 1, [1, 2, 3])" in {
+      slice(2, 1, List(1, 2, 3)) must beEmpty
+    }
+
+    "returns [] if (i, k, list) = (2, 2, [1, 2, 3])" in {
+      slice(2, 2, List(1, 2, 3)) must beEmpty
+    }
+
+    "returns [2] if (i, k, list) = (1, 2, [1, 2, 3])" in {
+      slice(1, 2, List(1, 2, 3)) must beEqualTo(List(2))
+    }
+
+    "returns ['d, 'e, 'f, 'g] if (i, k, list) = (3, 7, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+      slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must beEqualTo(List('d, 'e, 'f, 'g))
+    }
+
+    "returns [3, 4, 5] if (i, k, list) = (2, 6, [1, 2, 3, 4, 5])" in {
+      slice(2, 6, List(1, 2, 3, 4, 5)) must beEqualTo(List(3, 4, 5))
+    }
+
+    "returns [] if (i, k, list) = (10, 12, [1, 2, 3, 4, 5])" in {
+      slice(10, 12, List(1, 2, 3, 4, 5)) must beEmpty
+    }
+
+    "throws IndexOutOfBoundsException if (n, list) = (-1, 2, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+      slice(-1, 2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
+    }
+
+    "throws IndexOutOfBoundsException if (n, list) = (2, -1, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+      slice(2, -1, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
+    }
+  }
 }
