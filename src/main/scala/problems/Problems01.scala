@@ -168,5 +168,5 @@ object WorkingWithLists {
    *   scala> duplicate(List('a, 'b, 'c, 'c, 'd))
    *   res0: List[Symbol] = List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd)
    */
-  def duplicate[A](list: List[A]): List[A] = ???
+  def duplicate[A](list: List[A]): List[A] = list.flatMap { x => List(x, x) }
 }
