@@ -241,4 +241,30 @@ class WorkingWithListsSpec extends Specification {
       decode(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))) must beEqualTo(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
     }
   }
+
+  "encodeDirect(List[A])" should {
+    "returns [] if list = []" in {
+      encodeDirect(Nil) must beEmpty
+    }
+
+    "returns [[1, 1]] if list = [1]" in {
+      encodeDirect(List(1)) must beEqualTo(List((1, 1)))
+    }
+
+    "returns [[2, 2]] if list = [2, 2]" in {
+      encodeDirect(List(2, 2)) must beEqualTo(List((2, 2)))
+    }
+
+    "returns [[1, 1], [1, 2]] if list = [1, 2]" in {
+      encodeDirect(List(1, 2)) must beEqualTo(List((1, 1), (1, 2)))
+    }
+
+    "returns [[2, 1], [1, 2], [2, 3]] if list = [1, 1, 2, 3, 3]" in {
+      encodeDirect(List(1, 1, 2, 3, 3)) must beEqualTo(List((2, 1), (1, 2), (2, 3)))
+    }
+
+    "returns [(4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)] if list = ['a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e]" in {
+      encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must beEqualTo(List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+    }
+  }
 }
