@@ -42,4 +42,13 @@ object Arithmetic {
   //  * res0: Int = 9
   //  */
   // def gcd(m: Int, n: Int): Int = ???
+
+  /**
+   * P32 (**) Determine the greatest common divisor of two positive integer numbers.
+   * Use Euclid's algorithm.
+   *
+   * scala> gcd(36, 63)
+   * res0: Int = 9
+   */
+  def gcd(m: Int, n: Int): Int = ???
 }
