@@ -700,4 +700,30 @@ class WorkingWithListsSpec extends Specification {
       }
     }
   }
+
+  "lsort(List[List[A]])" should {
+    "returns [[]] if list = [[]]" in {
+      lsort(List(Nil)) must beEqualTo(List(Nil))
+    }
+
+    "returns [[1]] if list = [[1]]" in {
+      lsort(List(List(1))) must beEqualTo(List(List(1)))
+    }
+
+    "returns [[1, 2]] if list = [[1, 2]]" in {
+      lsort(List(List(1))) must beEqualTo(List(List(1)))
+    }
+
+    "returns [[1], [2]] if list = [[1], [2]]" in {
+      lsort(List(List(1), List(2))) must beEqualTo(List(List(1), List(2)))
+    }
+
+    "returns [[3], [1, 2]] if list = [[1, 2], [3]]" in {
+      lsort(List(List(1, 2), List(3))) must beEqualTo(List(List(3), List(1, 2)))
+    }
+
+    "returns [['a, 'b, 'c], ['d, 'e], ['f, 'g, 'h], ['d, 'e], ['i, 'j, 'k, 'l], ['m, 'n], ['o]] if list = [['o], ['d, 'e], ['d, 'e], ['m, 'n], ['a, 'b, 'c], ['f, 'g, 'h], ['i, 'j, 'k, 'l]]" in {
+      lsort(List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o))) must beEqualTo(List(List('o), List('d, 'e), List('d, 'e), List('m, 'n), List('a, 'b, 'c), List('f, 'g, 'h), List('i, 'j, 'k, 'l)))
+    }
+  }
 }
