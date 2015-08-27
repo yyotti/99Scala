@@ -401,11 +401,11 @@ class WorkingWithListsSpec extends Specification {
       slice(10, 12, List(1, 2, 3, 4, 5)) must beEmpty
     }
 
-    "throws IndexOutOfBoundsException if (n, list) = (-1, 2, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+    "throws IndexOutOfBoundsException if (i, k, list) = (-1, 2, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
       slice(-1, 2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
     }
 
-    "throws IndexOutOfBoundsException if (n, list) = (2, -1, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
+    "throws IndexOutOfBoundsException if (i, k, list) = (2, -1, ['a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k])" in {
       slice(2, -1, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must throwA[IndexOutOfBoundsException]
     }
   }

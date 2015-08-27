@@ -217,5 +217,8 @@ object WorkingWithLists {
    *   scala> slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res0: List[Symbol] = List('d, 'e, 'f, 'g)
    */
-  def slice[A](i: Int, k: Int, list: List[A]): List[A] = ???
+  def slice[A](i: Int, k: Int, list: List[A]): List[A] =
+    if (i < 0 || k < 0) throw new IndexOutOfBoundsException
+    else if (i >= k) Nil
+    else list.slice(i, k)
 }
