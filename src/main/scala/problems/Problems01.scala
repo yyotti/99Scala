@@ -180,4 +180,13 @@ object WorkingWithLists {
   def duplicateN[A](n: Int, list: List[A]): List[A] =
     if (n < 0) throw new IllegalArgumentException
     else list.flatMap { x => List.fill(n)(x) }
+
+  /**
+   * P16 (**) Drop every Nth element from a list.
+   *
+   * Example:
+   *   scala> drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
+   *   res0: List[Symbol] = List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
+   */
+  def drop[A](n: Int, list: List[A]): List[A] = ???
 }
