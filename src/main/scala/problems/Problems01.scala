@@ -346,5 +346,10 @@ object WorkingWithLists {
    *   scala> group3(List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida"))
    *   res0: List[List[List[String]]] = List(List(List(Aldo, Beat), List(Carla, David, Evi), List(Flip, Gary, Hugo, Ida)), ...
    */
-  def group3[A](list: List[A]): List[List[List[A]]] = ???
+  def group3[A](list: List[A]): List[List[List[A]]] = combinations(2, list).flatMap { g1 =>
+    val xs = list.diff(g1)
+    combinations(3, xs).map { g2 =>
+      List(g1, g2, xs.diff(g2))
+    }
+  }
 }
