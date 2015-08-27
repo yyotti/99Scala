@@ -280,5 +280,5 @@ object WorkingWithLists {
    *   scala> range(4, 9)
    *   res0: List[Int] = List(4, 5, 6, 7, 8, 9)
    */
-  def range(s: Int, e: Int): List[Int] = ???
+  def range(s: Int, e: Int): List[Int] = List.range(s, e + 1)
 }
