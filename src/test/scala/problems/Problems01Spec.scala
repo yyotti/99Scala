@@ -552,6 +552,33 @@ class WorkingWithListsSpec extends Specification {
       list2.size must beEqualTo(3)
       list1 must not(beEqualTo(list2))
     }
+  }
+
+  "lotto(Int, Int)" should {
+    "throws IllegalArgumentException if (n, max) = (-1, 10)" in {
+      lotto(-1, 10) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (n, max) = (3, 0)" in {
+      lotto(3, -2) must throwA[IllegalArgumentException]
+    }
+
+    "throws IllegalArgumentException if (n, max) = (2, 1)" in {
+      lotto(2, 1) must throwA[IllegalArgumentException]
+    }
+
+    "returns [] if (n, max) = (0, 10)" in {
+      lotto(0, 10) must beEqualTo(Nil)
+    }
+
+    "returns [?, ?, ?, ?, ?, ?] if (n, max) = (6, 49)" in {
+      val list1 = lotto(6, 49)
+      val list2 = lotto(6, 49)
+
+      list1.size must beEqualTo(6)
+      list2.size must beEqualTo(6)
+      list1 must not(beEqualTo(list2))
+    }
 
   }
 }
