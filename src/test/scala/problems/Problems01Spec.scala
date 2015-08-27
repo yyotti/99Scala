@@ -604,4 +604,56 @@ class WorkingWithListsSpec extends Specification {
       list1 must not(beEqualTo(list2))
     }
   }
+
+  "combinations(Int, List[A])" should {
+    "throws IllegalArgumentException if (n, list) = (-1, [1, 2, 3])" in {
+      combinations(-1, List(1, 2, 3)) must throwA[IllegalArgumentException]
+    }
+
+    "returns [[]] if (n, list) = (0, [1, 2, 3])" in {
+      combinations(0, List(1, 2, 3)) must beEqualTo(List(Nil))
+    }
+
+    "returns [] if (n, list) = (1, [])" in {
+      combinations(1, Nil) must beEmpty
+    }
+
+    "returns [] if (n, list) = (3, [1, 2])" in {
+      combinations(3, List(1, 2)) must beEmpty
+    }
+
+    "returns [[1], [2], [3]] if (n, list) = (1, [1, 2, 3])" in {
+      combinations(1, List(1, 2, 3)) must beEqualTo(List(List(1), List(2), List(3)))
+    }
+
+    "returns [[1, 2, 3]] if (n, list) = (3, [1, 2, 3])" in {
+      combinations(3, List(1, 2, 3)) must beEqualTo(List(List(1, 2, 3)))
+    }
+
+    "returns [['a, 'b, 'c], ['a, 'b, 'd], ['a, 'b, 'e], ...] if (n, list) = (3, ['a, 'b, 'c, 'd, 'e, 'f])" in {
+      val expected = List(
+        List('a, 'b, 'c),
+        List('a, 'b, 'd),
+        List('a, 'b, 'e),
+        List('a, 'b, 'f),
+        List('a, 'c, 'd),
+        List('a, 'c, 'e),
+        List('a, 'c, 'f),
+        List('a, 'd, 'e),
+        List('a, 'd, 'f),
+        List('a, 'e, 'f),
+        List('b, 'c, 'd),
+        List('b, 'c, 'e),
+        List('b, 'c, 'f),
+        List('b, 'd, 'e),
+        List('b, 'd, 'f),
+        List('b, 'e, 'f),
+        List('c, 'd, 'e),
+        List('c, 'd, 'f),
+        List('c, 'e, 'f),
+        List('d, 'e, 'f)
+      )
+      combinations(3, List('a, 'b, 'c, 'd, 'e, 'f)) must beEqualTo(expected)
+    }
+  }
 }
