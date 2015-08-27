@@ -29,7 +29,7 @@ package arithmetic {
      * scala> 35.isCoprimeTo(64)
      * res0: Boolean = true
      */
-    def isCoprimeTo(n: Int): Boolean = ???
+    def isCoprimeTo(n: Int): Boolean = start >= 0 && n >= 0 && gcd(start, n) == 1
   }
 
   object S99Int {

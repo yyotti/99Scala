@@ -120,19 +120,19 @@ class ArithmeticSpec extends Specification {
     }
 
     "returns false if (this, n) = (2, 4)" in {
-      new S99Int(2).isCoprimeTo(4) must beTrue
+      new S99Int(2).isCoprimeTo(4) must beFalse
     }
 
     "returns false if (this, n) = (4, 2)" in {
-      new S99Int(4).isCoprimeTo(2) must beTrue
+      new S99Int(4).isCoprimeTo(2) must beFalse
     }
 
     "returns false if (this, n) = (4, 6)" in {
-      new S99Int(4).isCoprimeTo(6) must beTrue
+      new S99Int(4).isCoprimeTo(6) must beFalse
     }
 
     "returns false if (this, n) = (6, 4)" in {
-      new S99Int(6).isCoprimeTo(4) must beTrue
+      new S99Int(6).isCoprimeTo(4) must beFalse
     }
 
     "returns true if (this, n) = (35, 64)" in {
