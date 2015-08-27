@@ -291,5 +291,18 @@ object WorkingWithLists {
    *
    * Hint: Use the solution to problem P20
    */
-  def randomSelect[A](n: Int, list: List[A]): List[A] = ???
+  def randomSelect[A](n: Int, list: List[A]): List[A] =
+    if (n < 0) throw new IllegalArgumentException
+    else if (n > list.size) throw new IllegalArgumentException
+    else {
+      def randomSelectR(n: Int, list: List[A], result: List[A]): List[A] = (n, list) match {
+        case (0, _) => result
+        case _ => {
+          val (xs, x) = removeAt(util.Random.nextInt(list.size), list)
+          randomSelectR(n - 1, xs, x :: result)
+        }
+      }
+
+      randomSelectR(n, list, Nil)
+    }
 }
