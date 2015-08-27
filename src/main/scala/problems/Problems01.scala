@@ -266,5 +266,10 @@ object WorkingWithLists {
    *   scala> insertAt('new, 1, List('a, 'b, 'c, 'd))
    *   res0: List[Symbol] = List('a, 'new, 'b, 'c, 'd)
    */
-  def insertAt[A](e: A, n: Int, list: List[A]): List[A] = ???
+  def insertAt[A](e: A, n: Int, list: List[A]): List[A] =
+    if (n < 0) throw new IndexOutOfBoundsException
+    else {
+      val (hs, ts) = list.splitAt(n)
+      hs ::: List(e) ::: ts
+    }
 }
