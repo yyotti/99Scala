@@ -473,4 +473,30 @@ class WorkingWithListsSpec extends Specification {
       removeAt(6, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
     }
   }
+
+  "insertAt(A, Int, List[A])" should {
+    "throws IndexOutOfBoundsException if (e, n, list) = (10, -1, [1, 1, 2, 3, 5, 8])" in {
+      insertAt(10, -1, List(1, 1, 2, 3, 5, 8)) must throwA[IndexOutOfBoundsException]
+    }
+
+    "returns [1] if (e, n, list) = (1, 0, [])" in {
+      insertAt(1, 0, Nil) must beEqualTo(List(1))
+    }
+
+    "returns [10, 1, 2, 3] if (e, n, list) = (10, 0, [1, 2, 3])" in {
+      insertAt(10, 0, List(1, 2, 3)) must beEqualTo(List(10, 1, 2, 3))
+    }
+
+    "returns ['a, 'new, 'b, 'c, 'd] if (e, n, list) = ('new, 1, ['a, 'b, 'c, 'd])" in {
+      insertAt('new, 1, List('a, 'b, 'c, 'd)) must beEqualTo(List('a, 'new, 'b, 'c, 'd))
+    }
+
+    "returns [1] if (e, n, list) = (1, 2, [])" in {
+      insertAt(1, 2, Nil) must beEqualTo(List(1))
+    }
+
+    "returns [1, 2, 3, 4] if (e, n, list) = (4, 10, [1, 2, 3])" in {
+      insertAt(4, 10, List(1, 2, 3)) must beEqualTo(List(1, 2, 3, 4))
+    }
+  }
 }
