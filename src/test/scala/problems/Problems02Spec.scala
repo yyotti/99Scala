@@ -95,4 +95,50 @@ class ArithmeticSpec extends Specification {
       gcd(36, 63) must beEqualTo(9)
     }
   }
+
+  "S99Int#isCoprimeTo" should {
+    "returns false if (this, n) = (-1, 2)" in {
+      new S99Int(-1).isCoprimeTo(2) must beFalse
+    }
+
+    "returns false if (this, n) = (0, 2)" in {
+      new S99Int(0).isCoprimeTo(2) must beFalse
+    }
+
+    "returns false if (this, n) = (1, -2)" in {
+      new S99Int(1).isCoprimeTo(-2) must beFalse
+    }
+
+    "returns true if (this, n) = (1, 0)" in {
+      new S99Int(1).isCoprimeTo(0) must beTrue
+    }
+
+    "returns true if (this, n) = (2, 3)" in {
+      new S99Int(2).isCoprimeTo(3) must beTrue
+    }
+
+    "returns true if (this, n) = (3, 2)" in {
+      new S99Int(3).isCoprimeTo(2) must beTrue
+    }
+
+    "returns false if (this, n) = (2, 4)" in {
+      new S99Int(2).isCoprimeTo(4) must beTrue
+    }
+
+    "returns false if (this, n) = (4, 2)" in {
+      new S99Int(4).isCoprimeTo(2) must beTrue
+    }
+
+    "returns false if (this, n) = (4, 6)" in {
+      new S99Int(4).isCoprimeTo(6) must beTrue
+    }
+
+    "returns false if (this, n) = (6, 4)" in {
+      new S99Int(6).isCoprimeTo(4) must beTrue
+    }
+
+    "returns true if (this, n) = (35, 64)" in {
+      new S99Int(35).isCoprimeTo(64) must beTrue
+    }
+  }
 }
