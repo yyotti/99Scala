@@ -7,6 +7,18 @@ import org.specs2.mutable._
 
 class ArithmeticSpec extends Specification {
   "S99Int#isPrime" should {
+    "returns false if -1" in {
+      new S99Int(-1).isPrime must beFalse
+    }
+
+    "returns false if 0" in {
+      new S99Int(0).isPrime must beFalse
+    }
+
+    "returns false if 1" in {
+      new S99Int(1).isPrime must beFalse
+    }
+
     "returns true if 2" in {
       new S99Int(2).isPrime must beTrue
     }

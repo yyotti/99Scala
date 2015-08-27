@@ -20,7 +20,7 @@ package arithmetic {
      * scala> 7.isPrime
      * res0: Boolean = true
      */
-    def isPrime: Boolean = primes.takeWhile { _ <= math.sqrt(start) }.forall { start % _ != 0 }
+    def isPrime: Boolean = (start > 1) && primes.takeWhile { _ <= math.sqrt(start) }.forall { start % _ != 0 }
   }
 
   object S99Int {
