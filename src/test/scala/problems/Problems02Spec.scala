@@ -336,4 +336,42 @@ class ArithmeticSpec extends Specification {
       S99Int.listPrimesinRange(7 to 31) must beEqualTo(List(7, 11, 13, 17, 19, 23, 29, 31))
     }
   }
+
+  "S99Int#goldbach" should {
+    "throws ArithmeticException if this = -1" in {
+      new S99Int(-1).goldbach must throwA[ArithmeticException]
+    }
+
+    "throws ArithmeticException if this = 0" in {
+      new S99Int(0).goldbach must throwA[ArithmeticException]
+    }
+
+    "throws ArithmeticException if this = 1" in {
+      new S99Int(1).goldbach must throwA[ArithmeticException]
+    }
+
+    "throws ArithmeticException if this = 2" in {
+      new S99Int(2).goldbach must throwA[ArithmeticException]
+    }
+
+    "throws ArithmeticException if this = 3" in {
+      new S99Int(3).goldbach must throwA[ArithmeticException]
+    }
+
+    "returns (2, 2) if this = 4" in {
+      new S99Int(4).goldbach must beEqualTo((2, 2))
+    }
+
+    "throws ArithmeticException if this = 5" in {
+      new S99Int(5).goldbach must throwA[ArithmeticException]
+    }
+
+    "returns (3, 3) if this = 6" in {
+      new S99Int(6).goldbach must beEqualTo((3, 3))
+    }
+
+    "returns (5, 23) if this = 28" in {
+      new S99Int(28).goldbach must beEqualTo((5, 23))
+    }
+  }
 }
