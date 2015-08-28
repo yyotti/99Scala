@@ -99,6 +99,7 @@ class S99Int(val start: Int) {
 }
 
 object S99Int {
+  import java.io.OutputStream
   import scala.language.implicitConversions
   implicit def int2S99Int(i: Int): S99Int = new S99Int(i)
 
@@ -148,5 +149,19 @@ object S99Int {
    * res0: List[Int] = List(7, 11, 13, 17, 19, 23, 29, 31)
    */
   def listPrimesinRange(r: Range): List[Int] = r.filter { _.isPrime }.toList
+
+  /**
+   * P41 (**) A list of Goldbach compositions.
+   * Given a range of integers by its lower and upper limit, print a list of all even numbers and their Goldbach composition.
+   *
+   * scala> printGoldbachList(9 to 20)
+   * 10 = 3 + 7
+   * 12 = 5 + 7
+   * 14 = 3 + 11
+   * 16 = 3 + 13
+   * 18 = 5 + 13
+   * 20 = 3 + 17
+   */
+  def printGoldbachList(r: Range, out: OutputStream = Console.out): Unit = ???
 }
 

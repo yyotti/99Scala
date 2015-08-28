@@ -374,4 +374,21 @@ class ArithmeticSpec extends Specification {
       new S99Int(28).goldbach must beEqualTo((5, 23))
     }
   }
+
+  "S99Int->printGoldbachList(Range)" should {
+    """prints "10 = 3 + 7\n12 = 5 + 7\n...20 = 3 + 17" if r = (9 to 20)""" in {
+      val out = new java.io.ByteArrayOutputStream()
+      val expected = """
+      10 = 3 + 7
+      12 = 5 + 7
+      14 = 3 + 11
+      16 = 3 + 13
+      18 = 5 + 13
+      20 = 3 + 17
+      """.trim
+
+      S99Int.printGoldbachList(9 to 20, out)
+      out.toString must beEqualTo(expected)
+    }
+  }
 }
