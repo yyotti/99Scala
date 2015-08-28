@@ -178,6 +178,7 @@ object S99Int {
    * 1856 = 67 + 1789
    * 1928 = 61 + 1867
    */
-  def printGoldbachListLimited(r: Range, min: Int)(implicit out: OutputStream = Console.out): Unit = ???
+  def printGoldbachListLimited(r: Range, min: Int)(implicit out: OutputStream = Console.out): Unit =
+    r.filter { n => n > 2 && n % 2 == 0 }.map { n => val (x, y) = n.goldbach; if (x >= min && y >= min) Some(s"$n = $x + $y") else None }.foreach { s => s.map { str => Console.withOut(out) { println(str) } } }
 }
 
