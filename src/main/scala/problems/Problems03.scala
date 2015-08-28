@@ -81,7 +81,13 @@ object S99Logic {
    *
    * See if you can use memoization to make the function more efficient.
    */
-  def gray(n: Int): List[String] = ???
+  def gray(n: Int): List[String] =
+    if (n < 0) throw new IllegalArgumentException
+    else if (n == 0) List("")
+    else {
+      val codes = gray(n - 1)
+      codes.map { c => "0" + c } ::: codes.reverse.map { c => "1" + c }
+    }
 }
 
 /**
