@@ -132,6 +132,6 @@ object S99Int {
    * scala> listPrimesinRange(7 to 31)
    * res0: List[Int] = List(7, 11, 13, 17, 19, 23, 29, 31)
    */
-  def listPrimesinRange(r: Range): List[Int] = ???
+  def listPrimesinRange(r: Range): List[Int] = r.filter { _.isPrime }.toList
 }
 
