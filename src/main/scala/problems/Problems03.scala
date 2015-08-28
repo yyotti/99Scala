@@ -104,7 +104,34 @@ object S99Logic {
    * scala> huffman(List(("a", 45), ("b", 13), ("c", 12), ("d", 16), ("e", 9), ("f", 5)))
    * res0: List[String, String] = List((a,0), (b,101), (c,100), (d,111), (e,1101), (f,1100))
    */
-  def huffman[A](freqs: List[(A, Int)]): List[(A, String)] = ???
+  sealed abstract class HuffmanTree[A](val freq: Int) {
+    def toCodeList(prefix: String): List[(A, String)]
+  }
+  case class HuffmanNode[A](
+    override val freq: Int,
+    left: Option[HuffmanTree[A]],
+    right: Option[HuffmanTree[A]]
+  ) extends HuffmanTree[A](freq) {
+    def toCodeList(prefix: String): List[(A, String)] =
+      left.map { _.toCodeList(prefix + "0") }.getOrElse(Nil) ::: right.map { _.toCodeList(prefix + "1") }.getOrElse(Nil)
+  }
+  case class HuffmanLeaf[A](value: A, override val freq: Int) extends HuffmanTree[A](freq) {
+    def toCodeList(prefix: String): List[(A, String)] = List((value, prefix))
+  }
+  def huffman[A: Ordering](freqs: List[(A, Int)]): List[(A, String)] = {
+    @annotation.tailrec
+    def createTree(nodes: List[HuffmanTree[A]]): HuffmanTree[A] = nodes.sortBy { _.freq } match {
+      case Nil => throw new java.util.NoSuchElementException
+      case x :: Nil => HuffmanNode(x.freq, Some(x), None)
+      case x :: y :: Nil => HuffmanNode(x.freq + y.freq, Some(x), Some(y))
+      case x :: y :: zs => createTree(HuffmanNode(x.freq + y.freq, Some(x), Some(y)) :: zs)
+    }
+
+    freqs match {
+      case Nil => Nil
+      case _ => createTree(freqs.map { case (v, f) => HuffmanLeaf(v, f) }).toCodeList("").sortBy { _._1 }
+    }
+  }
 }
 
 /**

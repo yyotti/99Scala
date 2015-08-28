@@ -346,7 +346,7 @@ false false false
 
   "S99Logic->huffman(List[(A, Int)])" should {
     "returns [] if freqs = []" in {
-      S99Logic.huffman(Nil) must beEmpty
+      S99Logic.huffman[Int](Nil) must beEmpty
     }
 
     """returns [("a", "0")] if freqs = [("a", 1)]""" in {
@@ -361,8 +361,8 @@ false false false
       S99Logic.huffman(List(("a", 1), ("b", 1))) must beEqualTo(List(("a", "0"), ("b", "1")))
     }
 
-    """returns [("b", "0"), ("a", "1")] if freqs = [("a", 1), ("b", 2)]""" in {
-      S99Logic.huffman(List(("a", 1), ("b", 2))) must beEqualTo(List(("b", "0"), ("a", "1")))
+    """returns [("a", "1"), ("b", "0")] if freqs = [("a", 2), ("b", 1)]""" in {
+      S99Logic.huffman(List(("a", 2), ("b", 1))) must beEqualTo(List(("a", "1"), ("b", "0")))
     }
 
     """returns [("a", "0"), ("b", "101"), ("c", "100"), ("d", "111"), ("e", "1101"), ("f", "1100")] if freqs = [("a", 45), ("b", 13), ("c", 12), ("d", 16), ("e", 9), ("f", 5)]""" in {
