@@ -35,4 +35,30 @@ class BinaryTreesSpec extends Specification {
       Tree.cBalanced(4, "x") must beEqualTo(expected)
     }
   }
+
+  "Tree#isSymmetric" should {
+    "returns true if this = End" in {
+      End.isSymmetric must beTrue
+    }
+
+    "returns true if this = Node('a)" in {
+      Node('a).isSymmetric must beTrue
+    }
+
+    "returns false if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).isSymmetric must beFalse
+    }
+
+    "returns false if this = Node('a, End, Node('b))" in {
+      Node('a, End, Node('b)).isSymmetric must beFalse
+    }
+
+    "returns true if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).isSymmetric must beTrue
+    }
+
+    "returns false if this = Node('a, Node('b, Node('d), End), Node('c))" in {
+      Node('a, Node('b, Node('d), End), Node('c)).isSymmetric must beFalse
+    }
+  }
 }
