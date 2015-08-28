@@ -92,7 +92,10 @@ class S99Int(val start: Int) {
    * scala> 28.goldbach
    * res0: (Int, Int) = (5,23)
    */
-  def goldbach: (Int, Int) = ???
+  def goldbach: (Int, Int) =
+    if (start <= 2) throw new ArithmeticException
+    else if (start % 2 == 1) throw new ArithmeticException
+    else primes.takeWhile { _ <= start / 2 }.find { p => (start - p).isPrime }.map { p => (p, start - p) }.get
 }
 
 object S99Int {
