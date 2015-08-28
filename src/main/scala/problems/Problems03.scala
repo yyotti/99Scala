@@ -2,6 +2,9 @@ package problems.logic
 
 object S99Logic {
   import java.io.OutputStream
+  import scala.language.implicitConversions
+
+  implicit def boolean2S99Boolean(b: Boolean) = ???
 
   // [テンプレート]
   //
@@ -63,4 +66,27 @@ object S99Logic {
         }
       }
     }
+}
+
+/**
+ * P47 (*) Truth tables for logical expressions (2).
+ * Continue problem P46 by redefining and, or, etc as operators.
+ * (i.e. make them methods of a new class with an implicit conversion from Boolean.)
+ * not will have to be left as a object method.
+ *
+ * scala> table2((a: Boolean, b: Boolean) => a and (a or not(b)))
+ * A     B     result
+ * true  true  true
+ * true  false true
+ * false true  false
+ * false false false
+ */
+class S99Boolean(val b: Boolean) {
+  def and(a: Boolean): Boolean = ???
+  def or(a: Boolean): Boolean = ???
+  def nand(a: Boolean): Boolean = ???
+  def nor(a: Boolean): Boolean = ???
+  def xor(a: Boolean): Boolean = ???
+  def impl(a: Boolean): Boolean = ???
+  def equ(a: Boolean): Boolean = ???
 }

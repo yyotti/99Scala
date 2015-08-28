@@ -155,4 +155,148 @@ false false false
       out.toString.trim must beEqualTo(expected)
     }
   }
+
+  "S99Boolean#and(Boolean)" should {
+    "returns true if (this, a) = (true, true)" in {
+      new S99Boolean(true).and(true) must beTrue
+    }
+
+    "returns false if (this, a) = (true, false)" in {
+      new S99Boolean(true).and(false) must beFalse
+    }
+
+    "returns false if (this, a) = (false, true)" in {
+      new S99Boolean(false).and(true) must beFalse
+    }
+
+    "returns false if (this, a) = (false, false)" in {
+      new S99Boolean(false).and(false) must beFalse
+    }
+  }
+
+  "S99Boolean#or(Boolean)" should {
+    "returns true if (this, a) = (true, true)" in {
+      new S99Boolean(true).or(true) must beTrue
+    }
+
+    "returns true if (this, a) = (true, false)" in {
+      new S99Boolean(true).or(false) must beTrue
+    }
+
+    "returns true if (this, a) = (false, true)" in {
+      new S99Boolean(false).or(true) must beTrue
+    }
+
+    "returns false if (this, a) = (false, false)" in {
+      new S99Boolean(false).or(false) must beFalse
+    }
+  }
+
+  "S99Boolean#nand(Boolean)" should {
+    "returns false if (this, a) = (true, true)" in {
+      new S99Boolean(true).nand(true) must beFalse
+    }
+
+    "returns true if (this, a) = (true, false)" in {
+      new S99Boolean(true).nand(false) must beTrue
+    }
+
+    "returns true if (this, a) = (false, true)" in {
+      new S99Boolean(false).nand(true) must beTrue
+    }
+
+    "returns true if (this, a) = (false, false)" in {
+      new S99Boolean(false).nand(false) must beTrue
+    }
+  }
+
+  "S99Boolean#nor(Boolean)" should {
+    "returns false if (a, b) = (true, true)" in {
+      new S99Boolean(true).nor(true) must beFalse
+    }
+
+    "returns false if (a, b) = (true, false)" in {
+      new S99Boolean(true).nor(false) must beFalse
+    }
+
+    "returns false if (a, b) = (false, true)" in {
+      new S99Boolean(false).nor(true) must beFalse
+    }
+
+    "returns true if (a, b) = (false, false)" in {
+      new S99Boolean(false).nor(false) must beTrue
+    }
+  }
+
+  "S99Boolean#xor(Boolean)" should {
+    "returns false if (a, b) = (true, true)" in {
+      new S99Boolean(true).xor(true) must beFalse
+    }
+
+    "returns true if (a, b) = (true, false)" in {
+      new S99Boolean(true).xor(false) must beTrue
+    }
+
+    "returns true if (a, b) = (false, true)" in {
+      new S99Boolean(false).xor(true) must beTrue
+    }
+
+    "returns false if (a, b) = (false, false)" in {
+      new S99Boolean(false).xor(false) must beFalse
+    }
+  }
+
+  "S99Boolean#impl(Boolean)" should {
+    "returns true if (a, b) = (true, true)" in {
+      new S99Boolean(true).impl(true) must beTrue
+    }
+
+    "returns false if (a, b) = (true, false)" in {
+      new S99Boolean(true).impl(false) must beFalse
+    }
+
+    "returns true if (a, b) = (false, true)" in {
+      new S99Boolean(false).impl(true) must beTrue
+    }
+
+    "returns true if (a, b) = (false, false)" in {
+      new S99Boolean(false).impl(false) must beTrue
+    }
+  }
+
+  "S99Boolean#equ(Boolean)" should {
+    "returns true if (a, b) = (true, true)" in {
+      new S99Boolean(true).equ(true) must beTrue
+    }
+
+    "returns false if (a, b) = (true, false)" in {
+      new S99Boolean(true).equ(false) must beFalse
+    }
+
+    "returns true if (a, b) = (false, true)" in {
+      new S99Boolean(false).equ(true) must beFalse
+    }
+
+    "returns true if (a, b) = (false, false)" in {
+      new S99Boolean(false).equ(false) must beTrue
+    }
+  }
+
+  "S99Logic->table2((Boolean, Boolean) => Boolean)" should {
+    "prints table [a and (a or b)]" in {
+      import S99Logic._
+
+      implicit val out = new java.io.ByteArrayOutputStream()
+      val expected = """
+A     B     result
+true  true  true
+true  false true
+false true  false
+false false false
+      """.trim
+
+      S99Logic.table2((a: Boolean, b: Boolean) => a and(a or b))
+      out.toString.trim must beEqualTo(expected)
+    }
+  }
 }
