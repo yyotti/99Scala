@@ -88,7 +88,11 @@ object S99Logic {
       val codes = gray(n - 1)
       codes.map { c => "0" + c } ::: codes.reverse.map { c => "1" + c }
     }
-  def grayMemorized(n: Int): List[String] = ???
+
+  private val grayCodes = collection.mutable.Map(0 -> List(""))
+  def grayMemorized(n: Int): List[String] =
+    if (n < 0) throw new IllegalArgumentException
+    else grayCodes.getOrElseUpdate(n, { val codes = grayMemorized(n - 1); codes.map { c => "0" + c } ::: codes.reverse.map { c => "1" + c } })
 }
 
 /**
