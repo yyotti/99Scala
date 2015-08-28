@@ -299,4 +299,26 @@ false false false
       out.toString.trim must beEqualTo(expected)
     }
   }
+
+  "S99Logic->gray(Int)" should {
+    "throws IllegalArgumentException if n = -1" in {
+      S99Logic.gray(-1) must throwA[IllegalArgumentException]
+    }
+
+    """returns [""] if n = 0""" in {
+      S99Logic.gray(0) must beEqualTo(List(""))
+    }
+
+    """returns ["0", "1"] if n = 1""" in {
+      S99Logic.gray(1) must beEqualTo(List("0", "1"))
+    }
+
+    """returns ["00", "01", "11", "10"] if n = 2""" in {
+      S99Logic.gray(2) must beEqualTo(List("00", "01", "11", "10"))
+    }
+
+    """returns ["000", "001", "011", "010", "110", "111", "101", "100"] if n = 3""" in {
+      S99Logic.gray(3) must beEqualTo(List("000", "001", "011", "010", "110", "111", "101", "100"))
+    }
+  }
 }
