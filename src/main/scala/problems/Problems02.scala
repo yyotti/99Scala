@@ -164,5 +164,20 @@ object S99Int {
    */
   def printGoldbachList(r: Range)(implicit out: OutputStream = Console.out): Unit =
     r.filter { n => n > 2 && n % 2 == 0 }.map { n => val (x, y) = n.goldbach; s"${n} = $x + $y" }.foreach { s => Console.withOut(out) { println(s) } }
+
+  /**
+   * P41 (**) A list of Goldbach compositions.
+   * In most cases, if an even number is written as the sum of two prime numbers, one of them is very small.
+   * Very rarely, the primes are both bigger than, say, 50. Try to find out how many such cases there are in the range 2..3000.
+   *
+   * Example (minimum value of 50 for the primes):
+   *
+   * scala> printGoldbachListLimited(1 to 2000, 50)
+   * 992 = 73 + 919
+   * 1382 = 61 + 1321
+   * 1856 = 67 + 1789
+   * 1928 = 61 + 1867
+   */
+  def printGoldbachListLimited(r: Range, min: Int)(implicit out: OutputStream = Console.out): Unit = ???
 }
 

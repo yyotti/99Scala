@@ -391,4 +391,24 @@ class ArithmeticSpec extends Specification {
       out.toString.trim must beEqualTo(expected)
     }
   }
+
+  "S99Int->printGoldbachListLimited(Range, Int)" should {
+    """prints "992 = 73 + 919\n1382 = 61 + 1321\n...1928 = 61 + 1867" if (r, n) = (1 to 2000, 50)""" in {
+      implicit val out = new java.io.ByteArrayOutputStream()
+      val expected = """
+992 = 73 + 919
+1382 = 61 + 1321
+1856 = 67 + 1789
+1928 = 61 + 1867
+      """.trim
+
+      S99Int.printGoldbachListLimited(1 to 2000, 50)
+      out.toString.trim must beEqualTo(expected)
+    }
+
+    """NOT TEST: find (2 to 3000, 50)""" in {
+      S99Int.printGoldbachListLimited(2 to 3000, 50)
+      true must beTrue
+    }
+  }
 }
