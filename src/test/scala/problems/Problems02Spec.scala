@@ -377,7 +377,7 @@ class ArithmeticSpec extends Specification {
 
   "S99Int->printGoldbachList(Range)" should {
     """prints "10 = 3 + 7\n12 = 5 + 7\n...20 = 3 + 17" if r = (9 to 20)""" in {
-      val out = new java.io.ByteArrayOutputStream()
+      implicit val out = new java.io.ByteArrayOutputStream()
       val expected = """
 10 = 3 + 7
 12 = 5 + 7
@@ -387,7 +387,7 @@ class ArithmeticSpec extends Specification {
 20 = 3 + 17
       """.trim
 
-      S99Int.printGoldbachList(9 to 20, out)
+      S99Int.printGoldbachList(9 to 20)
       out.toString.trim must beEqualTo(expected)
     }
   }

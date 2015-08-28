@@ -162,7 +162,7 @@ object S99Int {
    * 18 = 5 + 13
    * 20 = 3 + 17
    */
-  def printGoldbachList(r: Range, out: OutputStream = Console.out): Unit =
+  def printGoldbachList(r: Range)(implicit out: OutputStream = Console.out): Unit =
     r.filter { n => n > 2 && n % 2 == 0 }.map { n => val (x, y) = n.goldbach; s"${n} = $x + $y" }.foreach { s => Console.withOut(out) { println(s) } }
 }
 
