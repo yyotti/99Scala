@@ -119,5 +119,5 @@ object Tree {
    * scala> Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric
    * res5: Boolean = false
    */
-  def fromList(list: List[Int]): Tree[Int] = ???
+  def fromList(list: List[Int]): Tree[Int] = list.foldLeft(End: Tree[Int]) { case (t, v) => t.addValue(v) }
 }
