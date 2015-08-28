@@ -307,4 +307,11 @@ class ArithmeticSpec extends Specification {
       new S99Int(7).totientImproved must beEqualTo(6)
     }
   }
+
+  "S99Int->compareTotientFunctions" should {
+    "test" in {
+      // 特に何もしない
+      S99Int.compareTotientFunctions(10090) must beEqualTo(())
+    }
+  }
 }

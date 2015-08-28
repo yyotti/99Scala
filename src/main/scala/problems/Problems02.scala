@@ -101,5 +101,28 @@ object S99Int {
     else if (m < n) gcd(n, m)
     else if (n == 0) m
     else gcd(n, m % n)
+
+  /**
+   * P38 (*) Compare the two methods of calculating Euler's totient function.
+   * Use the solutions of problems P34 and P37 to compare the algorithms. Try to calculate phi(10090) as an example.
+   */
+  def compareTotientFunctions(n: Int): Unit = {
+    def time[A](block: => A): (Long, A) = {
+      val start = System.currentTimeMillis()
+      val result = block
+      val end = System.currentTimeMillis()
+
+      (end - start, result)
+    }
+
+    // まず十分にprimesを生成しておく
+    primes.takeWhile { _ <= n }
+
+    val (time1, ret1) = time(n.totient)
+    val (time2, ret2) = time(n.totientImproved)
+
+    println(s"totient($n): $time1 [ms]")
+    println(s"totient($n): $time2 [ms]")
+  }
 }
 
