@@ -79,4 +79,36 @@ class BinaryTreesSpec extends Specification {
       Node(2, Node(0), Node(3)).addValue(4) must beEqualTo(Node(2, Node(0), Node(3, End, Node(4))))
     }
   }
+
+  "Tree->fromList(List[Int])" should {
+    "returns T(2 . .) if list = [2]" in {
+      Tree.fromList(List(2)) must beEqualTo(Node(2))
+    }
+
+    "returns T(2 . T(3 . .)) if list = [2, 3]" in {
+      Tree.fromList(List(2, 3)) must beEqualTo(Node(2, End, Node(3)))
+    }
+
+    "returns T(2 T(0 . .) T(3 . .)) if list = [2, 3, 0]" in {
+      Tree.fromList(List(2, 3, 0)) must beEqualTo(Node(2, Node(0), Node(3)))
+    }
+
+    "returns T(2 T(0 . .) T(3 . T(4 . .))) if list = [2, 3, 0, 4]" in {
+      Tree.fromList(List(2, 3, 0, 4)) must beEqualTo(Node(2, Node(0), Node(3, End, Node(4))))
+    }
+
+    "returns T(3 T(2 T(1 . .) .) T(5 . T(7 . .))) if list = [3, 2, 5, 7, 1]" in {
+      Tree.fromList(List(3, 2, 5, 7, 1)) must beEqualTo(Node(3, Node(2, Node(1), End), Node(5, End, Node(7))))
+    }
+  }
+
+  "Tree->fromList(List[Int]) check" should {
+    "returns true if list = [5, 3, 18, 1, 4, 12, 21]" in {
+      Tree.fromList(List(5, 3, 18, 1, 4, 12, 21)).isSymmetric must beTrue
+    }
+
+    "returns false if list = [3, 2, 5, 7, 4]" in {
+      Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric must beFalse
+    }
+  }
 }

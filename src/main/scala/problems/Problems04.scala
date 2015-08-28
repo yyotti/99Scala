@@ -103,4 +103,21 @@ object Tree {
         }
       }
     }
+
+  /**
+   * P57 (**) Binary search trees (dictionaries).
+   * Use that function to construct a binary tree from a list of integers.
+   *
+   * scala> Tree.fromList(List(3, 2, 5, 7, 1))
+   * res3: Node[Int] = T(3 T(2 T(1 . .) .) T(5 . T(7 . .)))
+   *
+   * Finally, use that function to test your solution to P56.
+   *
+   * scala> Tree.fromList(List(5, 3, 18, 1, 4, 12, 21)).isSymmetric
+   * res4: Boolean = true
+   *
+   * scala> Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric
+   * res5: Boolean = false
+   */
+  def fromList(list: List[Int]): Tree[Int] = ???
 }
