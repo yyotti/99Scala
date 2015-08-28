@@ -88,6 +88,7 @@ object S99Logic {
       val codes = gray(n - 1)
       codes.map { c => "0" + c } ::: codes.reverse.map { c => "1" + c }
     }
+  def grayMemorized(n: Int): List[String] = ???
 }
 
 /**
