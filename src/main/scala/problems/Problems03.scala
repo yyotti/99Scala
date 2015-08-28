@@ -4,7 +4,7 @@ object S99Logic {
   import java.io.OutputStream
   import scala.language.implicitConversions
 
-  implicit def boolean2S99Boolean(b: Boolean) = ???
+  implicit def boolean2S99Boolean(b: Boolean) = new S99Boolean(b)
 
   // [テンプレート]
   //
@@ -82,11 +82,11 @@ object S99Logic {
  * false false false
  */
 class S99Boolean(val b: Boolean) {
-  def and(a: Boolean): Boolean = ???
-  def or(a: Boolean): Boolean = ???
-  def nand(a: Boolean): Boolean = ???
-  def nor(a: Boolean): Boolean = ???
-  def xor(a: Boolean): Boolean = ???
-  def impl(a: Boolean): Boolean = ???
-  def equ(a: Boolean): Boolean = ???
+  def and(a: Boolean): Boolean = S99Logic.and(b, a)
+  def or(a: Boolean): Boolean = S99Logic.or(b, a)
+  def nand(a: Boolean): Boolean = S99Logic.nand(b, a)
+  def nor(a: Boolean): Boolean = S99Logic.nor(b, a)
+  def xor(a: Boolean): Boolean = S99Logic.xor(b, a)
+  def impl(a: Boolean): Boolean = S99Logic.impl(b, a)
+  def equ(a: Boolean): Boolean = S99Logic.equ(b, a)
 }
