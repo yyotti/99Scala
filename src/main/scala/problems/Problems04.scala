@@ -13,15 +13,25 @@ sealed abstract class Tree[+T] {
    * scala> Node('a', Node('b'), Node('c')).isSymmetric
    * res0: Boolean = true
    */
-  def isSymmetric: Boolean = ???
+  def isMirrorOf[A](tree: Tree[A]): Boolean
+  def isSymmetric: Boolean
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
   override def toString = "T(" + value.toString + " " + left.toString + " " + right.toString + ")"
+
+  def isMirrorOf[A](tree: Tree[A]): Boolean = tree match {
+    case Node(_, l, r) => l.isMirrorOf(right) && r.isMirrorOf(left)
+    case _ => false
+  }
+  def isSymmetric = left.isMirrorOf(right)
 }
 
 case object End extends Tree[Nothing] {
   override def toString = "."
+
+  def isMirrorOf[A](tree: Tree[A]): Boolean = tree == End
+  def isSymmetric: Boolean = true
 }
 
 object Node {
