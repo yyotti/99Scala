@@ -37,12 +37,30 @@ object S99Logic {
    * false true  false
    * false false false
    */
-  def and(a: Boolean, b: Boolean): Boolean = ???
-  def or(a: Boolean, b: Boolean): Boolean = ???
-  def nand(a: Boolean, b: Boolean): Boolean = ???
-  def nor(a: Boolean, b: Boolean): Boolean = ???
-  def xor(a: Boolean, b: Boolean): Boolean = ???
-  def impl(a: Boolean, b: Boolean): Boolean = ???
-  def equ(a: Boolean, b: Boolean): Boolean = ???
-  def table2(f: (Boolean, Boolean) => Boolean)(implicit out: OutputStream = Console.out): Unit = ???
+  def and(a: Boolean, b: Boolean): Boolean = (a, b) match {
+    case (true, true) => true
+    case _ => false
+  }
+  def or(a: Boolean, b: Boolean): Boolean = (a, b) match {
+    case (false, false) => false
+    case _ => true
+  }
+  def not(a: Boolean): Boolean = a match {
+    case true => false
+    case _ => true
+  }
+  def nand(a: Boolean, b: Boolean): Boolean = not(and(a, b))
+  def nor(a: Boolean, b: Boolean): Boolean = not(or(a, b))
+  def xor(a: Boolean, b: Boolean): Boolean = or(and(a, not(b)), and(not(a), b))
+  def impl(a: Boolean, b: Boolean): Boolean = or(not(a), b)
+  def equ(a: Boolean, b: Boolean): Boolean = not(xor(a, b))
+  def table2(f: (Boolean, Boolean) => Boolean)(implicit out: OutputStream = Console.out): Unit =
+    Console.withOut(out) {
+      println("A     B     result")
+      Seq(true, false).map { a =>
+        Seq(true, false).map { b =>
+          println(f"$a%-5s $b%-5s ${f(a, b)}")
+        }
+      }
+    }
 }

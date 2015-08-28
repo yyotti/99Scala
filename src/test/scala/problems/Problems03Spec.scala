@@ -40,6 +40,16 @@ class LogicAndCodesSpec extends Specification {
     }
   }
 
+  "S99Logic->not(Boolean)" should {
+    "returns false if a = true" in {
+      S99Logic.not(true) must beFalse
+    }
+
+    "returns true if a = false" in {
+      S99Logic.not(false) must beTrue
+    }
+  }
+
   "S99Logic->nand(Boolean, Boolean)" should {
     "returns false if (a, b) = (true, true)" in {
       S99Logic.nand(true, true) must beFalse
