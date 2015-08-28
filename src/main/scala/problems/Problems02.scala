@@ -38,6 +38,15 @@ class S99Int(val start: Int) {
    * res0: Int = 4
    */
   def totient: Int = if (start < 1) 0 else (1 until start).count { _.isCoprimeTo(start) }
+
+  /**
+   * P35 (**) Determine the prime factors of a given positive integer.
+   * Construct a flat list containing the prime factors in ascending order.
+   *
+   * scala> 315.primeFactors
+   * res0: List[Int] = List(3, 3, 5, 7)
+   */
+  def primeFactors: List[Int] = ???
 }
 
 object S99Int {

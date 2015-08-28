@@ -177,4 +177,50 @@ class ArithmeticSpec extends Specification {
       new S99Int(7).totient must beEqualTo(6)
     }
   }
+
+  "S99Int#primeFactors" should {
+    "returns [] if this = -1" in {
+      new S99Int(-1).primeFactors must beEmpty
+    }
+
+    "returns [] if this = 0" in {
+      new S99Int(0).primeFactors must beEmpty
+    }
+
+    "returns [] if this = 1" in {
+      new S99Int(1).primeFactors must beEmpty
+    }
+
+    "returns [2] if this = 2" in {
+      new S99Int(2).primeFactors must beEqualTo(List(2))
+    }
+
+    "returns [3] if this = 3" in {
+      new S99Int(3).primeFactors must beEqualTo(List(3))
+    }
+
+    "returns [2, 2] if this = 4" in {
+      new S99Int(4).primeFactors must beEqualTo(List(2, 2))
+    }
+
+    "returns [5] if this = 5" in {
+      new S99Int(5).primeFactors must beEqualTo(List(5))
+    }
+
+    "returns [2, 3] if this = 6" in {
+      new S99Int(6).primeFactors must beEqualTo(List(2, 3))
+    }
+
+    "returns [7] if this = 7" in {
+      new S99Int(7).primeFactors must beEqualTo(List(7))
+    }
+
+    "returns [2, 2, 2] if this = 8" in {
+      new S99Int(8).primeFactors must beEqualTo(List(2, 2, 2))
+    }
+
+    "returns [3, 3, 5, 7] if this = 315" in {
+      new S99Int(315).primeFactors must beEqualTo(List(3, 3, 5, 7))
+    }
+  }
 }
