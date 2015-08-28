@@ -1,15 +1,5 @@
 package problems.binarytree
 
-// [テンプレート]
-//
-// /**
-//  * P31 (**) Determine whether a given integer number is prime.
-//  *
-//  * scala> 7.isPrime
-//  * res0: Boolean = true
-//  */
-// def isPrime: Boolean = ???
-
 sealed abstract class Tree[+T]
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -22,4 +12,31 @@ case object End extends Tree[Nothing] {
 
 object Node {
   def apply[T](value: T): Node[T] = Node(value, End, End)
+}
+
+object Tree {
+  // [テンプレート]
+  //
+  // /**
+  //  * P31 (**) Determine whether a given integer number is prime.
+  //  *
+  //  * scala> 7.isPrime
+  //  * res0: Boolean = true
+  //  */
+  // def isPrime: Boolean = ???
+
+  /**
+   * P55 (**) Construct completely balanced binary trees.
+   * In a completely balanced binary tree, the following property holds for every node:
+   * The number of nodes in its left subtree and the number of nodes in its right subtree are almost equal,
+   * which means their difference is not greater than one.
+   *
+   * Define an object named Tree.
+   * Write a function Tree.cBalanced to construct completely balanced binary trees for a given number of nodes.
+   * The function should generate all solutions. The function should take as parameters the number of nodes and a single value to put in all of them.
+   *
+   * scala> Tree.cBalanced(4, "x")
+   * res0: List(Node[String]) = List(T(x T(x . .) T(x . T(x . .))), T(x T(x . .) T(x T(x . .) .)), ...
+   */
+  def cBalanced[A](n: Int, value: A): List[Tree[A]] = ???
 }
