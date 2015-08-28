@@ -46,7 +46,12 @@ class S99Int(val start: Int) {
    * scala> 315.primeFactors
    * res0: List[Int] = List(3, 3, 5, 7)
    */
-  def primeFactors: List[Int] = ???
+  def primeFactors: List[Int] =
+    if (start < 2) Nil
+    else {
+      val p = primes.find { start % _ == 0 }.get
+      p :: (start / p).primeFactors
+    }
 }
 
 object S99Int {
