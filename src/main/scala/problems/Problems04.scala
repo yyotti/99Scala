@@ -35,7 +35,7 @@ sealed abstract class Tree[+T] {
    * the upper nodes must be of type T or any supertype.)
    * The <% Ordered[U] allows us to use the < operator on the values in the tree.
    */
-  def addValue[A >: T <% Ordered[A]](value: A): Tree[A] = ???
+  def addValue[A >: T <% Ordered[A]](value: A): Tree[A]
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -46,6 +46,10 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
     case _ => false
   }
   def isSymmetric = left.isMirrorOf(right)
+
+  def addValue[A >: T <% Ordered[A]](v: A): Tree[A] =
+    if (v < value) copy(left = left.addValue(v))
+    else copy(right = right.addValue(v))
 }
 
 case object End extends Tree[Nothing] {
@@ -53,6 +57,8 @@ case object End extends Tree[Nothing] {
 
   def isMirrorOf[A](tree: Tree[A]): Boolean = tree == End
   def isSymmetric: Boolean = true
+
+  def addValue[A <% Ordered[A]](value: A): Tree[A] = Node(value)
 }
 
 object Node {
