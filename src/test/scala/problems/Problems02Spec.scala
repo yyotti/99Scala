@@ -269,4 +269,42 @@ class ArithmeticSpec extends Specification {
       new S99Int(315).primeFactorMultiplicity must beEqualTo(Map(3 -> 2, 5 -> 1, 7 -> 1))
     }
   }
+
+  "S99Int#totientImproved" should {
+    "returns 0 if this = -1" in {
+      new S99Int(-1).totientImproved must beEqualTo(0)
+    }
+
+    "returns 0 if this = 0" in {
+      new S99Int(0).totientImproved must beEqualTo(0)
+    }
+
+    "returns 1 if this = 1" in {
+      new S99Int(1).totientImproved must beEqualTo(0)
+    }
+
+    "returns 1 if this = 2" in {
+      new S99Int(2).totientImproved must beEqualTo(1)
+    }
+
+    "returns 2 if this = 3" in {
+      new S99Int(3).totientImproved must beEqualTo(2)
+    }
+
+    "returns 2 if this = 4" in {
+      new S99Int(4).totientImproved must beEqualTo(2)
+    }
+
+    "returns 4 if this = 5" in {
+      new S99Int(5).totientImproved must beEqualTo(4)
+    }
+
+    "returns 2 if this = 6" in {
+      new S99Int(6).totientImproved must beEqualTo(2)
+    }
+
+    "returns 6 if this = 7" in {
+      new S99Int(7).totientImproved must beEqualTo(6)
+    }
+  }
 }
