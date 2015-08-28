@@ -38,5 +38,18 @@ object Tree {
    * scala> Tree.cBalanced(4, "x")
    * res0: List(Node[String]) = List(T(x T(x . .) T(x . T(x . .))), T(x T(x . .) T(x T(x . .) .)), ...
    */
-  def cBalanced[A](n: Int, value: A): List[Tree[A]] = ???
+  def cBalanced[A](n: Int, value: A): List[Tree[A]] =
+    if (n < 1) List(End)
+    else if ((n - 1) % 2 == 0) {
+      cBalanced((n - 1) / 2, value).map { t =>
+        Node(value, t, t)
+      }
+    } else {
+      val m = n / 2
+      cBalanced(m, value).flatMap { t1 =>
+        cBalanced(n - m - 1, value).flatMap { t2 =>
+          List(Node(value, t1, t2), Node(value, t2, t1))
+        }
+      }
+    }
 }
