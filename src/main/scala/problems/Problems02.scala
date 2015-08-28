@@ -65,7 +65,8 @@ class S99Int(val start: Int) {
    * scala> 315.primeFactorMultiplicity
    * res0: Map[Int,Int] = Map(3 -> 2, 5 -> 1, 7 -> 1)
    */
-  def primeFactorMultiplicity: Map[Int, Int] = ???
+  def primeFactorMultiplicity: Map[Int, Int] =
+    primeFactors.foldLeft(Map[Int, Int]()) { case (map, p) => map + (p -> (map.getOrElse(p, 0) + 1)) }
 }
 
 object S99Int {
