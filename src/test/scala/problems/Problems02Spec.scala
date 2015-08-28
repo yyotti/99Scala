@@ -314,4 +314,26 @@ class ArithmeticSpec extends Specification {
       S99Int.compareTotientFunctions(10090) must beEqualTo(())
     }
   }
+
+  "S99Int->listPrimesinRange" should {
+    "returns [] if r = (-1 to 1)" in {
+      S99Int.listPrimesinRange(-1 to 1) must beEmpty
+    }
+
+    "returns [] if r = (1 to 1)" in {
+      S99Int.listPrimesinRange(1 to 1) must beEmpty
+    }
+
+    "returns [2] if r = (1 to 2)" in {
+      S99Int.listPrimesinRange(1 to 2) must beEqualTo(List(2))
+    }
+
+    "returns [2, 3, 5] if r = (1 to 6)" in {
+      S99Int.listPrimesinRange(1 to 6) must beEqualTo(List(2, 3, 5))
+    }
+
+    "returns [7, 11, 13, 17, 19, 23, 29, 31] if r = (7 to 31)" in {
+      S99Int.listPrimesinRange(7 to 31) must beEqualTo(List(7, 11, 13, 17, 19, 23, 29, 31))
+    }
+  }
 }
