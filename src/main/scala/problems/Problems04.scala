@@ -15,6 +15,27 @@ sealed abstract class Tree[+T] {
    */
   def isMirrorOf[A](tree: Tree[A]): Boolean
   def isSymmetric: Boolean
+
+  /**
+   * P57 (**) Binary search trees (dictionaries).
+   * Write a function to add an element to a binary search tree.
+   *
+   * scala> End.addValue(2)
+   * res0: Node[Int] = T(2 . .)
+   *
+   * scala> res0.addValue(3)
+   * res1: Node[Int] = T(2 . T(3 . .))
+   *
+   * scala> res1.addValue(0)
+   * res2: Node[Int] = T(2 T(0 . .) T(3 . .))
+   *
+   * Hint: The abstract definition of addValue in Tree should be def addValue[U >: T <% Ordered[U]](x: U): Tree[U].
+   * The >: T is because addValue's parameters need to be contravariant in T.
+   * (Conceptually, we're adding nodes above existing nodes. In order for the subnodes to be of type T or any subtype,
+   * the upper nodes must be of type T or any supertype.)
+   * The <% Ordered[U] allows us to use the < operator on the values in the tree.
+   */
+  def addValue[A >: T <% Ordered[A]](value: A): Tree[A] = ???
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {

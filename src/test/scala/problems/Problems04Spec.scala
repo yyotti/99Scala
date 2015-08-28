@@ -61,4 +61,22 @@ class BinaryTreesSpec extends Specification {
       Node('a, Node('b, Node('d), End), Node('c)).isSymmetric must beFalse
     }
   }
+
+  "Tree#addValue(A)" should {
+    "returns T(2 . .) if this = End" in {
+      End.addValue(2) must beEqualTo(Node(2))
+    }
+
+    "returns T(2 . T(3 . .)) if this = Node(2)" in {
+      Node(2).addValue(3) must beEqualTo(Node(2, End, Node(3)))
+    }
+
+    "returns T(2 T(0 . .) T(3 . .)) if this = Node(2, End, Node(3))" in {
+      Node(2, End, Node(3)).addValue(0) must beEqualTo(Node(2, Node(0), Node(3)))
+    }
+
+    "returns T(2 T(0 . .) T(3 . T(4 . .))) if this = Node(2, Node(0), Node(3))" in {
+      Node(2, Node(0), Node(3)).addValue(4) must beEqualTo(Node(2, Node(0), Node(3, End, Node(4))))
+    }
+  }
 }
