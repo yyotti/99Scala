@@ -52,6 +52,20 @@ class S99Int(val start: Int) {
       val p = primes.find { start % _ == 0 }.get
       p :: (start / p).primeFactors
     }
+
+  /**
+   * P36 (**) Determine the prime factors of a given positive integer (2).
+   * Construct a list containing the prime factors and their multiplicity.
+   *
+   * scala> 315.primeFactorMultiplicity
+   * res0: List[(Int, Int)] = List((3,2), (5,1), (7,1))
+   *
+   * Alternately, use a Map for the result.
+   *
+   * scala> 315.primeFactorMultiplicity
+   * res0: Map[Int,Int] = Map(3 -> 2, 5 -> 1, 7 -> 1)
+   */
+  def primeFactorMultiplicity: Map[Int, Int] = ???
 }
 
 object S99Int {

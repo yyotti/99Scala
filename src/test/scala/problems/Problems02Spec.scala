@@ -223,4 +223,50 @@ class ArithmeticSpec extends Specification {
       new S99Int(315).primeFactors must beEqualTo(List(3, 3, 5, 7))
     }
   }
+
+  "S99Int#primeFactorMultiplicity" should {
+    "returns [] if this = -1" in {
+      new S99Int(-1).primeFactorMultiplicity must beEmpty
+    }
+
+    "returns [] if this = 0" in {
+      new S99Int(0).primeFactorMultiplicity must beEmpty
+    }
+
+    "returns [] if this = 1" in {
+      new S99Int(1).primeFactorMultiplicity must beEmpty
+    }
+
+    "returns [2 -> 1] if this = 2" in {
+      new S99Int(2).primeFactorMultiplicity must beEqualTo(Map(2 -> 1))
+    }
+
+    "returns [3 -> 1] if this = 3" in {
+      new S99Int(3).primeFactorMultiplicity must beEqualTo(Map(3 -> 1))
+    }
+
+    "returns [2 -> 2] if this = 4" in {
+      new S99Int(4).primeFactorMultiplicity must beEqualTo(Map(2 -> 2))
+    }
+
+    "returns [5 -> 1] if this = 5" in {
+      new S99Int(5).primeFactorMultiplicity must beEqualTo(Map(5 -> 1))
+    }
+
+    "returns [2 -> 1, 3 -> 1] if this = 6" in {
+      new S99Int(6).primeFactorMultiplicity must beEqualTo(Map(2 -> 1, 3 -> 1))
+    }
+
+    "returns [7 -> 1] if this = 7" in {
+      new S99Int(7).primeFactorMultiplicity must beEqualTo(Map(7 -> 1))
+    }
+
+    "returns [2 -> 3] if this = 8" in {
+      new S99Int(8).primeFactorMultiplicity must beEqualTo(Map(2 -> 3))
+    }
+
+    "returns [3 -> 2, 5 -> 1, 7 -> 1] if this = 315" in {
+      new S99Int(315).primeFactorMultiplicity must beEqualTo(Map(3 -> 2, 5 -> 1, 7 -> 1))
+    }
+  }
 }
