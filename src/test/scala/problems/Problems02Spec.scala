@@ -149,7 +149,7 @@ class ArithmeticSpec extends Specification {
       new S99Int(0).totient must beEqualTo(0)
     }
 
-    "returns 1 if this = 1" in {
+    "returns 0 if this = 1" in {
       new S99Int(1).totient must beEqualTo(0)
     }
 
@@ -279,7 +279,7 @@ class ArithmeticSpec extends Specification {
       new S99Int(0).totientImproved must beEqualTo(0)
     }
 
-    "returns 1 if this = 1" in {
+    "returns 0 if this = 1" in {
       new S99Int(1).totientImproved must beEqualTo(0)
     }
 

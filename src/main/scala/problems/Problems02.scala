@@ -37,7 +37,7 @@ class S99Int(val start: Int) {
    * scala> 10.totient
    * res0: Int = 4
    */
-  def totient: Int = if (start < 1) 0 else (1 until start).count { _.isCoprimeTo(start) }
+  def totient: Int = if (start < 2) 0 else (1 until start).count { _.isCoprimeTo(start) }
 
   /**
    * P35 (**) Determine the prime factors of a given positive integer.
@@ -78,7 +78,9 @@ class S99Int(val start: Int) {
    *
    * Note that a^b stands for the bth power of a.
    */
-  def totientImproved: Int = ???
+  def totientImproved: Int =
+    if (start < 2) 0
+    else primeFactorMultiplicity.map { case (p, m) => (p - 1) * BigInt(p).pow(m - 1).toInt }.product
 }
 
 object S99Int {
