@@ -123,8 +123,8 @@ class BinaryTreesSpec extends Specification {
   }
 
   "Tree->symmetricBalancedTrees(Int, A) check" should {
-    "returns IllegalArgumentException if (n, value) = (-1, 'a)" in {
-      Tree.symmetricBalancedTrees(-1, 'a) must throwA[IllegalArgumentException]
+    "returns [.] if (n, value) = (-1, 'a)" in {
+      Tree.symmetricBalancedTrees(-1, 'a) must beEqualTo(List(End))
     }
 
     "returns [.] if (n, value) = (0, 'a)" in {
