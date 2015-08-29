@@ -173,5 +173,7 @@ object Tree {
    * scala> minHbalNodes(3)
    * res0: Int = 4
    */
-  def minHbalNodes(height: Int): Int = ???
+  def minHbalNodes(height: Int): Int =
+    if (height <= 0) 0
+    else minHbalNodes(height - 1) + minHbalNodes(height - 2) + 1
 }
