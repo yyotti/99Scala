@@ -163,4 +163,15 @@ object Tree {
 
       list1 ::: list2
     }
+
+  /**
+   * P60 (**) Construct height-balanced binary trees with a given number of nodes.
+   * Consider a height-balanced binary tree of height H. What is the maximum number of nodes it can contain? Clearly, MaxN = 2^H - 1.
+   * However, what is the minimum number MinN? This question is more difficult.
+   * Try to find a recursive statement and turn it into a function minHbalNodes that takes a height and returns MinN.
+   *
+   * scala> minHbalNodes(3)
+   * res0: Int = 4
+   */
+  def minHbalNodes(height: Int): Int = ???
 }

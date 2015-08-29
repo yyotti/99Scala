@@ -195,4 +195,34 @@ class BinaryTreesSpec extends Specification {
       Tree.hbalTrees(3, "x") must beEqualTo(expected)
     }
   }
+
+  "Tree->minHbalNodes(Int)" should {
+    "returns 0 if height = -1" in {
+      Tree.minHbalNodes(-1) must beEqualTo(0)
+    }
+
+    "returns 0 if height = 0" in {
+      Tree.minHbalNodes(0) must beEqualTo(0)
+    }
+
+    "returns 1 if height = 1" in {
+      Tree.minHbalNodes(1) must beEqualTo(1)
+    }
+
+    "returns 2 if height = 2" in {
+      Tree.minHbalNodes(2) must beEqualTo(2)
+    }
+
+    "returns 4 if height = 3" in {
+      Tree.minHbalNodes(3) must beEqualTo(4)
+    }
+
+    "returns 7 if height = 4" in {
+      Tree.minHbalNodes(4) must beEqualTo(7)
+    }
+
+    "returns 12 if height = 5" in {
+      Tree.minHbalNodes(5) must beEqualTo(12)
+    }
+  }
 }
