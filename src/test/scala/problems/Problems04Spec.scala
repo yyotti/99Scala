@@ -111,4 +111,34 @@ class BinaryTreesSpec extends Specification {
       Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric must beFalse
     }
   }
+
+  "Tree->symmetricBalancedTrees(Int, A) check" should {
+    "returns IllegalArgumentException if (n, value) = (-1, 'a)" in {
+      Tree.symmetricBalancedTrees(-1, 'a) must throwA[IllegalArgumentException]
+    }
+
+    "returns [.] if (n, value) = (0, 'a)" in {
+      Tree.symmetricBalancedTrees(0, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [T(b . .)] if (n, value) = (1, 'b)" in {
+      Tree.symmetricBalancedTrees(1, 'b) must beEqualTo(List(Node('b)))
+    }
+
+    "returns [] if (n, value) = (2, 'c)" in {
+      Tree.symmetricBalancedTrees(2, 'c) must beEmpty
+    }
+
+    "returns [T(d T(d . .) T(d . .)] if (n, value) = (3, 'd)" in {
+      Tree.symmetricBalancedTrees(3, 'd) must beEqualTo(List(Node('d, Node('d), Node('d))))
+    }
+
+    "returns [] if (n, value) = (4, 'e)" in {
+      Tree.symmetricBalancedTrees(4, 'e) must beEmpty
+    }
+
+    """returns [T("x" T(T("x" . .) .) T(. T("x" . .))), T("x" T("x" . T("x" . .)) T("x" T("x" . .) .))] if (n, value) = (5, "x")""" in {
+      Tree.symmetricBalancedTrees(5, "x") must beEqualTo(List(Node("x", Node("x", Node("x"), End), Node("x", End, Node("x"))), Node("x", Node("x", End, Node("x")), Node("x", Node("x"), End))))
+    }
+  }
 }
