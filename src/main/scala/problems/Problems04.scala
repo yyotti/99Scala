@@ -142,5 +142,25 @@ object Tree {
    * scala> Tree.hbalTrees(3, "x")
    * res0: List[Node[String]] = List(T(x T(x T(x . .) T(x . .)) T(x T(x . .) T(x . .))), T(x T(x T(x . .) T(x . .)) T(x T(x . .) .)), ...
    */
-  def hbalTrees[A](height: Int, value: A): List[Tree[A]] = ???
+  def hbalTrees[A](height: Int, value: A): List[Tree[A]] =
+    if (height < 1) List(End)
+    else if (height == 1) List(Node(value))
+    else {
+      val subtree1 = hbalTrees(height - 1, value)
+      val subtree2 = hbalTrees(height - 2, value)
+
+      val list1 = subtree1.flatMap { t1 =>
+        subtree1.flatMap { t2 =>
+          List(Node(value, t1, t2))
+        }
+      }
+
+      val list2 = subtree1.flatMap { t1 =>
+        subtree2.flatMap { t2 =>
+          List(Node(value, t1, t2), Node(value, t2, t1))
+        }
+      }
+
+      list1 ::: list2
+    }
 }
