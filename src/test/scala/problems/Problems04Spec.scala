@@ -152,7 +152,7 @@ class BinaryTreesSpec extends Specification {
     }
   }
 
-  "Tree->hbalTrees(Int, A) check" should {
+  "Tree->hbalTrees(Int, A)" should {
     "returns [.] if (height, value) = (-1, 'a)" in {
       Tree.hbalTrees(-1, 'a) must beEqualTo(List(End))
     }
