@@ -176,4 +176,13 @@ object Tree {
   def minHbalNodes(height: Int): Int =
     if (height <= 0) 0
     else minHbalNodes(height - 1) + minHbalNodes(height - 2) + 1
+
+  /**
+   * P60 (**) Construct height-balanced binary trees with a given number of nodes.
+   * On the other hand, we might ask: what is the maximum height H a height-balanced binary tree with N nodes can have? Write a maxHbalHeight function.
+   *
+   * scala> maxHbalHeight(4)
+   * res1: Int = 3
+   */
+  def maxHbalHeight(n: Int): Int = ???
 }

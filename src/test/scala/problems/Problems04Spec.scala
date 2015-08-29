@@ -225,4 +225,42 @@ class BinaryTreesSpec extends Specification {
       Tree.minHbalNodes(5) must beEqualTo(12)
     }
   }
+
+  "Tree->maxHbalHeight(Int)" should {
+    "returns 0 if n = -1" in {
+      Tree.maxHbalHeight(-1) must beEqualTo(0)
+    }
+
+    "returns 0 if n = 0" in {
+      Tree.maxHbalHeight(0) must beEqualTo(0)
+    }
+
+    "returns 1 if n = 1" in {
+      Tree.maxHbalHeight(1) must beEqualTo(1)
+    }
+
+    "returns 2 if n = 2" in {
+      Tree.maxHbalHeight(2) must beEqualTo(2)
+    }
+
+    "returns 2 if n = 3" in {
+      Tree.maxHbalHeight(3) must beEqualTo(2)
+    }
+
+    "returns 3 if n = 4" in {
+      Tree.maxHbalHeight(4) must beEqualTo(3)
+    }
+
+    "returns 3 if n = 5" in {
+      Tree.maxHbalHeight(5) must beEqualTo(3)
+    }
+
+    "returns 3 if n = 7" in {
+      Tree.maxHbalHeight(7) must beEqualTo(3)
+    }
+
+    "returns 4 if n = 8" in {
+      Tree.maxHbalHeight(8) must beEqualTo(4)
+    }
+  }
 }
