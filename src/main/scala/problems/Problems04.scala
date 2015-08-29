@@ -92,8 +92,10 @@ object Tree {
   def cBalanced[A](n: Int, value: A): List[Tree[A]] =
     if (n < 1) List(End)
     else if ((n - 1) % 2 == 0) {
-      cBalanced((n - 1) / 2, value).map { t =>
-        Node(value, t, t)
+      cBalanced((n - 1) / 2, value).flatMap { t1 =>
+        cBalanced((n - 1) / 2, value).map { t2 =>
+          Node(value, t1, t2)
+        }
       }
     } else {
       val m = n / 2

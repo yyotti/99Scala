@@ -34,6 +34,16 @@ class BinaryTreesSpec extends Specification {
       )
       Tree.cBalanced(4, "x") must beEqualTo(expected)
     }
+
+    """returns [T("x" T("x" T("x" . .) .) T("x" T("x" . .) .)), T("x" T(T("x" . .) .) T(. T("x" . .))), T("x" T("x" . T("x" . .)) T("x" T("x" . .) .)), T("x" T("x" . T("x" . .)) T("x" . T("x")))] if (n, value) = (5, "x")""" in {
+      val expected = List(
+        Node("x", Node("x", Node("x"), End), Node("x", Node("x"), End)),
+        Node("x", Node("x", Node("x"), End), Node("x", End, Node("x"))),
+        Node("x", Node("x", End, Node("x")), Node("x", Node("x"), End)),
+        Node("x", Node("x", End, Node("x")), Node("x", End, Node("x")))
+      )
+      Tree.cBalanced(5, "x") must beEqualTo(expected)
+    }
   }
 
   "Tree#isSymmetric" should {
