@@ -184,5 +184,7 @@ object Tree {
    * scala> maxHbalHeight(4)
    * res1: Int = 3
    */
-  def maxHbalHeight(n: Int): Int = ???
+  def maxHbalHeight(n: Int): Int =
+    if (n <= 0) 0
+    else maxHbalHeight(n / 2) + 1
 }
