@@ -187,4 +187,15 @@ object Tree {
   def maxHbalHeight(n: Int): Int =
     if (n <= 0) 0
     else maxHbalHeight(n / 2) + 1
+
+  /**
+   * P60 (**) Construct height-balanced binary trees with a given number of nodes.
+   * Now, we can attack the main problem: construct all the height-balanced binary trees with a given nuber of nodes.
+   *
+   * scala> Tree.hbalTreesWithNodes(4, "x")
+   * res2: List[Node[String]] = List(T(x T(x T(x . .) .) T(x . .)), T(x T(x . T(x . .)) T(x . .)), ...
+   *
+   * Find out how many height-balanced trees exist for N = 15.
+   */
+  def hbalTreesWithNodes[A](n: Int, value: A): List[Tree[A]] = ???
 }

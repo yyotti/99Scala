@@ -263,4 +263,99 @@ class BinaryTreesSpec extends Specification {
       Tree.maxHbalHeight(8) must beEqualTo(4)
     }
   }
+
+  "Tree->hbalTreesWithNodes(Int, A)" should {
+    "returns [.] if (n, value) = (-1, 'a)" in {
+      Tree.hbalTreesWithNodes(-1, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [.] if (n, value) = (0, 'a)" in {
+      Tree.hbalTreesWithNodes(0, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [T(b . .)] if (n, value) = (1, 'b)" in {
+      Tree.hbalTreesWithNodes(1, 'b) must beEqualTo(List(Node('b)))
+    }
+
+    "returns [T(c T(c . .) .), T(c . T(c . .))] if (n, value) = (2, 'c)" in {
+      Tree.hbalTreesWithNodes(2, 'c) must beEqualTo(List(Node('c, Node('c), End), Node('c, End, Node('c))))
+    }
+
+    "returns [T(d T(d . .) T(d . .))] if (n, value) = (3, 'd)" in {
+      Tree.hbalTreesWithNodes(3, 'd) must beEqualTo(List(Node('d, Node('d), Node('d))))
+    }
+
+    """returns [T("x" T("x" T("x" . .) .) T("x" . .)), T("x" T("x" . T("x" . .)) T("x" . .)), ...] if (n, value) = (4, "x")""" in {
+      val expected = List(
+        Node("x", Node("x", Node("x"), End), Node("x")),
+        Node("x", Node("x", End, Node("x")), Node("x")),
+        Node("x", Node("x"), Node("x", Node("x"), End)),
+        Node("x", Node("x"), Node("x", End, Node("x")))
+      )
+      Tree.hbalTreesWithNodes(4, "x") must beEqualTo(expected)
+    }
+
+    "returns [T(e T(e . .) T(e . .))] if (n, value) = (5, 'e)" in {
+      val expected = List(
+        Node('e, Node('e, Node('e), Node('e)), Node('e, End, End)),
+        Node('e, Node('e, Node('e), End), Node('e, Node('e), End)),
+        Node('e, Node('e, Node('e), End), Node('e, End, Node('e))),
+        Node('e, Node('e, End, Node('e)), Node('e, Node('e), End)),
+        Node('e, Node('e, End, Node('e)), Node('e, End, Node('e))),
+        Node('e, Node('e, End, End), Node('e, Node('e), Node('e)))
+      )
+      Tree.hbalTreesWithNodes(5, 'e) must beEqualTo(expected)
+    }
+  }
+
+  "Tree->hbalTreesWithNodes(Int, A)" should {
+    "returns [.] if (n, value) = (-1, 'a)" in {
+      Tree.hbalTreesWithNodes(-1, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [.] if (n, value) = (0, 'a)" in {
+      Tree.hbalTreesWithNodes(0, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [T(b . .)] if (n, value) = (1, 'b)" in {
+      Tree.hbalTreesWithNodes(1, 'b) must beEqualTo(List(Node('b)))
+    }
+
+    "returns [T(c T(c . .) .), T(c . T(c . .))] if (n, value) = (2, 'c)" in {
+      Tree.hbalTreesWithNodes(2, 'c) must beEqualTo(List(Node('c, Node('c), End), Node('c, End, Node('c))))
+    }
+
+    "returns [T(d T(d . .) T(d . .))] if (n, value) = (3, 'd)" in {
+      Tree.hbalTreesWithNodes(3, 'd) must beEqualTo(List(Node('d, Node('d), Node('d))))
+    }
+
+    """returns [T("x" T("x" T("x" . .) .) T("x" . .)), T("x" T("x" . T("x" . .)) T("x" . .)), ...] if (n, value) = (4, "x")""" in {
+      val expected = List(
+        Node("x", Node("x", Node("x"), End), Node("x")),
+        Node("x", Node("x", End, Node("x")), Node("x")),
+        Node("x", Node("x"), Node("x", Node("x"), End)),
+        Node("x", Node("x"), Node("x", End, Node("x")))
+      )
+      Tree.hbalTreesWithNodes(4, "x") must beEqualTo(expected)
+    }
+
+    "returns [T(e T(e . .) T(e . .))] if (n, value) = (5, 'e)" in {
+      val expected = List(
+        Node('e, Node('e, Node('e), Node('e)), Node('e, End, End)),
+        Node('e, Node('e, Node('e), End), Node('e, Node('e), End)),
+        Node('e, Node('e, Node('e), End), Node('e, End, Node('e))),
+        Node('e, Node('e, End, Node('e)), Node('e, Node('e), End)),
+        Node('e, Node('e, End, Node('e)), Node('e, End, Node('e))),
+        Node('e, Node('e, End, End), Node('e, Node('e), Node('e)))
+      )
+      Tree.hbalTreesWithNodes(5, 'e) must beEqualTo(expected)
+    }
+  }
+
+  "Tree->hbalTreesWithNodes(Int, A) check" should {
+    "count if (n, value) = (15, 'z)" in {
+      println(Tree.hbalTreesWithNodes(15, 'z).size)
+      true must beTrue
+    }
+  }
 }
