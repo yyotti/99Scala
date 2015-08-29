@@ -130,5 +130,7 @@ object Tree {
    * scala> Tree.symmetricBalancedTrees(5, "x")
    * res0: List[Node[String]] = List(T(x T(x . T(x . .)) T(x T(x . .) .)), T(x T(x T(x . .) .) T(x . T(x . .))))
    */
-  def symmetricBalancedTrees[A](n: Int, value: A): List[Tree[A]] = ???
+  def symmetricBalancedTrees[A](n: Int, value: A): List[Tree[A]] =
+    if (n < 0) throw new IllegalArgumentException
+    else cBalanced(n, value).filter { _.isSymmetric }
 }
