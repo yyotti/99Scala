@@ -131,4 +131,16 @@ object Tree {
    * res0: List[Node[String]] = List(T(x T(x . T(x . .)) T(x T(x . .) .)), T(x T(x T(x . .) .) T(x . T(x . .))))
    */
   def symmetricBalancedTrees[A](n: Int, value: A): List[Tree[A]] = cBalanced(n, value).filter { _.isSymmetric }
+
+  /**
+   * P59 (**) Construct height-balanced binary trees.
+   * In a height-balanced binary tree, the following property holds for every node:
+   * The height of its left subtree and the height of its right subtree are almost equal, which means their difference is not greater than one.
+   * Write a method Tree.hbalTrees to construct height-balanced binary trees for a given height with a supplied value for the nodes.
+   * The function should generate all solutions.
+   *
+   * scala> Tree.hbalTrees(3, "x")
+   * res0: List[Node[String]] = List(T(x T(x T(x . .) T(x . .)) T(x T(x . .) T(x . .))), T(x T(x T(x . .) T(x . .)) T(x T(x . .) .)), ...
+   */
+  def hbalTrees[A](height: Int, value: A): List[Tree[A]] = ???
 }

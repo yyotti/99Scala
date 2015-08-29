@@ -151,4 +151,48 @@ class BinaryTreesSpec extends Specification {
       Tree.symmetricBalancedTrees(5, "x") must beEqualTo(List(Node("x", Node("x", Node("x"), End), Node("x", End, Node("x"))), Node("x", Node("x", End, Node("x")), Node("x", Node("x"), End))))
     }
   }
+
+  "Tree->hbalTrees(Int, A) check" should {
+    "returns [.] if (height, value) = (-1, 'a)" in {
+      Tree.hbalTrees(-1, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [.] if (height, value) = (0, 'a)" in {
+      Tree.hbalTrees(0, 'a) must beEqualTo(List(End))
+    }
+
+    "returns [T(b . .)] if (height, value) = (1, 'b)" in {
+      Tree.hbalTrees(1, 'b) must beEqualTo(List(Node('b)))
+    }
+
+    "returns [T(c T(c . .) T(c . .)), T(c T(c . .) .), T(c . T(c . .))] if (n, value) = (2, 'c)" in {
+      val expected = List(
+        Node('c, Node('c), Node('c)),
+        Node('c, Node('c), End),
+        Node('c, End, Node('c))
+      )
+      Tree.hbalTrees(2, 'c) must beEqualTo(expected)
+    }
+
+    """returns [T("x" T("x" T("x" . .) T("x" . .)) T("x" T("x" . .) T("x" . .))), T("x" T("x" T("x" . .) T("x" . .)) T("x" T("x" . .) .)), ...] if (n, value) = (3, "x")""" in {
+      val expected = List(
+        Node("x", Node("x", Node("x"), Node("x")), Node("x", Node("x"), Node("x"))),
+        Node("x", Node("x", Node("x"), Node("x")), Node("x", Node("x"), End)),
+        Node("x", Node("x", Node("x"), Node("x")), Node("x", End, Node("x"))),
+        Node("x", Node("x", Node("x"), End), Node("x", Node("x"), Node("x"))),
+        Node("x", Node("x", Node("x"), End), Node("x", Node("x"), End)),
+        Node("x", Node("x", Node("x"), End), Node("x", End, Node("x"))),
+        Node("x", Node("x", End, Node("x")), Node("x", Node("x"), Node("x"))),
+        Node("x", Node("x", End, Node("x")), Node("x", Node("x"), End)),
+        Node("x", Node("x", End, Node("x")), Node("x", End, Node("x"))),
+        Node("x", Node("x", Node("x"), Node("x")), Node("x", End, End)),
+        Node("x", Node("x", End, End), Node("x", Node("x"), Node("x"))),
+        Node("x", Node("x", Node("x"), End), Node("x", End, End)),
+        Node("x", Node("x", End, End), Node("x", Node("x"), End)),
+        Node("x", Node("x", End, Node("x")), Node("x", End, End)),
+        Node("x", Node("x", End, End), Node("x", End, Node("x")))
+      )
+      Tree.hbalTrees(3, "x") must beEqualTo(expected)
+    }
+  }
 }
