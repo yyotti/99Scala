@@ -426,4 +426,15 @@ object Tree {
     if (n <= 0) End
     else completeBinaryTreeR(1)
   }
+
+  /**
+   * P67 (**) A string representation of binary trees.
+   * Then write a method (on the Tree object) which does this inverse; i.e. given the string representation, construct the tree in the usual form.
+   *
+   * For simplicity, suppose the information in the nodes is a single letter and there are no spaces in the string.
+   *
+   * scala> Tree.fromString("a(b(d,e),c(,f(g,)))")
+   * res1: Node[Char] = a(b(d,e),c(,f(g,)))
+   */
+  def fromString(s: String): Tree[Char] = ???
 }

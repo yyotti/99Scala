@@ -840,4 +840,42 @@ class BinaryTreesSpec extends Specification {
       Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).toString2 must beEqualTo("a(b(d,e),c(,f(g,)))")
     }
   }
+
+  "Tree->fromString" should {
+    """returns End if s = """"" in {
+      Tree.fromString("") must beEqualTo(End)
+    }
+
+    """returns Node('a') if s = "a"""" in {
+      Tree.fromString("a") must beEqualTo(Node('a'))
+    }
+
+    """returns Node('a', Node('b'), End) if s = "a(b,)"""" in {
+      Tree.fromString("a(b,)") must beEqualTo(Node('a', Node('b'), End))
+    }
+
+    """returns Node('a', End, Node('c')) if s = "a(,c)"""" in {
+      Tree.fromString("a(,c)") must beEqualTo(Node('a', End, Node('c')))
+    }
+
+    """returns Node('a', Node('b'), Node('c')) if s = "a(b,c)"""" in {
+      Tree.fromString("a(b,c)") must beEqualTo(Node('a', Node('b'), Node('c')))
+    }
+
+    """returns Node('a', Node('b', Node('c'), End), End) if s = "a(b(c,),)"""" in {
+      Tree.fromString("a(b(c,),)") must beEqualTo(Node('a', Node('b', Node('c'), End), End))
+    }
+
+    """returns Node('a', End, Node('b', End, Node('c'))) if s = "a(,b(,c))"""" in {
+      Tree.fromString("a(,b(,c))") must beEqualTo(Node('a', End, Node('b', End, Node('c'))))
+    }
+
+    """returns Node('a', Node('b', End, Node('c')), Node('d')) if s = "a(b(,c),d)"""" in {
+      Tree.fromString("a(b(,c),d)") must beEqualTo(Node('a', Node('b', End, Node('c')), Node('d')))
+    }
+
+    """returns Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))) if s = "a(b(d,e),c(,f(g,)))"""" in {
+      Tree.fromString("a(b(d,e),c(,f(g,)))") must beEqualTo(Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))))
+    }
+  }
 }
