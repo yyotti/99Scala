@@ -1008,4 +1008,11 @@ class BinaryTreesSpec extends Specification {
       Tree.preInTree(List('a', 'b', 'd', 'e', 'c', 'f', 'g'), List('d', 'b', 'e', 'a', 'c', 'g', 'f')) must beEqualTo(Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))))
     }
   }
+
+  "Tree->preInTree(List[A], List[A]) check" should {
+    "What happens if the same character appears in more than one node?" in {
+      println(Tree.preInTree(List('a', 'b', 'a'), List('b', 'a', 'a')))
+      true must beTrue
+    }
+  }
 }

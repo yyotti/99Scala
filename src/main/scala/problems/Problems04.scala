@@ -479,5 +479,12 @@ object Tree {
    *
    * What happens if the same character appears in more than one node? Try, for instance, Tree.preInTree(List('a', 'b', 'a'), List('b', 'a', 'a')).
    */
-  def preInTree[A](preList: List[A], inList: List[A]): Tree[A] = ???
+  def preInTree[A](preList: List[A], inList: List[A]): Tree[A] = (preList, inList) match {
+    case (p, i) if p.size != i.size => End
+    case (Nil, Nil) => End
+    case (x :: tail, _) =>
+      val (inLeft, inRight) = inList.span { _ != x }
+      val (preLeft, preRight) = tail.splitAt(inLeft.size)
+      Node(x, preInTree(preLeft, inLeft), preInTree(preRight, inRight.tail))
+  }
 }
