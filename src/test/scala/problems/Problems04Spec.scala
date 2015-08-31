@@ -255,8 +255,46 @@ class BinaryTreesSpec extends Specification {
       Tree.maxHbalHeight(5) must beEqualTo(3)
     }
 
+    "returns 4 if n = 7" in {
+      Tree.maxHbalHeight(7) must beEqualTo(4)
+    }
+
+    "returns 4 if n = 8" in {
+      Tree.maxHbalHeight(8) must beEqualTo(4)
+    }
+  }
+
+  "Tree->minHbalHeight(Int)" should {
+    "returns 0 if n = -1" in {
+      Tree.minHbalHeight(-1) must beEqualTo(0)
+    }
+
+    "returns 0 if n = 0" in {
+      Tree.minHbalHeight(0) must beEqualTo(0)
+    }
+
+    "returns 1 if n = 1" in {
+      Tree.minHbalHeight(1) must beEqualTo(1)
+    }
+
+    "returns 2 if n = 2" in {
+      Tree.minHbalHeight(2) must beEqualTo(2)
+    }
+
+    "returns 2 if n = 3" in {
+      Tree.minHbalHeight(3) must beEqualTo(2)
+    }
+
+    "returns 3 if n = 4" in {
+      Tree.minHbalHeight(4) must beEqualTo(3)
+    }
+
+    "returns 3 if n = 5" in {
+      Tree.minHbalHeight(5) must beEqualTo(3)
+    }
+
     "returns 3 if n = 7" in {
-      Tree.maxHbalHeight(7) must beEqualTo(3)
+      Tree.minHbalHeight(7) must beEqualTo(3)
     }
 
     "returns 4 if n = 8" in {
@@ -287,65 +325,21 @@ class BinaryTreesSpec extends Specification {
 
     """returns [T("x" T("x" T("x" . .) .) T("x" . .)), T("x" T("x" . T("x" . .)) T("x" . .)), ...] if (n, value) = (4, "x")""" in {
       val expected = List(
-        Node("x", Node("x", Node("x"), End), Node("x")),
-        Node("x", Node("x", End, Node("x")), Node("x")),
-        Node("x", Node("x"), Node("x", Node("x"), End)),
-        Node("x", Node("x"), Node("x", End, Node("x")))
+        Node("x", Node("x", Node("x"), End), Node("x", End, End)),
+        Node("x", Node("x", End, End), Node("x", Node("x"), End)),
+        Node("x", Node("x", End, Node("x")), Node("x", End, End)),
+        Node("x", Node("x", End, End), Node("x", End, Node("x")))
       )
       Tree.hbalTreesWithNodes(4, "x") must beEqualTo(expected)
     }
 
     "returns [T(e T(e . .) T(e . .))] if (n, value) = (5, 'e)" in {
       val expected = List(
-        Node('e, Node('e, Node('e), Node('e)), Node('e, End, End)),
         Node('e, Node('e, Node('e), End), Node('e, Node('e), End)),
         Node('e, Node('e, Node('e), End), Node('e, End, Node('e))),
         Node('e, Node('e, End, Node('e)), Node('e, Node('e), End)),
         Node('e, Node('e, End, Node('e)), Node('e, End, Node('e))),
-        Node('e, Node('e, End, End), Node('e, Node('e), Node('e)))
-      )
-      Tree.hbalTreesWithNodes(5, 'e) must beEqualTo(expected)
-    }
-  }
-
-  "Tree->hbalTreesWithNodes(Int, A)" should {
-    "returns [.] if (n, value) = (-1, 'a)" in {
-      Tree.hbalTreesWithNodes(-1, 'a) must beEqualTo(List(End))
-    }
-
-    "returns [.] if (n, value) = (0, 'a)" in {
-      Tree.hbalTreesWithNodes(0, 'a) must beEqualTo(List(End))
-    }
-
-    "returns [T(b . .)] if (n, value) = (1, 'b)" in {
-      Tree.hbalTreesWithNodes(1, 'b) must beEqualTo(List(Node('b)))
-    }
-
-    "returns [T(c T(c . .) .), T(c . T(c . .))] if (n, value) = (2, 'c)" in {
-      Tree.hbalTreesWithNodes(2, 'c) must beEqualTo(List(Node('c, Node('c), End), Node('c, End, Node('c))))
-    }
-
-    "returns [T(d T(d . .) T(d . .))] if (n, value) = (3, 'd)" in {
-      Tree.hbalTreesWithNodes(3, 'd) must beEqualTo(List(Node('d, Node('d), Node('d))))
-    }
-
-    """returns [T("x" T("x" T("x" . .) .) T("x" . .)), T("x" T("x" . T("x" . .)) T("x" . .)), ...] if (n, value) = (4, "x")""" in {
-      val expected = List(
-        Node("x", Node("x", Node("x"), End), Node("x")),
-        Node("x", Node("x", End, Node("x")), Node("x")),
-        Node("x", Node("x"), Node("x", Node("x"), End)),
-        Node("x", Node("x"), Node("x", End, Node("x")))
-      )
-      Tree.hbalTreesWithNodes(4, "x") must beEqualTo(expected)
-    }
-
-    "returns [T(e T(e . .) T(e . .))] if (n, value) = (5, 'e)" in {
-      val expected = List(
         Node('e, Node('e, Node('e), Node('e)), Node('e, End, End)),
-        Node('e, Node('e, Node('e), End), Node('e, Node('e), End)),
-        Node('e, Node('e, Node('e), End), Node('e, End, Node('e))),
-        Node('e, Node('e, End, Node('e)), Node('e, Node('e), End)),
-        Node('e, Node('e, End, Node('e)), Node('e, End, Node('e))),
         Node('e, Node('e, End, End), Node('e, Node('e), Node('e)))
       )
       Tree.hbalTreesWithNodes(5, 'e) must beEqualTo(expected)
@@ -356,6 +350,52 @@ class BinaryTreesSpec extends Specification {
     "count if (n, value) = (15, 'z)" in {
       println(Tree.hbalTreesWithNodes(15, 'z).size)
       true must beTrue
+    }
+  }
+
+  "Tree#nodeCount" should {
+    "returns 0 if this = End" in {
+      End.nodeCount must beEqualTo(0)
+    }
+
+    "returns 1 if this = Node('a)" in {
+      Node('a).nodeCount must beEqualTo(1)
+    }
+
+    "returns 2 if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).nodeCount must beEqualTo(2)
+    }
+
+    "returns 2 if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).nodeCount must beEqualTo(2)
+    }
+
+    "returns 3 if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).nodeCount must beEqualTo(3)
+    }
+
+    "returns 4 if this = Node('a, Node('b, Node('d), End), Node('c))" in {
+      Node('a, Node('b, Node('d), End), Node('c)).nodeCount must beEqualTo(4)
+    }
+
+    "returns 4 if this = Node('a, Node('b, End, Node('e)), Node('c))" in {
+      Node('a, Node('b, End, Node('e)), Node('c)).nodeCount must beEqualTo(4)
+    }
+
+    "returns 4 if this = Node('a, Node('b), Node('c, Node('f), End))" in {
+      Node('a, Node('b), Node('c, Node('f), End)).nodeCount must beEqualTo(4)
+    }
+
+    "returns 4 if this = Node('a, Node('b), Node('c, End, Node('g)))" in {
+      Node('a, Node('b), Node('c, End, Node('g))).nodeCount must beEqualTo(4)
+    }
+
+    "returns 5 if this = Node('a, Node('b, Node('d), Node('e)), Node('c))" in {
+      Node('a, Node('b, Node('d), Node('e)), Node('c)).nodeCount must beEqualTo(5)
+    }
+
+    "returns 5 if this = Node('a, Node('b, Node('d), End), Node('c, Node('f), End))" in {
+      Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).nodeCount must beEqualTo(5)
     }
   }
 }

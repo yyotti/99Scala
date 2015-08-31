@@ -36,6 +36,8 @@ sealed abstract class Tree[+T] {
    * The <% Ordered[U] allows us to use the < operator on the values in the tree.
    */
   def addValue[A >: T <% Ordered[A]](value: A): Tree[A]
+
+  def nodeCount: Int
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -50,6 +52,8 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
   def addValue[A >: T <% Ordered[A]](v: A): Tree[A] =
     if (v < value) copy(left = left.addValue(v))
     else copy(right = right.addValue(v))
+
+  def nodeCount: Int = left.nodeCount + right.nodeCount + 1
 }
 
 case object End extends Tree[Nothing] {
@@ -59,6 +63,8 @@ case object End extends Tree[Nothing] {
   def isSymmetric: Boolean = true
 
   def addValue[A <% Ordered[A]](value: A): Tree[A] = Node(value)
+
+  val nodeCount: Int = 0
 }
 
 object Node {
@@ -186,7 +192,7 @@ object Tree {
    */
   def maxHbalHeight(n: Int): Int =
     if (n <= 0) 0
-    else maxHbalHeight(n / 2) + 1
+    else Stream.from(1).takeWhile { minHbalNodes(_) <= n }.last
 
   /**
    * P60 (**) Construct height-balanced binary trees with a given number of nodes.
@@ -197,5 +203,12 @@ object Tree {
    *
    * Find out how many height-balanced trees exist for N = 15.
    */
-  def hbalTreesWithNodes[A](n: Int, value: A): List[Tree[A]] = ???
+  def hbalTreesWithNodes[A](n: Int, value: A): List[Tree[A]] =
+    if (n <= 0) List(End)
+    else if (n == 1) List(Node(value))
+    else (minHbalHeight(n) to maxHbalHeight(n)).toList.flatMap { hbalTrees(_, value) }.filter { _.nodeCount == n }
+
+  def minHbalHeight(n: Int): Int =
+    if (n <= 0) 0
+    else minHbalHeight(n / 2) + 1
 }
