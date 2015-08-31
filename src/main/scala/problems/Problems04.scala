@@ -151,7 +151,7 @@ sealed abstract class Tree[+T] {
    * scala> Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).toString
    * res0: String = a(b(d,e),c(,f(g,)))
    */
-  def toString2: String = ???
+  def toString2: String
 }
 
 trait TreeNode[+T] extends Tree[T] {
@@ -206,6 +206,11 @@ trait TreeNode[+T] extends Tree[T] {
       right.layoutBinaryTree2Internal(x + math.pow(2, exp).toInt, depth + 1, exp - 1),
       x, depth
     )
+
+  def toString2: String = (left, right) match {
+    case (End, End) => value.toString
+    case _ => s"${value.toString}(${left.toString2},${right.toString2})"
+  }
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
@@ -245,6 +250,8 @@ case object End extends Tree[Nothing] {
   val treeDepth: Int = 0
   val leftmostNodeDepth: Int = 0
   def layoutBinaryTree2Internal(x: Int, depth: Int, exp: Int) = End
+
+  val toString2: String = ""
 }
 
 object Node {
