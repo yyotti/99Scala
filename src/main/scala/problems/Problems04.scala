@@ -468,4 +468,16 @@ object Tree {
     def node: Parser[Tree[Char]] = value ~ "(" ~ node ~ "," ~ node ~ ")" ^^ { case v ~ _ ~ left ~ _ ~ right ~ _ => Node(v.head, left, right) } | value ^^ { v => if (v.isEmpty) End else Node(v.head) }
     def parse(input: String) = parseAll(node, input)
   }
+
+  /**
+   * P68 (**) Preorder and inorder sequences of binary trees.
+   * b) If both the preorder sequence and the inorder sequence of the nodes of a binary tree are given, then the tree is determined unambiguously.
+   * Write a method preInTree that does the job.
+   *
+   * scala> Tree.preInTree(List('a', 'b', 'd', 'e', 'c', 'f', 'g'), List('d', 'b', 'e', 'a', 'c', 'g', 'f'))
+   * res2: Node[Char] = a(b(d,e),c(,f(g,)))
+   *
+   * What happens if the same character appears in more than one node? Try, for instance, Tree.preInTree(List('a', 'b', 'a'), List('b', 'a', 'a')).
+   */
+  def preInTree[A](preList: List[A], inList: List[A]): Tree[A] = ???
 }

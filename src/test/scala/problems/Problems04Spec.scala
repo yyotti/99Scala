@@ -954,4 +954,58 @@ class BinaryTreesSpec extends Specification {
       Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).inorder must beEqualTo(List('d', 'b', 'e', 'a', 'c', 'g', 'f'))
     }
   }
+
+  "Tree->preInTree(List[A], List[A])" should {
+    "returns End if (preList, inList) = ([], [])" in {
+      Tree.preInTree(Nil, Nil) must beEqualTo(End)
+    }
+
+    "returns End if (preList, inList) = ([], [a])" in {
+      Tree.preInTree(Nil, List('a)) must beEqualTo(End)
+    }
+
+    "returns End if (preList, inList) = ([a], [])" in {
+      Tree.preInTree(List('a), Nil) must beEqualTo(End)
+    }
+
+    "returns End if (preList, inList) = ([a, b], [a])" in {
+      Tree.preInTree(List('a, 'b), List('a)) must beEqualTo(End)
+    }
+
+    "returns End if (preList, inList) = ([a], [a, b])" in {
+      Tree.preInTree(List('a), List('a, 'b)) must beEqualTo(End)
+    }
+
+    "returns Node('a) if (preList, inList) = ([a], [a])" in {
+      Tree.preInTree(List('a), List('a)) must beEqualTo(Node('a))
+    }
+
+    "returns Node('a, Node('b), End) if (preList, inList) = ([a, b], [b, a])" in {
+      Tree.preInTree(List('a, 'b), List('b, 'a)) must beEqualTo(Node('a, Node('b), End))
+    }
+
+    "returns Node('a, End, Node('c)) if (preList, inList) = ([a, c], [a, c])" in {
+      Tree.preInTree(List('a, 'c), List('a, 'c)) must beEqualTo(Node('a, End, Node('c)))
+    }
+
+    "returns Node('a, Node('b), Node('c)) if (preList, inList) = ([a, b, c], [b, a, c])" in {
+      Tree.preInTree(List('a, 'b, 'c), List('b, 'a, 'c)) must beEqualTo(Node('a, Node('b), Node('c)))
+    }
+
+    "returns Node('a, Node('b, Node('c), End), End) if (preList, inList) = ([a, b, c], [c, b, a])" in {
+      Tree.preInTree(List('a, 'b, 'c), List('c, 'b, 'a)) must beEqualTo(Node('a, Node('b, Node('c), End), End))
+    }
+
+    "returns Node('a, End, Node('b, End, Node('c))) if (preList, inList) = ([a, b, c], [a, b, c])" in {
+      Tree.preInTree(List('a, 'b, 'c), List('a, 'b, 'c)) must beEqualTo(Node('a, End, Node('b, End, Node('c))))
+    }
+
+    "returns Node('a, Node('b, End, Node('c)), Node('d)) if (preList, inList) = ([a, b, c, d], [b, c, a, d])" in {
+      Tree.preInTree(List('a, 'b, 'c, 'd), List('b, 'c, 'a, 'd)) must beEqualTo(Node('a, Node('b, End, Node('c)), Node('d)))
+    }
+
+    "returns Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))) if (preList, inList) = ([a, b, d, e, c, f, g], [d, b, e, a, c, g, f])" in {
+      Tree.preInTree(List('a', 'b', 'd', 'e', 'c', 'f', 'g'), List('d', 'b', 'e', 'a', 'c', 'g', 'f')) must beEqualTo(Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))))
+    }
+  }
 }
