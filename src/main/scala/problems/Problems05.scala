@@ -10,7 +10,7 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * scala> MTree('a', List(MTree('f'))).nodeCount
    * res0: Int = 2
    */
-  def nodeCount: Int = ???
+  def nodeCount: Int = 1 + children.map { _.nodeCount }.sum
 }
 
 object MTree {
