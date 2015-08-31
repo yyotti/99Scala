@@ -802,4 +802,42 @@ class BinaryTreesSpec extends Specification {
       Tree.fromList(List('n','k','m','c','a','e','d','g','u','p','q')).layoutBinaryTree2 must beEqualTo(expected)
     }
   }
+
+  "Tree#toString2" should {
+    """returns "" if this = End""" in {
+      End.toString2 must beEqualTo("")
+    }
+
+    """returns "a" if this = Node('a')""" in {
+      Node('a').toString2 must beEqualTo("a")
+    }
+
+    """returns "a(b,)" if this = Node('a', Node('b'), End)""" in {
+      Node('a', Node('b'), End).toString2 must beEqualTo("a(b,)")
+    }
+
+    """returns "a(,c)" if this = Node('a', End, Node('c'))""" in {
+      Node('a', End, Node('c')).toString2 must beEqualTo("a(,c)")
+    }
+
+    """returns "a(b,c)" if this = Node('a', Node('b'), Node('c'))""" in {
+      Node('a', Node('b'), Node('c')).toString2 must beEqualTo("a(b,c)")
+    }
+
+    """returns "a(b(c,),)" if this = Node('a', Node('b', Node('c'), End), End)""" in {
+      Node('a', Node('b', Node('c'), End), End).toString2 must beEqualTo("a(b(c,),)")
+    }
+
+    """returns "a(,b(,c))" if this = Node('a', End, Node('b', End, Node('c')))""" in {
+      Node('a', End, Node('b', End, Node('c'))).toString2 must beEqualTo("a(,b(,c))")
+    }
+
+    """returns "a(b(,c),d)" if this = Node('a', Node('b', End, Node('c')), Node('d'))""" in {
+      Node('a', Node('b', End, Node('c')), Node('d')).toString2 must beEqualTo("a(b(,c),d)")
+    }
+
+    """returns a(b(d,e),c(,f(g,))) if this = Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End)))""" in {
+      Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).toString2 must beEqualTo("a(b(d,e),c(,f(g,)))")
+    }
+  }
 }
