@@ -878,4 +878,80 @@ class BinaryTreesSpec extends Specification {
       Tree.fromString("a(b(d,e),c(,f(g,)))") must beEqualTo(Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))))
     }
   }
+
+  "Tree#preorder" should {
+    "returns [] if this = End" in {
+      End.preorder must beEmpty
+    }
+
+    "returns [a] if this = Node('a)" in {
+      Node('a).preorder must beEqualTo(List('a))
+    }
+
+    "returns [a, b] if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).preorder must beEqualTo(List('a, 'b))
+    }
+
+    "returns [a, c] if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).preorder must beEqualTo(List('a, 'c))
+    }
+
+    "returns [a, b, c] if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).preorder must beEqualTo(List('a, 'b, 'c))
+    }
+
+    "returns [a, b, c] if this = Node('a, Node('b, Node('c), End), End)" in {
+      Node('a, Node('b, Node('c), End), End).preorder must beEqualTo(List('a, 'b, 'c))
+    }
+
+    "returns [a, b, c] if this = Node('a', End, Node('b, End, Node('c)))" in {
+      Node('a, End, Node('b, End, Node('c))).preorder must beEqualTo(List('a, 'b, 'c))
+    }
+
+    "returns [a, b, c, d] if this = Node('a, Node('b, End, Node('c)), Node('d))" in {
+      Node('a, Node('b, End, Node('c)), Node('d)).preorder must beEqualTo(List('a, 'b, 'c, 'd))
+    }
+
+    "returns [a, b, d, e, c, f, g] if this = Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End)))" in {
+      Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).preorder must beEqualTo(List('a', 'b', 'd', 'e', 'c', 'f', 'g'))
+    }
+  }
+
+  "Tree#inorder" should {
+    "returns [] if this = End" in {
+      End.inorder must beEmpty
+    }
+
+    "returns [a] if this = Node('a)" in {
+      Node('a).inorder must beEqualTo(List('a))
+    }
+
+    "returns [b, a] if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).inorder must beEqualTo(List('b, 'a))
+    }
+
+    "returns [a, c] if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).inorder must beEqualTo(List('a, 'c))
+    }
+
+    "returns [b, a, c] if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).inorder must beEqualTo(List('b, 'a, 'c))
+    }
+
+    "returns [c, b, a] if this = Node('a, Node('b, Node('c), End), End)" in {
+      Node('a, Node('b, Node('c), End), End).inorder must beEqualTo(List('c, 'b, 'a))
+    }
+
+    "returns [a, b, c] if this = Node('a', End, Node('b, End, Node('c)))" in {
+      Node('a, End, Node('b, End, Node('c))).inorder must beEqualTo(List('a, 'b, 'c))
+    }
+
+    "returns [b, c, a, d] if this = Node('a, Node('b, End, Node('c)), Node('d))" in {
+      Node('a, Node('b, End, Node('c)), Node('d)).inorder must beEqualTo(List('b, 'c, 'a, 'd))
+    }
+
+    "returns [d, b, e, a, c, g, f] if this = Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End)))" in {
+      Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).inorder must beEqualTo(List('d', 'b', 'e', 'a', 'c', 'g', 'f'))
+    }
+  }
 }

@@ -142,6 +142,22 @@ sealed abstract class Tree[+T] {
   def layoutBinaryTree3: Tree[T] = ???
 
   /**
+   * P68 (**) Preorder and inorder sequences of binary trees.
+   * We consider binary trees with nodes that are identified by single lower-case letters, as in the example of problem P67.
+   *
+   * a) Write methods preorder and inorder that construct the preorder and inorder sequence of a given binary tree, respectively.
+   * The results should be lists, e.g. List('a','b','d','e','c','f','g') for the preorder sequence of the example in problem P67.
+   *
+   * scala> Tree.string2Tree("a(b(d,e),c(,f(g,)))").preorder
+   * res0: List[Char] = List(a, b, d, e, c, f, g)
+   *
+   * scala> Tree.string2Tree("a(b(d,e),c(,f(g,)))").inorder
+   * res1: List[Char] = List(d, b, e, a, c, g, f)
+   */
+  def preorder: List[T] = ???
+  def inorder: List[T] = ???
+
+  /**
    * P67 (**) A string representation of binary trees.
    * Somebody represents binary trees as strings of the following type (see example opposite):
    * a(b(d,e),c(,f(g,)))
