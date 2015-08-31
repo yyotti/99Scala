@@ -590,4 +590,42 @@ class BinaryTreesSpec extends Specification {
       Node('a', Node('b'), Node('c', Node('d'), Node('e'))).atLevel(2) must beEqualTo(List('b', 'c'))
     }
   }
+
+  "Tree->completeBinaryTree(Int, A)" should {
+    "returns End if (n, value) = (-1, 'a)" in {
+      Tree.completeBinaryTree(-1, 'a) must beEqualTo(End)
+    }
+
+    "returns End if (n, value) = (0, 'a)" in {
+      Tree.completeBinaryTree(0, 'a) must beEqualTo(End)
+    }
+
+    "returns T(a . .) if (n, value) = (1, 'a)" in {
+      Tree.completeBinaryTree(1, 'a) must beEqualTo(Node('a))
+    }
+
+    "returns T(a T(a . .) .) if (n, value) = (2, 'a)" in {
+      Tree.completeBinaryTree(2, 'a) must beEqualTo(Node('a, Node('a), End))
+    }
+
+    "returns T(a T(a . .) T(a . .)) if (n, value) = (3, 'a)" in {
+      Tree.completeBinaryTree(3, 'a) must beEqualTo(Node('a, Node('a), Node('a)))
+    }
+
+    "returns T(a T(a T(a . .) .) T(a . .)) if (n, value) = (4, 'a)" in {
+      Tree.completeBinaryTree(4, 'a) must beEqualTo(Node('a, Node('a, Node('a), End), Node('a)))
+    }
+
+    "returns T(a T(a T(a . .) T(a . .)) T(a . .)) if (n, value) = (5, 'a)" in {
+      Tree.completeBinaryTree(5, 'a) must beEqualTo(Node('a, Node('a, Node('a), Node('a)), Node('a)))
+    }
+
+    """returns T("x" T("x" T("x" . .) T("x" . .)) T("x" T("x" . .) .)) if (n, value) = (6, "x")""" in {
+      Tree.completeBinaryTree(6, "x") must beEqualTo(Node("x", Node("x", Node("x"), Node("x")), Node("x", Node("x"), End)))
+    }
+
+    "returns T(a T(a T(a . .) T(a . .)) T(a T(a . .) T(a . .))) if (n, value) = (7, 'a)" in {
+      Tree.completeBinaryTree(7, 'a) must beEqualTo(Node('a, Node('a, Node('a), Node('a)), Node('a, Node('a), Node('a))))
+    }
+  }
 }
