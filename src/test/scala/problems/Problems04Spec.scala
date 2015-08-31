@@ -494,4 +494,54 @@ class BinaryTreesSpec extends Specification {
       Node('a, Node('b), Node('c, Node('d), Node('e))).leafList must beEqualTo(List('b, 'd, 'e))
     }
   }
+
+  "Tree#internalList" should {
+    "returns [] if this = End" in {
+      End.internalList must beEmpty
+    }
+
+    "returns [] if this = Node('a)" in {
+      Node('a).internalList must beEmpty
+    }
+
+    "returns ['x'] if this = Node('x', Node('x'), End)" in {
+      Node('x', Node('x'), End).internalList must beEqualTo(List('x'))
+    }
+
+    "returns ['a] if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).internalList must beEqualTo(List('a))
+    }
+
+    "returns ['a] if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).internalList must beEqualTo(List('a))
+    }
+
+    "returns ['a, 'b] if this = Node('a, Node('b, Node('d), End), Node('c))" in {
+      Node('a, Node('b, Node('d), End), Node('c)).internalList must beEqualTo(List('a, 'b))
+    }
+
+    "returns ['a, 'b] if this = Node('a, Node('b, End, Node('e)), Node('c))" in {
+      Node('a, Node('b, End, Node('e)), Node('c)).internalList must beEqualTo(List('a, 'b))
+    }
+
+    "returns ['a, 'c] if this = Node('a, Node('b), Node('c, Node('f), End))" in {
+      Node('a, Node('b), Node('c, Node('f), End)).internalList must beEqualTo(List('a, 'c))
+    }
+
+    "returns ['a, 'c] if this = Node('a, Node('b), Node('c, End, Node('g)))" in {
+      Node('a, Node('b), Node('c, End, Node('g))).internalList must beEqualTo(List('a, 'c))
+    }
+
+    "returns ['a, 'b] if this = Node('a, Node('b, Node('d), Node('e)), Node('c))" in {
+      Node('a, Node('b, Node('d), Node('e)), Node('c)).internalList must beEqualTo(List('a, 'b))
+    }
+
+    "returns ['a, 'b, 'c] if this = Node('a, Node('b, Node('d), End), Node('c, Node('f), End))" in {
+      Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).internalList must beEqualTo(List('a, 'b, 'c))
+    }
+
+    "returns ['a', 'c'] if this = Node('a', Node('b'), Node('c', Node('d'), Node('e')))" in {
+      Node('a', Node('b'), Node('c', Node('d'), Node('e'))).internalList must beEqualTo(List('a', 'c'))
+    }
+  }
 }
