@@ -298,5 +298,12 @@ object Tree {
    * scala> Tree.completeBinaryTree(6, "x")
    * res0: Node[String] = T(x T(x T(x . .) T(x . .)) T(x T(x . .) .))
    */
-  def completeBinaryTree[A](n: Int, value: A): Tree[A] = ???
+  def completeBinaryTree[A](n: Int, value: A): Tree[A] = {
+    def completeBinaryTreeR(i: Int): Tree[A] =
+      if (i > n) End
+      else Node(value, completeBinaryTreeR(2 * i), completeBinaryTreeR(2 * i + 1))
+
+    if (n <= 0) End
+    else completeBinaryTreeR(1)
+  }
 }
