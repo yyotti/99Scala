@@ -142,6 +142,18 @@ sealed abstract class Tree[+T] {
   def layoutBinaryTree3: Tree[T] = ???
 
   /**
+   * P67 (**) A string representation of binary trees.
+   * Somebody represents binary trees as strings of the following type (see example opposite):
+   * a(b(d,e),c(,f(g,)))
+   * Write a method which generates this string representation, if the tree is given as usual (in Nodes and Ends).
+   * Use that method for the Tree class's and subclass's toString methods.
+   *
+   * scala> Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).toString
+   * res0: String = a(b(d,e),c(,f(g,)))
+   */
+  def toString2: String
+
+  /**
    * P68 (**) Preorder and inorder sequences of binary trees.
    * We consider binary trees with nodes that are identified by single lower-case letters, as in the example of problem P67.
    *
@@ -154,20 +166,8 @@ sealed abstract class Tree[+T] {
    * scala> Tree.string2Tree("a(b(d,e),c(,f(g,)))").inorder
    * res1: List[Char] = List(d, b, e, a, c, g, f)
    */
-  def preorder: List[T] = ???
-  def inorder: List[T] = ???
-
-  /**
-   * P67 (**) A string representation of binary trees.
-   * Somebody represents binary trees as strings of the following type (see example opposite):
-   * a(b(d,e),c(,f(g,)))
-   * Write a method which generates this string representation, if the tree is given as usual (in Nodes and Ends).
-   * Use that method for the Tree class's and subclass's toString methods.
-   *
-   * scala> Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))).toString
-   * res0: String = a(b(d,e),c(,f(g,)))
-   */
-  def toString2: String
+  def preorder: List[T]
+  def inorder: List[T]
 }
 
 trait TreeNode[+T] extends Tree[T] {
@@ -227,6 +227,9 @@ trait TreeNode[+T] extends Tree[T] {
     case (End, End) => value.toString
     case _ => s"${value.toString}(${left.toString2},${right.toString2})"
   }
+
+  def preorder: List[T] = value :: left.preorder ::: right.preorder
+  def inorder: List[T] = left.inorder ::: List(value) ::: right.inorder
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
@@ -268,6 +271,9 @@ case object End extends Tree[Nothing] {
   def layoutBinaryTree2Internal(x: Int, depth: Int, exp: Int) = End
 
   val toString2: String = ""
+
+  val preorder = Nil
+  val inorder = Nil
 }
 
 object Node {
