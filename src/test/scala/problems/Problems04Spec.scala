@@ -544,4 +544,50 @@ class BinaryTreesSpec extends Specification {
       Node('a', Node('b'), Node('c', Node('d'), Node('e'))).internalList must beEqualTo(List('a', 'c'))
     }
   }
+
+  "Tree#atLevel(Int)" should {
+    "returns [] if (this, level) = (End, 2)" in {
+      End.atLevel(2) must beEmpty
+    }
+
+    "returns [] if (this, level) = (Node('a), -1)" in {
+      Node('a).atLevel(-1) must beEmpty
+    }
+
+    "returns [] if (this, level) = (Node('a), 0)" in {
+      Node('a).atLevel(0) must beEmpty
+    }
+
+    "returns ['a] if (this, level) = (Node('a), 1)" in {
+      Node('a).atLevel(1) must beEqualTo(List('a))
+    }
+
+    "returns ['a] if (this, level) = (Node('a), 2)" in {
+      Node('a).atLevel(2) must beEmpty
+    }
+
+    "returns ['x'] if (this, level) = (Node('x', Node('x'), End), 1)" in {
+      Node('x', Node('x'), End).atLevel(1) must beEqualTo(List('x'))
+    }
+
+    "returns ['c] if (this, level) = (Node('a, End, Node('c)), 2)" in {
+      Node('a, End, Node('c)).atLevel(2) must beEqualTo(List('c))
+    }
+
+    "returns ['b, 'c] if (this, level) = (Node('a, Node('b), Node('c)), 2)" in {
+      Node('a, Node('b), Node('c)).atLevel(2) must beEqualTo(List('b, 'c))
+    }
+
+    "returns ['b, 'c] if (this, level) = (Node('a, Node('b, Node('d), End), Node('c)), 2)" in {
+      Node('a, Node('b, Node('d), End), Node('c)).atLevel(2) must beEqualTo(List('b, 'c))
+    }
+
+    "returns ['d] if (this, level) = (Node('a, Node('b, Node('d), End), Node('c)), 3)" in {
+      Node('a, Node('b, Node('d), End), Node('c)).atLevel(3) must beEqualTo(List('d))
+    }
+
+    "returns ['b', 'c'] if (this, level) = Node('a', Node('b'), Node('c', Node('d'), Node('e')))" in {
+      Node('a', Node('b'), Node('c', Node('d'), Node('e'))).atLevel(2) must beEqualTo(List('b', 'c'))
+    }
+  }
 }
