@@ -504,4 +504,12 @@ object Tree {
       val (preLeft, preRight) = tail.splitAt(inLeft.size)
       Node(x, preInTree(preLeft, inLeft), preInTree(preRight, inRight.tail))
   }
+
+  /**
+   * P69 (**) Dotstring representation of binary trees.
+   *
+   * scala> Tree.fromDotstring("abd..e..c.fg...")
+   * res1: Node[Char] = a(b(d,e),c(,f(g,)))
+   */
+  def fromDotstring(s: String): Tree[Char] = ???
 }

@@ -1053,4 +1053,50 @@ class BinaryTreesSpec extends Specification {
       Tree.fromString("a(b(d,e),c(,f(g,)))").toDotstring must beEqualTo("abd..e..c.fg...")
     }
   }
+
+  "Tree->fromDotstring" should {
+    """returns End if s = "."""" in {
+      Tree.fromDotstring(".") must beEqualTo(End)
+    }
+
+    """returns End if s = "a."""" in {
+      Tree.fromDotstring("a.") must beEqualTo(End)
+    }
+
+    """returns Node('a') if s = "a.."""" in {
+      Tree.fromDotstring("a..") must beEqualTo(Node('a'))
+    }
+
+    """returns End if s = "a..."""" in {
+      Tree.fromDotstring("a...") must beEqualTo(End)
+    }
+
+    """returns Node('a', Node('b'), End) if s = "ab..."""" in {
+      Tree.fromDotstring("ab...") must beEqualTo(Node('a', Node('b'), End))
+    }
+
+    """returns Node('a', End, Node('c')) if s = "a.c.."""" in {
+      Tree.fromDotstring("a.c..") must beEqualTo(Node('a', End, Node('c')))
+    }
+
+    """returns Node('a', Node('b'), Node('c')) if s = "ab..c.."""" in {
+      Tree.fromDotstring("ab..c..") must beEqualTo(Node('a', Node('b'), Node('c')))
+    }
+
+    """returns Node('a', Node('b', Node('c'), End), End) if s = "abc...."""" in {
+      Tree.fromDotstring("abc....") must beEqualTo(Node('a', Node('b', Node('c'), End), End))
+    }
+
+    """returns Node('a', End, Node('b', End, Node('c'))) if s = "a.b.c.."""" in {
+      Tree.fromDotstring("a.b.c..") must beEqualTo(Node('a', End, Node('b', End, Node('c'))))
+    }
+
+    """returns Node('a', Node('b', End, Node('c')), Node('d')) if s = "ab.c..d.."""" in {
+      Tree.fromDotstring("ab.c..d..") must beEqualTo(Node('a', Node('b', End, Node('c')), Node('d')))
+    }
+
+    """returns Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))) if s = "abd..e..c.fg..."""" in {
+      Tree.fromDotstring("abd..e..c.fg...") must beEqualTo(Node('a', Node('b', Node('d'), Node('e')), Node('c', End, Node('f', Node('g'), End))))
+    }
+  }
 }
