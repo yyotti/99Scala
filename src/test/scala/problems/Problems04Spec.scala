@@ -628,4 +628,85 @@ class BinaryTreesSpec extends Specification {
       Tree.completeBinaryTree(7, 'a) must beEqualTo(Node('a, Node('a, Node('a), Node('a)), Node('a, Node('a), Node('a))))
     }
   }
+
+  "Tree#layoutBinaryTree" should {
+    "returns End if this = End" in {
+      End.layoutBinaryTree must beEqualTo(End)
+    }
+
+    "returns T[1,1](a . .) if this = Node('a)" in {
+      Node('a).layoutBinaryTree must beEqualTo(PositionedNode('a, End, End, 1, 1))
+    }
+
+    "returns T[2,1](a T[1,2](b . .) .) if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).layoutBinaryTree must beEqualTo(PositionedNode('a, PositionedNode('b, End, End, 1, 2), End, 2, 1))
+    }
+
+    "returns T[1,1](a . T[2,2](c . .)) if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).layoutBinaryTree must beEqualTo(PositionedNode('a, End, PositionedNode('c, End, End, 2, 2), 1, 1))
+    }
+
+    "returns T[2,1](a T[1,2](b . .) T[3,2](c . .)) if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).layoutBinaryTree must beEqualTo(PositionedNode('a, PositionedNode('b, End, End, 1, 2), PositionedNode('c, End, End, 3, 2), 2, 1))
+    }
+
+    "returns T[3,1]('a' T[1,2]('b' . T[2,3]('c' . .)) T[4,2]('d' . .)) if this = Node('a', Node('b', End, Node('c')), Node('d'))" in {
+      Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree must beEqualTo(PositionedNode('a', PositionedNode('b', End, PositionedNode('c', End, End, 2, 3), 1, 2), PositionedNode('d', End, End, 4, 2), 3, 1))
+    }
+
+    "returns T[8,1]('n' T[6,2]('k' . ...) T[12,2]('u' . ... T[10,5]('q' . .))) if this = Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q'))" in {
+      val expected =
+        PositionedNode('n',
+          PositionedNode('k',
+            PositionedNode('c',
+              PositionedNode('a',
+                End,
+                End,
+                1, 4
+                ),
+              PositionedNode('h',
+                PositionedNode('g',
+                  PositionedNode('e',
+                    End,
+                    End,
+                    3, 6
+                    ),
+                  End,
+                  4, 5
+                  ),
+                End,
+                5, 4
+                ),
+              2, 3
+              ),
+            PositionedNode('m',
+              End,
+              End,
+              7, 3
+              ),
+            6, 2
+            ),
+          PositionedNode('u',
+            PositionedNode('p',
+              End,
+              PositionedNode('s',
+                PositionedNode('q',
+                  End,
+                  End,
+                  10, 5
+                  ),
+                End,
+                11, 4
+                ),
+              9, 3
+              ),
+            End,
+            12, 2
+            ),
+          8, 1
+        )
+
+      Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q')).layoutBinaryTree must beEqualTo(expected)
+    }
+  }
 }

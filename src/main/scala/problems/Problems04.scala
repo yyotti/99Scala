@@ -76,20 +76,44 @@ sealed abstract class Tree[+T] {
    * Using atLevel it is easy to construct a method levelOrder which creates the level-order sequence of the nodes. However, there are more efficient ways to do that.
    */
   def atLevel(level: Int): List[T]
+
+  /**
+   * P64 (**) Layout a binary tree (1).
+   * As a preparation for drawing a tree, a layout algorithm is required to determine the position of each node in a rectangular grid.
+   * Several layout methods are conceivable, one of them is shown in the illustration on the right.
+   *
+   * In this layout strategy, the position of a node v is obtained by the following two rules:
+   *   x(v) is equal to the position of the node v in the inorder sequence
+   *   y(v) is equal to the depth of the node v in the tree
+   *
+   * In order to store the position of the nodes, we add a new class with the additional information.
+   *
+   * case class PositionedNode[+T](override val value: T, override val left: Tree[T], override val right: Tree[T], x: Int, y: Int) extends Node[T](value, left, right) {
+   *   override def toString = "T[" + x.toString + "," + y.toString + "](" + value.toString + " " + left.toString + " " + right.toString + ")"
+   * }
+   *
+   * Write a method layoutBinaryTree that turns a tree of normal Nodes into a tree of PositionedNodes.
+   *
+   * scala> Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree
+   * res0: PositionedNode[Char] = T[3,1](a T[1,2](b . T[2,3](c . .)) T[4,2](d . .))
+   *
+   * The tree at right may be constructed with Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q')). Use it to check your code.
+   */
+  def layoutBinaryTree: Tree[T] = ???
 }
 
-case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
+trait TreeNode[+T] extends Tree[T] {
   override def toString = "T(" + value.toString + " " + left.toString + " " + right.toString + ")"
+
+  val value: T
+  val left: Tree[T]
+  val right: Tree[T]
 
   def isMirrorOf[A](tree: Tree[A]): Boolean = tree match {
     case Node(_, l, r) => l.isMirrorOf(right) && r.isMirrorOf(left)
     case _ => false
   }
   def isSymmetric = left.isMirrorOf(right)
-
-  def addValue[A >: T <% Ordered[A]](v: A): Tree[A] =
-    if (v < value) copy(left = left.addValue(v))
-    else copy(right = right.addValue(v))
 
   def nodeCount: Int = left.nodeCount + right.nodeCount + 1
 
@@ -113,6 +137,20 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
     case 1 => List(value)
     case _ => left.atLevel(level - 1) ::: right.atLevel(level - 1)
   }
+}
+
+case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
+  def addValue[A >: T <% Ordered[A]](v: A): Tree[A] =
+    if (v < value) copy(left = left.addValue(v))
+    else copy(right = right.addValue(v))
+}
+
+case class PositionedNode[+T](val value: T, val left: Tree[T], override val right: Tree[T], x: Int, y: Int) extends TreeNode[T] {
+  override def toString = "T[" + x.toString + "," + y.toString + "](" + value.toString + " " + left.toString + " " + right.toString + ")"
+
+  def addValue[A >: T <% Ordered[A]](v: A): Tree[A] =
+    if (v < value) copy(left = left.addValue(v))
+    else copy(right = right.addValue(v))
 }
 
 case object End extends Tree[Nothing] {
