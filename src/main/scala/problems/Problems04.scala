@@ -180,7 +180,7 @@ sealed abstract class Tree[+T] {
    * scala> Tree.string2Tree("a(b(d,e),c(,f(g,)))").toDotstring
    * res0: String = abd..e..c.fg...
    */
-  def toDotstring: String = ???
+  def toDotstring: String
 }
 
 trait TreeNode[+T] extends Tree[T] {
@@ -243,6 +243,8 @@ trait TreeNode[+T] extends Tree[T] {
 
   def preorder: List[T] = value :: left.preorder ::: right.preorder
   def inorder: List[T] = left.inorder ::: List(value) ::: right.inorder
+
+  def toDotstring: String = value + left.toDotstring + right.toDotstring
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
@@ -287,6 +289,8 @@ case object End extends Tree[Nothing] {
 
   val preorder = Nil
   val inorder = Nil
+
+  val toDotstring: String = "."
 }
 
 object Node {
