@@ -115,7 +115,14 @@ sealed abstract class Tree[+T] {
    *
    * The tree at right may be constructed with Tree.fromList(List('n','k','m','c','a','e','d','g','u','p','q')). Use it to check your code.
    */
-  def layoutBinaryTree2: Tree[T] = ???
+  def layoutBinaryTree2: Tree[T] = {
+    val d = treeDepth
+    val x0 = (2 to leftmostNodeDepth).map { n => math.pow(2, d - n).toInt }.sum + 1
+    layoutBinaryTree2Internal(x0, 1, d - 2)
+  }
+  def treeDepth: Int
+  def leftmostNodeDepth: Int
+  def layoutBinaryTree2Internal(x: Int, depth: Int, exp: Int): Tree[T]
 }
 
 trait TreeNode[+T] extends Tree[T] {
@@ -160,6 +167,16 @@ trait TreeNode[+T] extends Tree[T] {
 
     (PositionedNode(value, leftTree, rightTree, thisX, y), nextX)
   }
+
+  def treeDepth: Int = left.treeDepth.max(right.treeDepth) + 1
+  def leftmostNodeDepth: Int = left.leftmostNodeDepth + 1
+  def layoutBinaryTree2Internal(x: Int, depth: Int, exp: Int): Tree[T] =
+    PositionedNode(
+      value,
+      left.layoutBinaryTree2Internal(x - math.pow(2, exp).toInt, depth + 1, exp - 1),
+      right.layoutBinaryTree2Internal(x + math.pow(2, exp).toInt, depth + 1, exp - 1),
+      x, depth
+    )
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
@@ -195,6 +212,10 @@ case object End extends Tree[Nothing] {
   def atLevel(level: Int): List[Nothing] = Nil
 
   def layoutBinaryTreeSub(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
+
+  val treeDepth: Int = 0
+  val leftmostNodeDepth: Int = 0
+  def layoutBinaryTree2Internal(x: Int, depth: Int, exp: Int) = End
 }
 
 object Node {
