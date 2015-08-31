@@ -47,6 +47,15 @@ sealed abstract class Tree[+T] {
    * res0: Int = 1
    */
   def leafCount: Int
+
+  /**
+   * 61A (*) Collect the leaves of a binary tree in a list.
+   * A leaf is a node with no successors. Write a method leafList to collect them in a list.
+   *
+   * scala> Node('a', Node('b'), Node('c', Node('d'), Node('e'))).leafList
+   * res0: List[Char] = List(b, d, e)
+   */
+  def leafList: List[T] = ???
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {

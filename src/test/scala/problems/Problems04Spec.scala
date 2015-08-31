@@ -444,4 +444,54 @@ class BinaryTreesSpec extends Specification {
       Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).leafCount must beEqualTo(2)
     }
   }
+
+  "Tree#leafList" should {
+    "returns [] if this = End" in {
+      End.leafList must beEmpty
+    }
+
+    "returns [a] if this = Node('a)" in {
+      Node('a).leafList must beEqualTo(List('a))
+    }
+
+    "returns ['x'] if this = Node('x', Node('x'), End)" in {
+      Node('x', Node('x'), End).leafList must beEqualTo(List('x'))
+    }
+
+    "returns [c] if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).leafList must beEqualTo(List('c))
+    }
+
+    "returns [b, c] if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).leafList must beEqualTo(List('b, 'c))
+    }
+
+    "returns [d, c] if this = Node('a, Node('b, Node('d), End), Node('c))" in {
+      Node('a, Node('b, Node('d), End), Node('c)).leafList must beEqualTo(List('d, 'c))
+    }
+
+    "returns [e, c] if this = Node('a, Node('b, End, Node('e)), Node('c))" in {
+      Node('a, Node('b, End, Node('e)), Node('c)).leafList must beEqualTo(List('e, 'c))
+    }
+
+    "returns [b, f] if this = Node('a, Node('b), Node('c, Node('f), End))" in {
+      Node('a, Node('b), Node('c, Node('f), End)).leafList must beEqualTo(List('b, 'f))
+    }
+
+    "returns [b, g] if this = Node('a, Node('b), Node('c, End, Node('g)))" in {
+      Node('a, Node('b), Node('c, End, Node('g))).leafList must beEqualTo(List('b, 'g))
+    }
+
+    "returns [d, e, c] if this = Node('a, Node('b, Node('d), Node('e)), Node('c))" in {
+      Node('a, Node('b, Node('d), Node('e)), Node('c)).leafList must beEqualTo(List('d, 'e, 'c))
+    }
+
+    "returns [d, f] if this = Node('a, Node('b, Node('d), End), Node('c, Node('f), End))" in {
+      Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).leafList must beEqualTo(List('d, 'f))
+    }
+
+    "returns [b, d, e] if this = Node('a, Node('b), Node('c, Node('d), Node('e)))" in {
+      Node('a, Node('b), Node('c, Node('d), Node('e))).leafList must beEqualTo(List('b, 'd, 'e))
+    }
+  }
 }
