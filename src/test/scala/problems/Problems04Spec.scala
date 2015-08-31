@@ -398,4 +398,50 @@ class BinaryTreesSpec extends Specification {
       Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).nodeCount must beEqualTo(5)
     }
   }
+
+  "Tree#leafCount" should {
+    "returns 0 if this = End" in {
+      End.leafCount must beEqualTo(0)
+    }
+
+    "returns 1 if this = Node('a)" in {
+      Node('a).leafCount must beEqualTo(1)
+    }
+
+    "returns 1 if this = Node('x', Node('x'), End)" in {
+      Node('x', Node('x'), End).leafCount must beEqualTo(1)
+    }
+
+    "returns 1 if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).leafCount must beEqualTo(1)
+    }
+
+    "returns 2 if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).leafCount must beEqualTo(2)
+    }
+
+    "returns 2 if this = Node('a, Node('b, Node('d), End), Node('c))" in {
+      Node('a, Node('b, Node('d), End), Node('c)).leafCount must beEqualTo(2)
+    }
+
+    "returns 2 if this = Node('a, Node('b, End, Node('e)), Node('c))" in {
+      Node('a, Node('b, End, Node('e)), Node('c)).leafCount must beEqualTo(2)
+    }
+
+    "returns 2 if this = Node('a, Node('b), Node('c, Node('f), End))" in {
+      Node('a, Node('b), Node('c, Node('f), End)).leafCount must beEqualTo(2)
+    }
+
+    "returns 2 if this = Node('a, Node('b), Node('c, End, Node('g)))" in {
+      Node('a, Node('b), Node('c, End, Node('g))).leafCount must beEqualTo(2)
+    }
+
+    "returns 3 if this = Node('a, Node('b, Node('d), Node('e)), Node('c))" in {
+      Node('a, Node('b, Node('d), Node('e)), Node('c)).leafCount must beEqualTo(3)
+    }
+
+    "returns 2 if this = Node('a, Node('b, Node('d), End), Node('c, Node('f), End))" in {
+      Node('a, Node('b, Node('d), End), Node('c, Node('f), End)).leafCount must beEqualTo(2)
+    }
+  }
 }

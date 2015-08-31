@@ -38,6 +38,15 @@ sealed abstract class Tree[+T] {
   def addValue[A >: T <% Ordered[A]](value: A): Tree[A]
 
   def nodeCount: Int
+
+  /**
+   * P61 (*) Count the leaves of a binary tree.
+   * A leaf is a node with no successors. Write a method leafCount to count them.
+   *
+   * scala> Node('x', Node('x'), End).leafCount
+   * res0: Int = 1
+   */
+  def leafCount: Int = ???
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
