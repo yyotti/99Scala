@@ -46,7 +46,7 @@ sealed abstract class Tree[+T] {
    * scala> Node('x', Node('x'), End).leafCount
    * res0: Int = 1
    */
-  def leafCount: Int = ???
+  def leafCount: Int
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -63,6 +63,11 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
     else copy(right = right.addValue(v))
 
   def nodeCount: Int = left.nodeCount + right.nodeCount + 1
+
+  def leafCount: Int = (left, right) match {
+    case (End, End) => 1
+    case _ => left.leafCount + right.leafCount
+  }
 }
 
 case object End extends Tree[Nothing] {
@@ -74,6 +79,8 @@ case object End extends Tree[Nothing] {
   def addValue[A <% Ordered[A]](value: A): Tree[A] = Node(value)
 
   val nodeCount: Int = 0
+
+  val leafCount: Int = 0
 }
 
 object Node {
