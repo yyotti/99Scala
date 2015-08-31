@@ -436,5 +436,14 @@ object Tree {
    * scala> Tree.fromString("a(b(d,e),c(,f(g,)))")
    * res1: Node[Char] = a(b(d,e),c(,f(g,)))
    */
-  def fromString(s: String): Tree[Char] = ???
+  import util.parsing.combinator._
+  def fromString(s: String): Tree[Char] = TreeStringParser.parse(s) match {
+    case TreeStringParser.Success(t, _) => t
+    case _ => End
+  }
+  object TreeStringParser extends RegexParsers {
+    def value = "[a-z]?".r
+    def node: Parser[Tree[Char]] = value ~ "(" ~ node ~ "," ~ node ~ ")" ^^ { case v ~ _ ~ left ~ _ ~ right ~ _ => Node(v.head, left, right) } | value ^^ { v => if (v.isEmpty) End else Node(v.head) }
+    def parse(input: String) = parseAll(node, input)
+  }
 }
