@@ -650,6 +650,14 @@ class BinaryTreesSpec extends Specification {
       Node('a, Node('b), Node('c)).layoutBinaryTree must beEqualTo(PositionedNode('a, PositionedNode('b, End, End, 1, 2), PositionedNode('c, End, End, 3, 2), 2, 1))
     }
 
+    "returns T[3,1](a T[2,2](b T[1,3](c . .) .) .) if this = Node('a, Node('b, Node('c), End), End)" in {
+      Node('a, Node('b, Node('c), End), End).layoutBinaryTree must beEqualTo(PositionedNode('a, PositionedNode('b, PositionedNode('c, End, End, 1, 3), End, 2, 2), End, 3, 1))
+    }
+
+    "returns T[1,1](a . T[2,2](b . T[3,3](c . .))) if this = Node('a, End, Node('b, End, Node('c)))" in {
+      Node('a, End, Node('b, End, Node('c))).layoutBinaryTree must beEqualTo(PositionedNode('a, End, PositionedNode('b, End, PositionedNode('c, End, End, 3, 3), 2, 2), 1, 1))
+    }
+
     "returns T[3,1]('a' T[1,2]('b' . T[2,3]('c' . .)) T[4,2]('d' . .)) if this = Node('a', Node('b', End, Node('c')), Node('d'))" in {
       Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree must beEqualTo(PositionedNode('a', PositionedNode('b', End, PositionedNode('c', End, End, 2, 3), 1, 2), PositionedNode('d', End, End, 4, 2), 3, 1))
     }

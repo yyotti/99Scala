@@ -99,7 +99,8 @@ sealed abstract class Tree[+T] {
    *
    * The tree at right may be constructed with Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q')). Use it to check your code.
    */
-  def layoutBinaryTree: Tree[T] = ???
+  def layoutBinaryTree: Tree[T] = layoutBinaryTreeSub(1, 1)._1
+  def layoutBinaryTreeSub(x: Int, y: Int): (Tree[T], Int)
 }
 
 trait TreeNode[+T] extends Tree[T] {
@@ -137,6 +138,13 @@ trait TreeNode[+T] extends Tree[T] {
     case 1 => List(value)
     case _ => left.atLevel(level - 1) ::: right.atLevel(level - 1)
   }
+
+  def layoutBinaryTreeSub(x: Int, y: Int): (Tree[T], Int) = {
+    val (leftTree, thisX) = left.layoutBinaryTreeSub(x, y + 1)
+    val (rightTree, nextX) = right.layoutBinaryTreeSub(thisX + 1, y + 1)
+
+    (PositionedNode(value, leftTree, rightTree, thisX, y), nextX)
+  }
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends TreeNode[T] {
@@ -170,6 +178,8 @@ case object End extends Tree[Nothing] {
   val internalList: List[Nothing] = Nil
 
   def atLevel(level: Int): List[Nothing] = Nil
+
+  def layoutBinaryTreeSub(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
 }
 
 object Node {
