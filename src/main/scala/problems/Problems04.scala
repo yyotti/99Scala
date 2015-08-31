@@ -75,7 +75,7 @@ sealed abstract class Tree[+T] {
    *
    * Using atLevel it is easy to construct a method levelOrder which creates the level-order sequence of the nodes. However, there are more efficient ways to do that.
    */
-  def atLevel(level: Int): List[T] = ???
+  def atLevel(level: Int): List[T]
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -107,6 +107,12 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
     case (End, End) => Nil
     case _ => (value :: left.internalList) ::: right.internalList
   }
+
+  def atLevel(level: Int): List[T] = level match {
+    case level if level <= 0 => Nil
+    case 1 => List(value)
+    case _ => left.atLevel(level - 1) ::: right.atLevel(level - 1)
+  }
 }
 
 case object End extends Tree[Nothing] {
@@ -124,6 +130,8 @@ case object End extends Tree[Nothing] {
   val leafList: List[Nothing] = Nil
 
   val internalList: List[Nothing] = Nil
+
+  def atLevel(level: Int): List[Nothing] = Nil
 }
 
 object Node {
