@@ -662,7 +662,7 @@ class BinaryTreesSpec extends Specification {
       Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree must beEqualTo(PositionedNode('a', PositionedNode('b', End, PositionedNode('c', End, End, 2, 3), 1, 2), PositionedNode('d', End, End, 4, 2), 3, 1))
     }
 
-    "returns T[8,1]('n' T[6,2]('k' . ...) T[12,2]('u' . ... T[10,5]('q' . .))) if this = Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q'))" in {
+    "returns T[8,1]('n' T[6,2]('k' . ...) T[12,2]('u' . ...)) if this = Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q'))" in {
       val expected =
         PositionedNode('n',
           PositionedNode('k',
@@ -715,6 +715,91 @@ class BinaryTreesSpec extends Specification {
         )
 
       Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q')).layoutBinaryTree must beEqualTo(expected)
+    }
+  }
+
+  "Tree#layoutBinaryTree2" should {
+    "returns End if this = End" in {
+      End.layoutBinaryTree2 must beEqualTo(End)
+    }
+
+    "returns T[1,1](a . .) if this = Node('a)" in {
+      Node('a).layoutBinaryTree2 must beEqualTo(PositionedNode('a, End, End, 1, 1))
+    }
+
+    "returns T[2,1](a T[1,2](b . .) .) if this = Node('a, Node('b), End)" in {
+      Node('a, Node('b), End).layoutBinaryTree2 must beEqualTo(PositionedNode('a, PositionedNode('b, End, End, 1, 2), End, 2, 1))
+    }
+
+    "returns T[1,1](a . T[2,2](c . .)) if this = Node('a, End, Node('c))" in {
+      Node('a, End, Node('c)).layoutBinaryTree2 must beEqualTo(PositionedNode('a, End, PositionedNode('c, End, End, 2, 2), 1, 1))
+    }
+
+    "returns T[2,1](a T[1,2](b . .) T[3,2](c . .)) if this = Node('a, Node('b), Node('c))" in {
+      Node('a, Node('b), Node('c)).layoutBinaryTree2 must beEqualTo(PositionedNode('a, PositionedNode('b, End, End, 1, 2), PositionedNode('c, End, End, 3, 2), 2, 1))
+    }
+
+    "returns T[4,1](a T[2,2](b T[1,3](c . .) .) .) if this = Node('a, Node('b, Node('c), End), End)" in {
+      Node('a, Node('b, Node('c), End), End).layoutBinaryTree2 must beEqualTo(PositionedNode('a, PositionedNode('b, PositionedNode('c, End, End, 1, 3), End, 2, 2), End, 4, 1))
+    }
+
+    "returns T[1,1](a . T[3,2](b . T[4,3](c . .))) if this = Node('a, End, Node('b, End, Node('c)))" in {
+      Node('a, End, Node('b, End, Node('c))).layoutBinaryTree2 must beEqualTo(PositionedNode('a, End, PositionedNode('b, End, PositionedNode('c, End, End, 4, 3), 3, 2), 1, 1))
+    }
+
+    "returns T[3,1]('a T[1,2]('b' . T[2,3]('c' . .)) T[5,2]('d' . .)) if this = Node('a', Node('b', End, Node('c')), Node('d'))" in {
+      Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree2 must beEqualTo(PositionedNode('a', PositionedNode('b', End, PositionedNode('c', End, End, 2, 3), 1, 2), PositionedNode('d', End, End, 5, 2), 3, 1))
+    }
+
+    "returns T[15,1]('n' T[7,2]('k' . ...) T[23,2]('u' . ... ))if this = Tree.fromList(List('n','k','m','c','a','e','d','g','u','p','q'))" in {
+      val expected =
+        PositionedNode('n',
+          PositionedNode('k',
+            PositionedNode('c',
+              PositionedNode('a',
+                End,
+                End,
+                1, 4
+                ),
+              PositionedNode('e',
+                PositionedNode('d',
+                  End,
+                  End,
+                  4, 5
+                  ),
+                PositionedNode('g',
+                  End,
+                  End,
+                  6, 5
+                  ),
+                5, 4
+                ),
+              3, 3
+              ),
+            PositionedNode('m',
+              End,
+              End,
+              11, 3
+              ),
+            7, 2
+            ),
+          PositionedNode('u',
+            PositionedNode('p',
+              End,
+              PositionedNode('q',
+                End,
+                End,
+                21, 4
+                ),
+              19, 3
+              ),
+            End,
+            23, 2
+            ),
+          15, 1
+        )
+
+      Tree.fromList(List('n','k','m','c','a','e','d','g','u','p','q')).layoutBinaryTree2 must beEqualTo(expected)
     }
   }
 }
