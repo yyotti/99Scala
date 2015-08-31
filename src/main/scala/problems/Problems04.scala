@@ -511,5 +511,14 @@ object Tree {
    * scala> Tree.fromDotstring("abd..e..c.fg...")
    * res1: Node[Char] = a(b(d,e),c(,f(g,)))
    */
-  def fromDotstring(s: String): Tree[Char] = ???
+  def fromDotstring(s: String): Tree[Char] = DotstringParser.parse(s) match {
+    case DotstringParser.Success(t, _) => t
+    case _ => End
+  }
+  object DotstringParser extends RegexParsers {
+    def end: Parser[Tree[Nothing]] = "[.]".r ^^ { _ => End }
+    def value: Parser[Char] = "[a-z]".r ^^ { c => c.head }
+    def node: Parser[Tree[Char]] = end | value ~ node ~ node ^^ { case v ~ left ~ right => Node(v, left, right) }
+    def parse(input: String) = parseAll(node, input)
+  }
 }
