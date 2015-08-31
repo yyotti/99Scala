@@ -232,7 +232,7 @@ object Tree {
    * scala> Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric
    * res5: Boolean = false
    */
-  def fromList(list: List[Int]): Tree[Int] = list.foldLeft(End: Tree[Int]) { case (t, v) => t.addValue(v) }
+  def fromList[A <% Ordered[A]](list: List[A]): Tree[A] = list.foldLeft(End: Tree[A]) { case (t, v) => t.addValue(v) }
 
   /**
    * P58 (**) Generate-and-test paradigm.
