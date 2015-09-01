@@ -32,5 +32,10 @@ class MultiwayTreesSpec extends Specification {
     "returns 7 if this = MTree('a, List(MTree('b), MTree('c, List(MTree('e, MTree('g)))), MTree('d, List(MTree('f)))))" in {
       MTree('a, List(MTree('b), MTree('c, List(MTree('e), MTree('g))), MTree('d, List(MTree('f))))).nodeCount must beEqualTo(7)
     }
+
+    """returns 7 if this = MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e')))))""" in {
+      MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))).nodeCount must beEqualTo(7)
+    }
+  }
   }
 }
