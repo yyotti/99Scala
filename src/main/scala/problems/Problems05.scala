@@ -39,7 +39,7 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * scala> "afg^^c^bd^e^^^".postorder
    * res0: List[Char] = List(g, f, c, d, e, b, a)
    */
-  def postorder: List[T] = ???
+  def postorder: List[T] = children.flatMap { _.postorder } ::: List(value)
 }
 
 object MTree {
