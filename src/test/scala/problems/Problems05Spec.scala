@@ -145,4 +145,40 @@ class MultiwayTreesSpec extends Specification {
       "afg^^c^bd^e^^^".internalPathLength must beEqualTo(9)
     }
   }
+
+  "MTree#postorder" should {
+    import MTree._
+
+    """returns [a] if this = "a^"""" in {
+      "a^".postorder must beEqualTo(List('a'))
+    }
+
+    """returns [b, a] if this = "ab^^"""" in {
+      "ab^^".postorder must beEqualTo(List('b', 'a'))
+    }
+
+    """returns [b, c, a] if this = "ab^c^^"""" in {
+      "ab^c^^".postorder must beEqualTo(List('b', 'c', 'a'))
+    }
+
+    """returns [b, c, d, a] if this = "ab^c^d^^"""" in {
+      "ab^c^d^^".postorder must beEqualTo(List('b', 'c', 'd', 'a'))
+    }
+
+    """returns [b, e, c, d, a] if this = "ab^ce^^d^^"""" in {
+      "ab^ce^^d^^".postorder must beEqualTo(List('b', 'e', 'c', 'd', 'a'))
+    }
+
+    """returns [b, e, c, f, d, a] if this = "ab^ce^^df^^^"""" in {
+      "ab^ce^^df^^^".postorder must beEqualTo(List('b', 'e', 'c', 'f', 'd', 'a'))
+    }
+
+    """returns [b, e, g, c, f, d, a] if this = "ab^ce^g^^df^^^"""" in {
+      "ab^ce^g^^df^^^".postorder must beEqualTo(List('b', 'e', 'g', 'c', 'f', 'd', 'a'))
+    }
+
+    """returns [g, f, c, d, e, b, a] if this = "afg^^c^bd^e^^^"""" in {
+      "afg^^c^bd^e^^^".postorder must beEqualTo(List('g', 'f', 'c', 'd', 'e', 'b', 'a'))
+    }
+  }
 }

@@ -31,6 +31,15 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * res0: Int = 9
    */
   def internalPathLength: Int = children.foldLeft(0) { case (sum, c) => sum + c.nodeCount + c.internalPathLength }
+
+  /**
+   * P72 (*) Construct the postorder sequence of the tree nodes.
+   * Write a method postorder which constructs the postorder sequence of the nodes of a multiway tree. The result should be a List.
+   *
+   * scala> "afg^^c^bd^e^^^".postorder
+   * res0: List[Char] = List(g, f, c, d, e, b, a)
+   */
+  def postorder: List[T] = ???
 }
 
 object MTree {
