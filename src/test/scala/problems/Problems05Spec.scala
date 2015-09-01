@@ -109,4 +109,40 @@ class MultiwayTreesSpec extends Specification {
       MTree.string2MTree("afg^^c^bd^e^^^") must beEqualTo(MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))))
     }
   }
+
+  "MTree#internalPathLength" should {
+    import MTree._
+
+    """returns 0 if this = "a^"""" in {
+      "a^".internalPathLength must beEqualTo(0)
+    }
+
+    """returns 1 if this = "ab^^"""" in {
+      "ab^^".internalPathLength must beEqualTo(1)
+    }
+
+    """returns 2 if this = "ab^c^^"""" in {
+      "ab^c^^".internalPathLength must beEqualTo(2)
+    }
+
+    """returns 3 if this = "ab^c^d^^"""" in {
+      "ab^c^d^^".internalPathLength must beEqualTo(3)
+    }
+
+    """returns 5 if this = "ab^ce^^d^^"""" in {
+      "ab^ce^^d^^".internalPathLength must beEqualTo(5)
+    }
+
+    """returns 7 if this = "ab^ce^^df^^^"""" in {
+      "ab^ce^^df^^^".internalPathLength must beEqualTo(7)
+    }
+
+    """returns 9 if this = "ab^ce^g^^df^^^"""" in {
+      "ab^ce^g^^df^^^".internalPathLength must beEqualTo(9)
+    }
+
+    """returns 9 if this = "afg^^c^bd^e^^^"""" in {
+      "afg^^c^bd^e^^^".internalPathLength must beEqualTo(9)
+    }
+  }
 }
