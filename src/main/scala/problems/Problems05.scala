@@ -56,7 +56,10 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * scala> MTree("a", List(MTree("b", List(MTree("c"))))).lispyTree
    * res0: String = (a (b c))
    */
-  def lispyTree: String = ???
+  def lispyTree: String = children match {
+    case Nil => value.toString
+    case _ => "(" + (value.toString :: children.map { _.lispyTree}).mkString(" ") + ")"
+  }
 }
 
 object MTree {
