@@ -19,7 +19,7 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * scala> MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))).toString
    * res0: String = afg^^c^bd^e^^^
    */
-  def toString2: String = ???
+  def toString2: String = value.toString + children.map { _.toString2 }.mkString + "^"
 }
 
 object MTree {
@@ -41,5 +41,15 @@ object MTree {
    */
   import scala.language.implicitConversions
   implicit def s2MT(s: String): MTree[Char] = string2MTree(s)
-  def string2MTree(s: String): MTree[Char] = ???
+  import util.parsing.combinator._
+  def string2MTree(s: String): MTree[Char] = TreeStringParser.parse(s) match {
+    case TreeStringParser.Success(t, _) => t
+    case _ => throw new IllegalArgumentException
+  }
+  object TreeStringParser extends RegexParsers {
+    def back = "^"
+    def value: Parser[Char] = "[a-z]".r ^^ { c => c.head }
+    def node: Parser[MTree[Char]] = value ~ rep(node) ~ back ^^ { case v ~ children ~ _ => MTree(v, children) }
+    def parse(input: String) = parseAll(node, input)
+  }
 }
