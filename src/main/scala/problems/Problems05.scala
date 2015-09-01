@@ -92,4 +92,10 @@ object MTree {
     def node: Parser[MTree[Char]] = value ~ rep(node) ~ back ^^ { case v ~ children ~ _ => MTree(v, children) }
     def parse(input: String) = parseAll(node, input)
   }
+
+  /**
+   * P73 (**) Lisp-like tree representation.
+   * As a second, even more interesting, exercise try to write a method that takes a "lispy" string and turns it into a multiway tree.
+   */
+  def fromLispyString(s: String): MTree[Char] = ???
 }

@@ -203,4 +203,26 @@ class MultiwayTreesSpec extends Specification {
       MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))).lispyTree must beEqualTo("(a (f g) c (b d e))")
     }
   }
+
+  "MTree->fromLispyString(String)" should {
+    """returns MTree('a') if s = "a"""" in {
+      MTree.fromLispyString("a") must beEqualTo(MTree('a'))
+    }
+
+    """returns MTree('a', List(MTree('b'))) if s = "(a b)"""" in {
+      MTree.fromLispyString("(a b)") must beEqualTo(MTree('a', List(MTree('b'))))
+    }
+
+    """returns MTree('a', List(MTree('b', List(MTree('c'))))) if s = "(a (b c))"""" in {
+      MTree.fromLispyString("(a (b c))") must beEqualTo(MTree('a', List(MTree('b', List(MTree('c'))))))
+    }
+
+    """returns MTree('b', List(MTree('d'), MTree('e'))) if s = """ in {
+      MTree.fromLispyString("(b d e)") must beEqualTo(MTree('b', List(MTree('d'), MTree('e'))))
+    }
+
+    """returns MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))) if s = "(a (f g) c (b d e))"""" in {
+      MTree.fromLispyString("(a (f g) c (b d e))") must beEqualTo(MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))))
+    }
+  }
 }
