@@ -97,5 +97,14 @@ object MTree {
    * P73 (**) Lisp-like tree representation.
    * As a second, even more interesting, exercise try to write a method that takes a "lispy" string and turns it into a multiway tree.
    */
-  def fromLispyString(s: String): MTree[Char] = ???
+  def fromLispyString(s: String): MTree[Char] = LispyTreeParser.parse(s) match {
+    case LispyTreeParser.Success(t, _) => t
+    case _ => throw new IllegalArgumentException
+  }
+  object LispyTreeParser extends RegexParsers {
+    def back = "^"
+    def value: Parser[Char] = "[a-z]".r ^^ { c => c.head }
+    def node: Parser[MTree[Char]] = "(" ~ value ~ rep(node) ~ ")" ^^ { case _ ~ v ~ children ~ _ => MTree(v, children) } | value ^^ { v => MTree(v) }
+    def parse(input: String) = parseAll(node, input)
+  }
 }
