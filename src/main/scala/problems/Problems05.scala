@@ -30,7 +30,7 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * scala> "afg^^c^bd^e^^^".internalPathLength
    * res0: Int = 9
    */
-  def internalPathLength: Int = ???
+  def internalPathLength: Int = children.foldLeft(0) { case (sum, c) => sum + c.nodeCount + c.internalPathLength }
 }
 
 object MTree {
