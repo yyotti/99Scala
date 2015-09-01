@@ -181,4 +181,26 @@ class MultiwayTreesSpec extends Specification {
       "afg^^c^bd^e^^^".postorder must beEqualTo(List('g', 'f', 'c', 'd', 'e', 'b', 'a'))
     }
   }
+
+  "MTree#lispyTree" should {
+    """returns "a" if this = MTree('a')""" in {
+      MTree('a').lispyTree must beEqualTo("a")
+    }
+
+    """returns "(a b)" if this = MTree('a', List(MTree('b')))""" in {
+      MTree('a', List(MTree('b'))).lispyTree must beEqualTo("(a b)")
+    }
+
+    """returns "(a (b c))" if this = MTree('a', List(MTree('b', List(MTree('c')))))""" in {
+      MTree('a', List(MTree('b', List(MTree('c'))))).lispyTree must beEqualTo("(a (b c))")
+    }
+
+    """returns "(b d e)" if this = MTree('b', List(MTree('d'), MTree('e')))""" in {
+      MTree('b', List(MTree('d'), MTree('e'))).lispyTree must beEqualTo("(b d e)")
+    }
+
+    """returns "(a (f g) c (b d e))" if this = MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e')))))""" in {
+      MTree('a', List(MTree('f', List(MTree('g'))), MTree('c'), MTree('b', List(MTree('d'), MTree('e'))))).lispyTree must beEqualTo("(a (f g) c (b d e))")
+    }
+  }
 }

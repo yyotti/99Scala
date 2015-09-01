@@ -40,6 +40,23 @@ case class MTree[+T](value: T, children: List[MTree[T]]) {
    * res0: List[Char] = List(g, f, c, d, e, b, a)
    */
   def postorder: List[T] = children.flatMap { _.postorder } ::: List(value)
+
+  /**
+   * P73 (**) Lisp-like tree representation.
+   * There is a particular notation for multiway trees in Lisp.
+   * Lisp is a prominent functional programming language. In Lisp almost everything is a list.
+   *
+   * Our example tree would be represented in Lisp as (a (f g) c (b d e)). The following pictures give some more examples.
+   *
+   * Note that in the "lispy" notation a node with successors (children) in the tree is always the first element in a list,
+   * followed by its children.
+   * The "lispy" representation of a multiway tree is a sequence of atoms and parentheses '(' and ')', with the atoms separated by spaces.
+   * We can represent this syntax as a Scala String. Write a method lispyTree which constructs a "lispy string" from an MTree.
+   *
+   * scala> MTree("a", List(MTree("b", List(MTree("c"))))).lispyTree
+   * res0: String = (a (b c))
+   */
+  def lispyTree: String = ???
 }
 
 object MTree {
